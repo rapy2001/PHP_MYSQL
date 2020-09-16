@@ -1,0 +1,117 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+:root{
+    --mainColor:rgb(255, 51, 133);
+    --mainFamily:'Quicksand', sans-serif;
+    --trans:.2s all linear;
+    --lightWhite:rgba(255,255,255,.87);
+    --myH:88vh;
+}
+
+.nav{
+    background-color:var(--mainColor);
+    font-family:var(--mainFamily);
+    display:flex;
+    padding:1rem 3rem;
+    box-sizing: border-box;
+    height:7vh;
+    justify-content: space-between;
+    color:white;
+}
+.nav a{
+    color:var(--lightWhite);
+    transition: var(--trans);
+}
+.nav a:hover{
+    color:white;
+}
+.nav_box_1{
+    font-size:1.5rem;
+}
+.nav_box_2{
+    display:flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position:fixed;
+    top:0px;
+    background-color:black;
+    width:22vw;
+   
+    right:-22vw;
+    min-height:22vh;
+    padding:2rem 3rem;
+    padding-top:2rem;
+    transition: .5s all linear;
+}
+.nav_box_2 a{
+    margin-top:.3rem;
+    margin-bottom:.3rem;
+}
+.nav_box_2 div{
+    /* border:1px solid red; */
+    display:flex;
+    justify-content: flex-end;
+    
+    margin-bottom:2rem;
+}
+.slide{
+    right:0px;
+}
+.nav_cut{
+    font-size:1.3rem;
+    border:1.5px solid white;
+    box-sizing: border-box;
+    height:3rem;
+    width:3rem;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    transition: var(--trans);
+}
+.nav_cut:hover{
+    cursor:pointer;
+    background-color:white;
+    color:black;
+}
+a{
+    text-decoration:none;
+    outline:none;
+}
+.nav_box_3{
+    display:flex;
+    flex-direction: column;
+}
+.nav_box_3 div{
+    box-sizing: border-box;
+    width:2rem;
+    height:.3rem;
+    background-color:var(--lightWhite);
+    margin-top:.2rem;
+    margin-bottom: .2rem;
+    transition: var(--trans);
+}
+.nav_box_3:hover{
+    cursor: pointer;
+}
+.nav_box_3:hover div{
+    
+    background-color:white;
+}
+.footer{
+    background-color:var(--mainColor);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    height:5vh;
+    font-family:var(--mainFamily);
+    color:white;
+}
+.homepage{
+    height:var(--myH);
+}
+.signup{
+    height:var(--myH);
+}
