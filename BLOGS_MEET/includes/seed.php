@@ -2,9 +2,20 @@
     require_once("vars.php");
     function seed()
     {
+        $query = "SELECT userImage from users";
+        $results = mysqli_query($GLOBALS['conn'],$query) or die("Error while deleting the user images");
+        if(mysqli_num_rows($results)>0)
+        {
+            echo mysqli_num_rows($results);
+            while($row = mysqli_fetch_array($results))
+            {
+                echo $row['userImage'];
+                @unlink($row['userImage']);
+            }
+        }
         $query = "DELETE from users where username != 'Admin'";
         mysqli_query($GLOBALS['conn'],$query) or die("Error while deleting the users during seeding the database");
-        $query = "DELETE from comments where username != 'Admin'";
+        $query = "DELETE from comments";
         mysqli_query($GLOBALS['conn'],$query) or die("Error while deleting the comments during seeding the database");
         $query  = "SELECT * from blogs";
         $results = mysqli_query($GLOBALS['conn'],$query) or die("Error while deleting the blogs in the seed");
