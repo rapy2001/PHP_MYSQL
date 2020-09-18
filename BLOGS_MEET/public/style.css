@@ -114,7 +114,24 @@ a{
     height:var(--myH);
 }
 .signup{
-    height:var(--myH);
+    padding:5rem;
+    /* border:1px solid red; */
+    box-sizing:border-box;
+    min-height:var(--myH);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    font-family:var(--mainFamily);
+    background:
+    linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url("https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-position:center center;
+    background-size:cover;
+    
+}
+.captcha{
+    border:1px solid black;
+    margin-top:.5rem;
+    margin-bottom:.5rem;
 }
 .login{
     /* border:1px solid red; */
@@ -146,7 +163,7 @@ a{
     color:var(--mainColor);
     margin-bottom:3rem;
 }
-.form input{
+.form input,textarea{
     box-sizing:border-box;
     width:60%;
     outline:none;
@@ -160,7 +177,10 @@ a{
     transition:var(--trans);
     /* box-shadow:2px 0px 5px var(--mainColor); */
 }
-.form input:hover{
+.form textarea{
+    height:15vh;
+}
+.form input:hover,textarea:hover{
     border:4px solid var(--mainColorLite);
     background-color:white;
 }
