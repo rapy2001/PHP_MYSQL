@@ -17,7 +17,7 @@ $height = 30;
     imagefilledrectangle($img,0,0,$width,$height,$bg_color);
     for($i=1;$i<=5;$i++)
     {
-        imageline($img,rand() % $width,rand() % $height, $width, $height,$red);
+        imageline($img,0,rand() % $height,rand() % $width,rand() % $height,$red);
     }
     for($i=1;$i<=25;$i++)
     {
