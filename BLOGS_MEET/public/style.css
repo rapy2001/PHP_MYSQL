@@ -208,3 +208,33 @@ a{
 .form h4 a:hover{
     color:var(--mainColor);
 }
+.error,.success{
+    position:fixed;
+    top:0px;
+    /* border:1px solid red; */
+    right:0px;
+    box-sizing: border-box;
+    min-width:15vw;
+    background-color:white;
+    padding:1rem 1.5rem;
+    font-weight:100;
+    border-left:3px solid red;
+    top:10vh;
+    font-family:var(--mainFamily);
+    transition:1s all linear;
+}
+.success{
+    border-left:3px solid green;
+}
+.error i,.success i{
+    margin-left:1rem;
+    color:rgba(0,0,0,.2);
+    transition:var(--trans);
+}
+.error i:hover,.success i{
+    cursor:pointer;
+    color:black;
+}
+.hide{
+    right:-50vw;
+}

@@ -15,11 +15,11 @@
             $password = mysqli_real_escape_string($conn, trim($_POST['password']));
             if(empty($username))
             {
-                $msg = 'Please Enter a Username';
+                $msg = '<h4 class = "error msg">Please Enter a Username <i class = "fa fa-times msg_cut"></i></h4>';
             }
             else if(empty($password))
             {
-                $msg = 'Plese Enter Your Password';
+                $msg = '<h4 class = "error msg">Plese Enter Your Password <i class = "fa fa-times msg_cut"></i></h4>';
             }
             else
             {
@@ -27,7 +27,7 @@
                 $results = mysqli_query($conn,$query) or die("Error while querying the database");
                 if(mysqli_num_rows($results) === 0)
                 {
-                    $msg = 'Username does not exists please register';
+                    $msg = '<h4 class = "error msg">Username does not exists please register <i class = "fa fa-times msg_cut"></i></h4>';
                 }
                 else
                 {
@@ -39,12 +39,13 @@
                         $_SESSION['username'] = $row['username'];
                         $_SESSION['user_id']  = $row['user_id'];
                         header('Refresh:4;url="homepage.php"');
-                        echo  'You have Logged In Successfully';
-                        $show = 1;
+                        echo  '<h4 class = "success msg">You have Logged In Successfully <i class = "fa fa-times msg_cut"></i></h4>';
+                        $username = "";
+                        $show = 0;
                     }
                     else
                     {
-                        $msg = 'The Password is Wrong.Please Enter the password again';
+                        $msg = '<h4 class = "error msg">The Password is Wrong.Please Enter the password again <i class = "fa fa-times msg_cut"></i></h4>';
                     }
                     
                 }
@@ -59,16 +60,18 @@
     if($show === 0)
     {
 ?>
-        <div>
-            <h2>Log In</h2>
+        <div class = "login">
+            
             <?php 
                 if(!empty($msg))
                     echo '<h2>'.$msg.'</h2>';
             ?>
-            <form action = "logIn.php" method = "POST">
-                <input type ="text" value = "<?php echo $username; ?>" placeholder = "Your Username" name = "username"/>
+            <form action = "logIn.php" method = "POST" class = "form">
+                <h2>Log In</h2>
+                <input type ="text" value = "<?php echo $username; ?>" placeholder = "Your Username" name = "username" autocomplete = "off"/>
                 <input type ="password" placeholder = "Your Password" name = "password"/>
-                <input type = "submit" name = "submit">
+                <input type = "submit" name = "submit" id = "btn">
+                <h4>Don't have an account ? Then <a href = "signup.php">Sign Up</a></h4>
             </form>
         </div>
 <?php
