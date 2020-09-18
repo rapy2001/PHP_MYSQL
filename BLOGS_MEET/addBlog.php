@@ -64,7 +64,7 @@
                 }
                 move_uploaded_file($file['tmp_name'],$path);
                 $id = $_SESSION['user_id'];
-                $query = "INSERT INTO blogs VALUES(0,'$id','$category','$title','$text','$path',0,0,0)";
+                $query = "INSERT INTO blogs VALUES(0,NOW(),'$id','$category','$title','$text','$path',0,0,0)";
                 mysqli_query($conn,$query) or die("There was Error while querying the database");
                 header('Refresh:4;url="homepage.php"');
                 echo 'The Blog has been submiited for Approval';

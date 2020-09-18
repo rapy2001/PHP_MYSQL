@@ -7,7 +7,7 @@
     {
         $id = $_GET['id'];
         $msg = '';
-        $query="SELECT blogs.views,blogs.blog_id,blogs.title, blogs.text,blogs.imageUrl,blogs.likes,categories.category_name,users.username 
+        $query="SELECT blogs.posted,blogs.views,blogs.blog_id,blogs.title, blogs.text,blogs.imageUrl,blogs.likes,categories.category_name,users.username 
         from categories inner join blogs using(category_id) inner join users using(user_id) where blogs.blog_id = $id";
         $result = mysqli_query($conn,$query) or die("Error while querying the database");
         if(mysqli_num_rows($result) === 0)
@@ -68,6 +68,7 @@
                 </p>
                 <h4> likes: <?php echo $row['likes']; ?></h4>
                 <h4> views: <?php echo $row['views']; ?></h4>
+                <h4>posted on <?php echo substr($row['posted'],0,10); ?></h4>
                 <?php
                     if(isset($_SESSION['user_id']))
                     {
@@ -105,6 +106,16 @@
                 // $id = $row['blog_id'];
                 $query = "SELECT comments.comment_id,comments.text,users.username from comments inner join users using(user_id) where comments.blog_id=$id";
                 $results = mysqli_query($conn,$query) or die("Error while querying the database for getting the comments");
+                $limit = 5;
+                $total = ceil(mysqli_num_rows($results)/$limit);
+                // echo mysqli_num_rows($results)/$limit;
+                $skip = 0;
+                if(isset($_GET['page']))
+                {
+                    $skip = ($_GET['page'] - 1) * $limit;
+                }
+                $query.= " LIMIT $skip, $limit";
+                $results = mysqli_query($conn,$query) or die("Error while getting the commennts");
                 if(mysqli_num_rows($results) > 0)
                 {
                     while($flg = mysqli_fetch_array($results))
@@ -124,6 +135,52 @@
 <?php
                                 }
                     }
+                    if(!empty($_GET['page']))
+                    {
+                        // echo $total,$_GET['page'];
+                        if($_GET['page'] == 1)
+                            echo '<h4><--</h4>';
+                        else
+                        {
+?>
+                            <a href = "viewBlogFull.php?id=<?php echo $id; ?>&page=<?php echo $_GET['page'] - 1 ;?>"><--</a>
+<?php
+                        }
+                    }
+                    else
+                    {
+?>
+                        <h4><--</h4>
+                        
+<?php
+                        
+                    }
+                    // echo $total;
+                    for($i=1;$i<=$total;$i++)
+                    {
+?>
+                        <a href = "viewBlogFull.php?id=<?php echo $id; ?>&page=<?php echo ($i) ;?>"><?php echo $i; ?></a>
+<?php
+                    }
+                    if(!empty($_GET['page']))
+                    {
+                        // echo $total,$_GET['page'];
+                        if($_GET['page'] == $total)
+                            echo '<h4>--></h4>';
+                        else
+                        {
+?>
+                            <a href = "viewBlogFull.php?id=<?php echo $id; ?>&page=<?php echo $_GET['page'] + 1 ;?>">--></a>
+<?php
+                        }
+                    }
+                    else
+                    {
+?>
+                        <h4>--></h4>
+<?php
+                    }
+                    
                 }
                 else
                 {
