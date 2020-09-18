@@ -54,8 +54,13 @@
             // $query = "SELECT * from blogs where title ";
             $query = "SELECT * from blogs where ";
             if($categories != '')
+            {
                 $query.=$categories;
-            $query.=' AND title ';
+                $query.=' AND title ';
+            }
+            else
+                $query.="title ";
+           
             $ary = explode(' ',$search);
             $newAry = array();
             for($i=0; $i<count($ary); $i++)
