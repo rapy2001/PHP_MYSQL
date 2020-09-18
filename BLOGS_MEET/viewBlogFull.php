@@ -94,6 +94,12 @@
                             }
                         }
                     }
+                    if(isset($_GET['notif_id']))
+                    {
+                        $notifId = $_GET['notif_id'];
+                        $query = "DELETE from notifications where nottif_id=$notifId";
+                        mysqli_query($conn,$query) or die("Error while deleting the notification");
+                    }
                 }
                 if($dlt != 1)
                 {
@@ -163,7 +169,7 @@
                             <div>
             <?php
                             // $id = $row['blog_id'];
-                            $query = "SELECT comments.comment_id,comments.text,users.username from comments inner join users using(user_id) where comments.blog_id=$id";
+                            $query = "SELECT comments.comment_id,comments.text,comments.commented_on,users.username from comments inner join users using(user_id) where comments.blog_id=$id";
                             $results = mysqli_query($conn,$query) or die("Error while querying the database for getting the comments");
                             $limit = 5;
                             $total = ceil(mysqli_num_rows($results)/$limit);
@@ -183,7 +189,7 @@
             ?>              
                                     <div>
                                         <h3><?php echo $flg['text']; ?></h3>
-                                        <h4>By: <?php echo $flg['username']; ?></h4>
+                                        <h4>By: <?php echo $flg['username']; ?> posted on: <?php echo substr($flg['commented_on'],0,10) ;?></h4>
                                         <?php
                                             if(isset($_SESSION['username']) && $flg['username'] === $_SESSION['username'])
                                             {

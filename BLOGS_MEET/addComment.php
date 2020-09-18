@@ -37,11 +37,21 @@
             else
             {
                 $text =mysqli_real_escape_string($conn,trim($text));
-                $user_id = $_SESSION['user_id'];
-                $blog_id = $id;
-                $query = "INSERT INTO comments values(0,'$user_id','$blog_id','$text')";
+                $userId = $_SESSION['user_id'];
+                $blogId = $id;
+                $query = "INSERT INTO comments values(0,'$userId','$blogId','$text',NOW())";
                 mysqli_query($conn,$query) or die('Error while querying the database');
-                header("Refresh:3;url=viewBlogFull.php?id=$blog_id");
+                $query = "SELECT user_id from blogs where blog_id=$blogId";
+                $result = mysqli_query($conn,$query) or die("Error while querying the database for getting the owner id");
+                $value= mysqli_fetch_array($result);
+                $ownerId = $value['user_id'];
+                $query = "SELECT comments.comment_id from comments where user_id=$userId and blog_id=$blogId order by commented_on desc limit 1";
+                $result = mysqli_query($conn,$query) or die("Error while querying the database for getting the comment_id of the latest comment");
+                $data = mysqli_fetch_array($result);
+                $cmntId = $data['comment_id'];
+                $query = "INSERT INTO notifications values(0,$ownerId,$cmntId,'1')";
+                mysqli_query($conn,$query) or die("Error while adding the notification");
+                header("Refresh:3;url=viewBlogFull.php?id=$blogId");
                 echo '<div><h2>Comment Added Successfully</h2></div>';
                 $show = 1;
             }

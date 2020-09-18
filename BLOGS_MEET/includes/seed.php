@@ -18,6 +18,8 @@
         mysqli_query($GLOBALS['conn'],$query) or die("Error while deleting the users during seeding the database");
         $query = "DELETE from comments";
         mysqli_query($GLOBALS['conn'],$query) or die("Error while deleting the comments during seeding the database");
+        $query = "DELETE FROM notifications";
+        mysqli_query($GLOBALS['conn'],$query) or die("Error while deleting the notifications");
         $query  = "SELECT * from blogs";
         $results = mysqli_query($GLOBALS['conn'],$query) or die("Error while deleting the blogs in the seed");
         if(mysqli_num_rows($results) > 0)
@@ -30,7 +32,7 @@
             }
         }
         $query = "DELETE from likes";
-        mysqli_query($conn,$query) or die("Error while deleting the likes");
+        mysqli_query($GLOBALS['conn'],$query) or die("Error while deleting the likes");
         // $pass = sha1('12345');
         // $query = "INSERT INTO users(username,password,description) VALUES('Admin','$pass','This is the Admin')";
         // mysqli_query($GLOBALS['conn'],$query) or die("Error while creating the Admin");

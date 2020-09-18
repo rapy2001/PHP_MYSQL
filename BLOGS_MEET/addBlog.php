@@ -91,7 +91,7 @@
         ?>
         <form enctype = "multipart/form-data" action = "addBlog.php" method = 'POST' class = "form">
             <h2>Add a Blog</h2>
-            <input type = "text" placeholder = "Title of Blog" name = "title" value = "<?php echo $title; ?>"/>
+            <input type = "text" placeholder = "Title of Blog" name = "title" value = "<?php echo $title; ?>" autocomplete="off"/>
             <input type = "file" name = "file" />
             <textarea name = "text" placeholder = "Your Blog Text"><?php echo $text; ?></textarea>
             <div class = "categories">

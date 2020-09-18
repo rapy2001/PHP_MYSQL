@@ -14,6 +14,7 @@
                 <a href = "viewBlogs.php">View Blogs</a>
                 <a href = "search.php">Search</a>
                 <a href = "topWriters.php">Top 10 Writers</a>
+                <a href = "userDashboard.php?user_id=<?php echo $_SESSION['user_id']?>">Dashboard</a>
                 <?php 
                     if($_SESSION['username'] === 'Admin')
                     {
