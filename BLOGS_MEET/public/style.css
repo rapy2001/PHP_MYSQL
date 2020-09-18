@@ -8,6 +8,7 @@
     --trans:.2s all linear;
     --lightWhite:rgba(255,255,255,.87);
     --myH:88vh;
+    --mainColorLite:rgba(255, 51, 133,.5);
 }
 
 .nav{
@@ -114,4 +115,76 @@ a{
 }
 .signup{
     height:var(--myH);
+}
+.login{
+    /* border:1px solid red; */
+    box-sizing:border-box;
+    height:var(--myH);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    font-family:var(--mainFamily);
+    background:
+    linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url("https://images.pexels.com/photos/3563625/pexels-photo-3563625.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+    background-position:center center;
+    background-size:cover;
+}
+.form{
+    box-sizing:border-box;
+    /* border:1px solid red; */
+    width:35vw;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background-color:white;
+    padding-top:3rem;
+    padding-bottom:4rem;
+    border-radius:1rem;
+}
+.form h2{
+    font-weight:100;
+    color:var(--mainColor);
+    margin-bottom:3rem;
+}
+.form input{
+    box-sizing:border-box;
+    width:60%;
+    outline:none;
+    font-family:var(--mainFamily);
+    margin-top:.8rem;
+    margin-bottom:.8rem;
+    padding:.5rem 1rem;
+    background-color:rgba(0,0,0,0.1);
+    border:4px solid transparent;
+    border-radius:.2rem;
+    transition:var(--trans);
+    /* box-shadow:2px 0px 5px var(--mainColor); */
+}
+.form input:hover{
+    border:4px solid var(--mainColorLite);
+    background-color:white;
+}
+#btn{
+    background-color:white;
+    border:4px solid var(--mainColorLite);
+    color:var(--mainColorLite);
+    transition:var(--trans);
+    font-size:1rem;
+}
+#btn:hover{
+    cursor:pointer;
+    background-color:var(--mainColorLite);
+    color:white;
+}
+.form h4{
+    font-weight:100;
+    font-size:1rem;
+    margin-top:1rem;
+}
+.form h4 a{
+    color:var(--mainColorLite);
+    transition: var(--trans);
+}
+.form h4 a:hover{
+    color:var(--mainColor);
 }
