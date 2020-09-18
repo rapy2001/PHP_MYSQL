@@ -1,5 +1,6 @@
 <?php 
     require_once("vars.php");
+    require_once("./session.php");
     function seed()
     {
         $query = "SELECT userImage from users";
@@ -9,7 +10,7 @@
             echo mysqli_num_rows($results);
             while($row = mysqli_fetch_array($results))
             {
-                echo $row['userImage'];
+                // echo $row['userImage'];
                 @unlink($row['userImage']);
             }
         }
@@ -28,11 +29,16 @@
                 mysqli_query($GLOBALS['conn'],$query) or die("Error while deleting a single blog");
             }
         }
+        $query = "DELETE from likes";
+        mysqli_query($conn,$query) or die("Error while deleting the likes");
         // $pass = sha1('12345');
         // $query = "INSERT INTO users(username,password,description) VALUES('Admin','$pass','This is the Admin')";
         // mysqli_query($GLOBALS['conn'],$query) or die("Error while creating the Admin");
     }
-    seed();
+    if(isset($_SESSION['username']) && $_SESSION['username'] === "Admin")
+        seed();
+    else
+        echo "You need Admin access to seed the database";
     header('Refresh:3;url=../homepage.php');
     echo "Database seeded successfully";
 ?>
