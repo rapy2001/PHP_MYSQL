@@ -64,7 +64,7 @@
                 }
                 move_uploaded_file($file['tmp_name'],$path);
                 $id = $_SESSION['user_id'];
-                $query = "INSERT INTO blogs VALUES(0,'$id','$category','$title','$text','$path',0)";
+                $query = "INSERT INTO blogs VALUES(0,'$id','$category','$title','$text','$path',0,0,0)";
                 mysqli_query($conn,$query) or die("There was Error while querying the database");
                 header('Refresh:4;url="homepage.php"');
                 echo 'The Blog has been submiited for Approval';
@@ -82,26 +82,29 @@
     if($show === 0)
     {
 ?>
-    <div>
+    <div class = "addBlog">
         <?php 
             if(!empty($msg))
             {
                 echo '<h2>'.$msg.'</h2>';
             }
         ?>
-        <form enctype = "multipart/form-data" action = "addBlog.php" method = 'POST'>
+        <form enctype = "multipart/form-data" action = "addBlog.php" method = 'POST' class = "form">
+            <h2>Add a Blog</h2>
             <input type = "text" placeholder = "Title of Blog" name = "title" value = "<?php echo $title; ?>"/>
             <input type = "file" name = "file" />
             <textarea name = "text" placeholder = "Your Blog Text"><?php echo $text; ?></textarea>
-            <lable for = "politics">Politics</label>
-            <input type = "radio" name = "category" value = "1" id = "politics" />
-            <lable for = "entertainment">Entertainment</label>
-            <input type = "radio" name = "category" value = "2" id = "entertainment" />
-            <lable for = "sports">Sports</label>
-            <input type = "radio" name = "category" value = "3" id = "sports" />
-            <lable for = "science">Science</label>
-            <input type = "radio" name = "category" value = "4" id = "science" />
-            <input type = "submit" name = "submit"/>
+            <div class = "categories">
+                <lable for = "politics">Politics</label>
+                <input type = "radio" name = "category" value = "1" id = "politics" />
+                <lable for = "entertainment">Entertainment</label>
+                <input type = "radio" name = "category" value = "2" id = "entertainment" />
+                <lable for = "sports">Sports</label>
+                <input type = "radio" name = "category" value = "3" id = "sports" />
+                <lable for = "science">Science</label>
+                <input type = "radio" name = "category" value = "4" id = "science" />
+            </div>
+            <input type = "submit" name = "submit" class = "btn"/>
         </form>
     </div>
 <?php
