@@ -37,16 +37,35 @@
         else
         {
 ?>
-            
-                <?php
-                    while($row = mysqli_fetch_array($results))
-                    {
-                        echo '<h2>'.$row['title'].'</h2>'.'<a href = "admin.php?id='.$row['blog_id'].'">Approve</a>';
-                    }
-                ?>
+                <div class = "admin">
+                    <h1>Blogs Submitted for Approval</h1>
+                    <div class = "admin_box">
+                        <?php
+                            while($row = mysqli_fetch_array($results))
+                            {
+                        ?>
+                                <div class = "approval">
+                                    <h2><?php echo $row['title']; ?></h2>
+                                    
+                                    <img src = "<?php echo $row['imageUrl'] ?>" />
+                                    <div class = "approval_p">
+                                        <p>
+                                            <?php echo $row['text']; ?>
+                                            
+                                        </p>
+                                        <span><i class = "fa fa-angle-down expand"></i></span>
+                                    </div>
+                                    
+                                    <a href = "admin.php?id=<?php echo $row['blog_id']; ?>" class = "admin_btn">Approve</a>
+                                </div>
+                        <?php
+                            }
+                        ?>
+                    </div>
+                </div>
 <?php
         }
     }
     mysqli_close($conn);
-    require_once("./includes/footer.php");
+    require_once("./includes/adminFooter.php");
 ?>
