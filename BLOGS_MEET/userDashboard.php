@@ -36,17 +36,7 @@
                                 $query = "SELECT * from notifications where user_id=$uId";
                                 $result = mysqli_query($conn,$query) or die("Error while querying the database here");
                                 $dat = mysqli_fetch_array($result);
-                                $cmnt = $dat['data_id'];
-                                $query = "SELECT user_id,blog_id from comments where comment_id=$cmnt";
-                                $result = mysqli_query($conn,$query) or die("error while querying the database present");
-                                $my = mysqli_fetch_array($result);
-                                $uId = $my['user_id'];
-                                $dat['blog_id'] = $my['blog_id'];
-                                echo $dat['blog_id']."here";
-                                $query = "SELECT users.username from users where user_id=$uId";
-                                $result = mysqli_query($conn,$query) or die("Error while querying the database there");
-                                $val = mysqli_fetch_array($result);
-                                $dat['username']=$val['username'];
+                                
                                
                                 // $query =     
                                 // "SELECT notifications.notif_id,comments.blog_id,users.username from".
@@ -55,6 +45,17 @@
                                 // $data = mysqli_num_rows($result);
                                 if($notif['type'] == 1)
                                 {
+                                    $cmnt = $dat['data_id'];
+                                    $query = "SELECT user_id,blog_id from comments where comment_id=$cmnt";
+                                    $result = mysqli_query($conn,$query) or die("error while querying the database present");
+                                    $my = mysqli_fetch_array($result);
+                                    $uId = $my['user_id'];
+                                    $dat['blog_id'] = $my['blog_id'];
+                                    echo $dat['blog_id']."here";
+                                    $query = "SELECT users.username from users where user_id=$uId";
+                                    $result = mysqli_query($conn,$query) or die("Error while querying the database there");
+                                    $val = mysqli_fetch_array($result);
+                                    $dat['username']=$val['username'];
 ?>
                                     <a href="viewBlogFull.php?id=<?php echo $dat['blog_id']; ?>&notif_id=<?php echo $dat['nottif_id']; ?>">
                                         <?php echo $dat['username'] ?> added a Comment to your Blog
@@ -63,9 +64,23 @@
                                 }
                                 else
                                 {
+                                    $query = "SELECT * from notifications where user_id=$uId";
+                                    $result = mysqli_query($conn,$query) or die("Error while querying the database here");
+                                    $univ = mysqli_fetch_array($result);
+                                    $likeId = $univ['data_id'];
+                                    $query = "SELECT user_id,blog_id from likes where like_id=$likeId";
+                                    $result = mysqli_query($conn,$query) or die("Error while qquerying the database for getting the user_id of the like");
+                                    $row = mysqli_fetch_array($result);
+                                    $uId = $row['user_id'];
+                                    $blogId = $row['blog_id'];
+                                    $query = "SELECT users.username from users where user_id=$uId";
+                                    $result = mysqli_query($conn,$query) or die("Error while getting the username");
+                                    $username = mysqli_fetch_array($result)['username'];
+                                    // $ntf = $univ['notif_id'];
+                                    
 ?>
-                                   <a href="viewBlogFull.php?id=<?php echo $dat['blog_id']; ?>&notif_id=<?php echo $dat['notif_id']; ?>">
-                                        <?php echo $dat['username'] ?> added a like to your Blog
+                                   <a href="viewBlogFull.php?id=<?php echo $blogId; ?>&notif_id=<?php echo $univ['nottif_id']; ?>">
+                                        <?php echo $username ?> added a like to your Blog
                                     </a> 
 
 <?php

@@ -78,6 +78,14 @@
                                     $newLikes = $row['likes'] + 1;
                                     $query = "UPDATE BLOGS SET likes=$newLikes where blog_id = $blogId";
                                     mysqli_query($conn,$query) or die("Error while updating the blogs data for likes");
+                                    $query = "SELECT user_id from blogs where blog_id=$blogId";
+                                    $result = mysqli_query($conn,$query) or die("Error while querying the database for getting the owner");
+                                    $own = mysqli_fetch_array($result)['user_id'];
+                                    $query = "SELECT like_id from likes where blog_id=$blogId AND user_id=$uId";
+                                    $result = mysqli_query($conn,$query) or die("Error while querying the database for getting the like id");
+                                    $likeId = mysqli_fetch_array($result)['like_id'];
+                                    $query = "INSERT into notifications values(0,$own,$likeId,'2')";
+                                    mysqli_query($conn,$query) or die("Error while querying the database for adding the notifications");
                                     header("Refresh:2;url=viewBlogFull.php?id=$blogId");
                                     $msg = 'Like added successfully';
                                 }
