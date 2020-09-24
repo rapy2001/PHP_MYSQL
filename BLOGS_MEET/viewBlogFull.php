@@ -5,13 +5,13 @@
     require_once("./includes/nav.php");
     if(isset($_GET['id']))
     {
-        
+        $flw = 0;
         $id = $_GET['id'];
         $dlt = 0;
         $msg = '';
         $query="SELECT blogs.posted,blogs.views,blogs.blog_id,blogs.title, blogs.text,blogs.imageUrl,blogs.likes,categories.category_name,users.user_id,users.username,users.totalViews
         from categories inner join blogs using(category_id) inner join users using(user_id) where blogs.blog_id = $id";
-        $result = mysqli_query($conn,$query) or die("Error while querying the database");
+        $result = mysqli_query($conn,$query) or die("Error while querying the database to get blog data");
         if(mysqli_num_rows($result) === 0)
         {
             header('Refresh:3;url=viewBlogs.php');
@@ -108,6 +108,54 @@
                         $query = "DELETE from notifications where nottif_id=$notifId";
                         mysqli_query($conn,$query) or die("Error while deleting the notification");
                     }
+                    if(!empty($_SESSION['user_id']))
+                    {   
+                        $userId = $row['user_id'];
+                        $followerId = $_SESSION['user_id'];
+                        $query = "SELECT * from followers where user_id=$userId and follower_id=$followerId";
+                        $result = mysqli_query($conn,$query) or die("Error while checking for following status");
+                    }
+                   
+                    if(mysqli_num_rows($result) > 0)
+                        $flw = 1;
+                    if(!empty($_GET['follow']))
+                    {
+                        if(!empty($_SESSION['user_id']))
+                        {
+                            if($_SESSION['user_id']!=$row['user_id'])
+                            {
+                                $userId = $_GET['follow'];
+                                $followerId = $_SESSION['user_id'];
+                                $query = "SELECT * from followers where user_id=$userId and follower_id=$followerId";
+                                $result = mysqli_query($conn,$query) or die("Error while checking for following status");
+                                if(mysqli_num_rows($result) == 0)
+                                {
+                                    $query = "INSERT into followers values(0,$userId,$followerId)";
+                                    mysqli_query($conn,$query) or die("Error while adding the new follower");
+                                    $query = "INSERT into notifications values(0,$userId,$followerId,'3')";
+                                    mysqli_query($conn,$query) or die("Error while providing the notification about the new follower");   
+                                    $msg ="You started following".$row['username'];
+                                    header("Refresh:3;url=viewBlogFull.php?id=$row['blog_id]");
+                                }
+                                else
+                                {
+                                    $msg  ="You are already a follower";
+                                    $flw = 1;
+                                }
+                                
+                            }
+                            else
+                            {
+                                $msg = "You can not follow yourself";
+                            }
+                            
+                        }
+                        else
+                        {
+                            $msg = "Please Log to follow";
+                        }
+                        
+                    }
                 }
                 if($dlt != 1)
                 {
@@ -121,7 +169,18 @@
                                     echo '<h2>'.$msg.'</h2>';
                             ?>
                             <h1><?php echo $row['title']; ?></h1>
-                            <h3>By: <i><?php echo $row['username'];?></i></h3>
+                            <h3>
+                                By: <i><?php echo $row['username'];?></i>
+                                <?php
+                                    if(!empty($_SESSION['user_id']) &&  $row['user_id']!=$_SESSION['user_id'] && $flw == 0)
+                                    {
+                                ?>
+                                        <a href="viewBlogFull.php?id=<?php echo $row['blog_id']; ?>&follow=<?php echo $row['user_id'];?>">Follow</a>
+                                <?php  
+                                    }
+                                ?>
+                                
+                            </h3>
                             <?php 
                                 if(isset($_SESSION['user_id']))
                                 {

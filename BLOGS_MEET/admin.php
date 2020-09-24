@@ -8,13 +8,30 @@
     {
         if($_SESSION['username'] === "Admin")
         {
+            $limit = 5;
             $query = "SELECT * FROM blogs WHERE approved=0";
-            $results = mysqli_query($conn,$query) or die('Error while querying the database for displaying the form');
+            $results = mysqli_query($conn,$query) or die("Error while querying the database");
+            $total = ceil(mysqli_num_rows($results) / $limit);
+            $page = empty($_GET['page']) ? 1 : $_GET['page'];
+            $skip = ($page-1)*$limit;
+            $query = "SELECT * from blogs where approved=0 limit $skip,$limit";
+            $results = mysqli_query($conn,$query) or die('Error while querying the database for displaying the form in admin page');
             if(isset($_GET['id']))
             {
                 $id = trim($_GET['id']);
                 $query = "UPDATE blogs set approved='1' where blog_id='$id'";
                 mysqli_query($conn,$query) or die("Error while querying the database for approval");
+                $query = "SELECT user_id from blogs where blog_id=$id";
+                $result = mysqli_query($conn,$query) or die("Error while querying the database getting blog user_id");
+                $userId = mysqli_fetch_array($result)['user_id'];
+                $query = "SELECT * from followers where user_id=$userId";
+                $result = mysqli_query($conn,$query) or die("Error while getting the followers");
+                while($row = mysqli_fetch_array($result))
+                {
+                    $flwId = $row['follower_id'];
+                    $query = "INSERT into notifications values(0,$flwId,$id,'4')";
+                    mysqli_query($conn,$query) or die("Error while querying the database for giving the followers notifications");
+                }
                 header('Refresh:2;url=admin.php');
                 echo 'The Blog was approved';
             }
@@ -58,6 +75,37 @@
                                     
                                     <a href = "admin.php?id=<?php echo $row['blog_id']; ?>" class = "admin_btn">Approve</a>
                                 </div>
+                        <?php
+                            }
+                            // echo $total,$page;
+                            if($page === 1)
+                            {        
+                        ?>
+                                <a href="#"><--</a>
+                        <?php
+                            }
+                            else
+                            {
+                        ?>
+                                <a href = "admin.php?page=<?php echo $page-1?>"><--</a>
+                        <?php
+                            }
+                            for($i=1;$i<=$total;$i++)
+                            {
+                        ?>
+                                <a href = "admin.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        <?php
+                            }
+                            if($page == $total)
+                            {
+                        ?>
+                                <a href="#">--></a>
+                        <?php
+                            }
+                            else
+                            {
+                        ?>
+                                <a href="admin.php?page=<?php echo $page+1; ?>">--></a>
                         <?php
                             }
                         ?>

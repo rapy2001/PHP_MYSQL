@@ -33,9 +33,8 @@
         }
         $query = "DELETE from likes";
         mysqli_query($GLOBALS['conn'],$query) or die("Error while deleting the likes");
-        // $pass = sha1('12345');
-        // $query = "INSERT INTO users(username,password,description) VALUES('Admin','$pass','This is the Admin')";
-        // mysqli_query($GLOBALS['conn'],$query) or die("Error while creating the Admin");
+        $query = "DELETE from followers";
+        mysqli_query($GLOBALS['conn'],$query) or die("Error while deleting the followers");
     }
     if(isset($_SESSION['username']) && $_SESSION['username'] === "Admin")
         seed();
