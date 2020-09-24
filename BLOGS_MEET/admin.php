@@ -38,19 +38,19 @@
         }
         else
         {
-            echo 'Please Log In as the Admin to access this page';
+            echo '<div id = "empty_div"><h2 id = "empty">Please Log In as the Admin to access this page</h2></div>';
             $show = 1;
         }
     }
     else
     {
-        echo 'Please Log In as the Admin to access this page';
+        echo '<div id = "empty_div"><h2 id = "empty">Please Log In as the Admin to access this page</h2></div>';
         $show = 1;
     }
     if($show === 0)
     {
         if(mysqli_num_rows($results) === 0)
-                echo 'No Blogs To approve';
+                echo '<div id = "empty_div"><h2 id="empty">No Blogs To approve</h2></div>';
         else
         {
 ?>

@@ -62,8 +62,9 @@
         if(!empty($msg))
             echo '<h2>'.$msg.'</h2>';
 ?>
-        <div>
-            <form action = "addComment.php?id=<?php echo $_GET['id'] ;?>" method = "POST">
+        <div class = "comment_form">
+            <form action = "addComment.php?id=<?php echo $_GET['id'] ;?>" method = "POST" class = "form">
+                <h2>Add a Comment</h2>
                 <input type ="text" placeholder = "Comment" name = "comment" required = "required" autocomplete = "off" value = '<?php echo $text;?>'/>
                 <input type ="submit" name = "submit"/>
             </form>

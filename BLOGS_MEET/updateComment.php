@@ -43,8 +43,9 @@
                 $query = "UPDATE comments set text='$text' where comment_id=$comment_id";
                 mysqli_query($conn,$query) or die('Error while querying the database');
                 header("Refresh:3;url=viewBlogFull.php?id=$blog_id");
-                echo '<div><h2>Comment updated Successfully</h2></div>';
-                $show = 1;
+                // echo '<div><h2>Comment updated Successfully</h2></div>';
+                $msg = "Comment updated Successfully";
+                // $show = 1;
             }
         }
     }
@@ -59,10 +60,11 @@
     if($show === 0)
     {
         if(!empty($msg))
-            echo '<h2>'.$msg.'</h2>';
+            echo '<h4 class = "success msg">'.$msg.'</h4>';
 ?>
-        <div>
-            <form action = "updateComment.php?id=<?php echo $_GET['id'] ;?>&blog_id=<?php echo $_GET['blog_id'] ;?>" method = "POST">
+        <div class = "comment_form">
+            <form action = "updateComment.php?id=<?php echo $_GET['id'] ;?>&blog_id=<?php echo $_GET['blog_id'] ;?>" method = "POST" class = "form">
+                <h2>Update Comment</h2>
                 <input type ="text" placeholder = "Comment" name = "comment" required = "required" autocomplete = "off" value = '<?php echo $text;?>'/>
                 <input type ="submit" name = "submit"/>
             </form>

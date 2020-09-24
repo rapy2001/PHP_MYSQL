@@ -61,7 +61,12 @@
             else
             {
                 header('Refresh:3;url=homepage.php');
-                echo "No comment to delete";
+?>
+                <div >
+                    <h2 id = "empty">No comment to delete</h2>
+                </div>
+<?php
+                
             }
             
         }

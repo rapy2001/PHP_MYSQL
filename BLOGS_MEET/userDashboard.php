@@ -16,21 +16,40 @@
                     mysqli_query($conn,$query) or die("Error while querying the dataase for deleting the notif");
                 }
                 $uId = $_GET['user_id'];
+                $query = "SELECT * from followers where user_id=$uId";
+                $result = mysqli_query($conn,$query) or die("Error while querying the database");
+                $followers = mysqli_num_rows($result);
+                $query = "SELECT * from blogs where user_id=$uId";
+                $result = mysqli_query($conn,$query) or die("Error while querying the database");
+                $blogs =  mysqli_num_rows($result);
                 $query = "SELECT * FROM users where user_id=$uId";
                 $result = mysqli_query($conn,$query) or die("Error while querying the database");
                 if(mysqli_num_rows($result) > 0)
                 {
                     $row = mysqli_fetch_array($result);
 ?>
-                    <div>
-                        <h1>username: <?php echo $row['username']; ?></h1>
-                        <img src="<?php echo $row['userImage']; ?>" alt ="error"/>
-                        <p>
-                            <?php 
-                                echo $row['description'];
-                            ?>
-                        </p>
-                        <h4>Total Views:<?php echo $row['totalViews'];?></h4>
+                    <div class = "dashboard public">
+                        <div class = "public_box_1">
+                            <div class = "pb1_1">
+                                <img src="<?php echo $row['userImage']; ?>" alt ="error"/>
+                            </div>
+                            <div class = "pb1_2">
+                                <div class = "pb1_2_1">
+                                    <h1><?php echo $row['username']; ?></h1>
+                                </div>
+                                <p>
+                                    <?php 
+                                        echo $row['description'];
+                                    ?>
+                                </p>
+                                <div class = "pb1_2_2">
+                                    <h4><i class = "fa fa-image"></i><?php echo $blogs;?></h4>
+                                    <h4><i class = "fa fa-male"></i><?php echo $followers;?></h4>
+                                    <h4><i class = "fa fa-eye"></i><?php echo $row['totalViews'];?></h4>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <h2>Notifications</h2>
 <?php
                         $uId = $row['user_id'];
@@ -158,7 +177,6 @@
         header('Refresh:3;url="homepage.php"');
         echo '<h4 class = "error msg">No User Selected</h4>';
     }
-    $query = "SELECT * from users";
     mysqli_close($conn);
     require_once("./includes/footer.php");
 ?>
