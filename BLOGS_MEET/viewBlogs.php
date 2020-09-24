@@ -21,92 +21,104 @@
     else
     {
 ?>
-        <div>
-            <h2>Blogs</h2>
+        <div class = "blogs">
+            <h2 class = "blogs_heading">Blogs</h2>
+            <div class ="category">
 <?php
-        for($i=1;$i<=4;$i++)
-        {
-            switch($i)
-            {
-                case 1:
-                    echo '<h4>Politics</h4>';
-                break;
-                case 2:
-                    echo '<h4>Entertainment</h4>';
-                break;
-                case 3:
-                    echo '<h4>Sports</h4>';
-                break;
-                case 4:
-                    echo '<h4>Science</h4>';
-                break;
-            }
-?>
-<?php
-            $query = "SELECT * from blogs where category_id='$i' and approved=1";
-            $result = mysqli_query($conn,$query) or die("Error while querying the darabase");
-            $total =ceil(mysqli_num_rows($result) / $step);
-            if($total > $mainTotal)
-                $mainTotal = $total;
-            $skip = ($page-1) * $step;
-            // $query = "SELECT * from blogs where category_id='$i' and approved=1 limit $skip,$step";
-            $query = 
-                "SELECT 
-                blogs.blog_id,blogs.title, blogs.text, blogs.imageUrl, categories.category_name, users.username from 
-                categories inner join blogs using(category_id) inner join users using(user_id) where approved = 1 and category_id='$i' limit $skip,$step";
-            $results = mysqli_query($conn,$query) or die("Error while querying the database");
-            if(mysqli_num_rows($results)>0)
-            {
-                while($row = mysqli_fetch_array($results))
+                for($i=1;$i<=4;$i++)
                 {
-?>
-                    <a href = "viewBlogFull.php?id=<?php echo $row['blog_id']; ?>">
-                        <?php echo $row['title'];?> <?php echo substr($row['text'],0,10);?> by: <?php echo $row['username'];?>
-                    </a><br>
-<?php
+                    switch($i)
+                    {
+                        case 1:
+                            echo '<h3 class ="category">Politics</h3>';
+                        break;
+                        case 2:
+                            echo '<h3 class ="category">Entertainment</h3>';
+                        break;
+                        case 3:
+                            echo '<h3 class ="category">Sports</h3>';
+                        break;
+                        case 4:
+                            echo '<h3 class ="category">Science</h3>';
+                        break;
+                    }
+        ?>
+        <?php
+                    $query = "SELECT * from blogs where category_id='$i' and approved=1";
+                    $result = mysqli_query($conn,$query) or die("Error while querying the darabase");
+                    $total =ceil(mysqli_num_rows($result) / $step);
+                    if($total > $mainTotal)
+                        $mainTotal = $total;
+                    $skip = ($page-1) * $step;
+                    // $query = "SELECT * from blogs where category_id='$i' and approved=1 limit $skip,$step";
+                    $query = 
+                        "SELECT 
+                        blogs.blog_id,blogs.title, blogs.text, blogs.imageUrl, categories.category_name, users.username from 
+                        categories inner join blogs using(category_id) inner join users using(user_id) where approved = 1 and category_id='$i' limit $skip,$step";
+                    $results = mysqli_query($conn,$query) or die("Error while querying the database");
+                    if(mysqli_num_rows($results)>0)
+                    {
+                        while($row = mysqli_fetch_array($results))
+                        {
+        ?>
+                            <a class = "blog_item" href = "viewBlogFull.php?id=<?php echo $row['blog_id']; ?>">
+                                <img src = "<?php echo $row['imageUrl']; ?>"/>
+                                <span class = "title"><?php echo $row['title'];?> <?php echo substr($row['text'],0,50);?> </span>
+                                <span class = "by">
+                                    by: 
+                                    <?php echo $row['username'];?>
+                                </span>
+                            </a>
+        <?php
+                        }
+                    }
+                    else
+                    {
+                        echo '<h5 class = "empt">No Blogs in this category</h5>';
+                    }
                 }
-            }
-            else
-            {
-                echo '<h5>No Blogs in this category</h5>';
-            }
-        }
-        // while($row = mysqli_fetch_array($results))
-        // {
-?>          
+            // while($row = mysqli_fetch_array($results))
+            // {
+    ?>        
+            </div>  
+            <div class = "pages">
+                <?php
+                        // }
+                        if($page ==1)
+                        {
+                ?>
+                            <a href = "#"><i class = "fa fa-angle-left"></i></a>
+                <?php
+                        }
+                        else
+                        {
+                ?>
+                            <a href="viewBlogs.php?page=<?php echo $page - 1; ?>"><i class = "fa fa-angle-left"></i></a>
+                <?php
+                        }
+                        for($i=1;$i<=$mainTotal;$i++)
+                        {
+                ?>
+                            <a id="<?php if($page == $i) echo "pg_selec" ?>" href="viewBlogs.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <?php
+                        }
+                        if($page == $mainTotal)
+                        {
+                            
+                ?>
+                            <a href = "#"><i class = "fa fa-angle-right"></i></a>
+                <?php
+                        }
+                        else
+                        {
+                ?>
+                            <a href="viewBlogs.php?page=<?php echo $page + 1; ?>"><i class = "fa fa-angle-right"></i></a>
+                <?php
+                        }
+                ?>
+            </div>
+        </div>
 <?php
-        // }
-        if($page ==1)
-        {
-?>
-            <a href = "#"><--</a>
-<?php
-        }
-        else
-        {
-?>
-            <a href="viewBlogs.php?page=<?php echo $page - 1; ?>"><--</a>
-<?php
-        }
-        for($i=1;$i<=$mainTotal;$i++)
-        {
-?>
-            <a href="viewBlogs.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-<?php
-        }
-        if($page == $mainTotal)
-        {
-            
-?>
-            <a href = "#">--></a>
-<?php
-        }
-        else
-        {
-?>
-            <a href="viewBlogs.php?page=<?php echo $page + 1; ?>">--></a>
-<?php
-        }
     }
     mysqli_close($conn);
     require_once("./includes/footer.php");
