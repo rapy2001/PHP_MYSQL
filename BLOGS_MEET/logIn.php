@@ -38,7 +38,17 @@
                         setcookie('user_id',$row['user_id'], time() + 60*60);
                         $_SESSION['username'] = $row['username'];
                         $_SESSION['user_id']  = $row['user_id'];
-                        header('Refresh:4;url="homepage.php"');
+                        $uId = $row['user_id'];
+                        if($_SESSION['username'] == "Admin")
+                        {
+                            header("Refresh:4;url='admin.php'");
+                        }
+                        else
+                        {
+                            header("Refresh:4;url='userDashboard.php?user_id=$uId");
+                            
+                        }
+                        
                         echo  '<h4 class = "success msg">You have Logged In Successfully <i class = "fa fa-times msg_cut"></i></h4>';
                         $username = "";
                         $show = 0;

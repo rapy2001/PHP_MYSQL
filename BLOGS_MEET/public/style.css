@@ -11,6 +11,9 @@
     --mainColorLite:rgba(255, 51, 133,.5);
     --scndColor:rgb(51, 153, 255);
 }
+h1,h2,h3,h4{
+    font-weight:100;
+}
 body{
     font-family:var(--mainFamily);
 }
@@ -441,6 +444,7 @@ p span{
     display:flex;
     justify-content: center;
     align-items:center;
+    margin:0px auto;
 }
 .blogs{
     box-sizing: border-box;
@@ -752,7 +756,8 @@ p span{
 .dashboard{
     border:1px solid black;
     box-sizing: border-box;
-    height:var(--myH);
+    min-height:var(--myH);
+    padding-bottom:3rem;
 }
 .public{
     /* border:1px solid red; */
@@ -835,4 +840,74 @@ p span{
     display:inline-block;
     margin-top:1rem;
     margin:0px auto;
+}
+.dashboard_blogs{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    padding: 3rem 6rem;
+    flex-shrink:0;
+    flex-basis:50%;
+    height:100%;
+}
+.dashboard_blogs h2,.notifications h2{
+    font-weight:100;
+    color:var(--mainColor);
+    text-align:center;
+    font-size:2rem;
+    margin-bottom:2rem;
+}
+.notifications{
+    /* border:1px solid red; */
+    flex-shrink:0;
+    flex-basis:50%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    box-sizing: border-box;
+    height:47vh;
+    overflow-y:auto;
+}
+.notifications h4{
+    font-weight:100;
+    margin:0px auto;
+    color:red;
+    font-size:1.2rem;
+    display:block;
+}
+.dashboard_box{
+    /* border:1px solid red; */
+    display:flex;
+    align-items:center;
+    margin-top:3rem;
+}
+.blog_item h4{
+    font-weight:100;
+    font-size:1.1rem;
+}
+#notif_item{
+    display:flex;
+    
+    justify-content: center;
+    align-items: center;
+    /* border:1px solid red; */
+    border-top:1px solid var(--scndColor);
+    border-bottom:1px solid var(--scndColor);
+    padding:.8rem 3rem;
+    color:var(--scndColor);
+    margin-top:1rem;
+    margin-bottom:1rem;
+    box-sizing: border-box;
+    width:20vw;
+    transform:scale(1);
+    transition:var(--trans);
+}
+#notif_item i{
+    margin-right:1rem;
+}
+#notif_item:focus{
+    cursor:pointer;
+    border-radius:.2rem;
+    transform:scale(1.01);
+    box-shadow:rgba(0,0,0,0.1);
 }

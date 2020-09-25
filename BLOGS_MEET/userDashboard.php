@@ -49,8 +49,94 @@
                                 </div>
                             </div>
                         </div>
+                        <div class = "dashboard_box">
+                        <div class = "dashboard_blogs">
+                            <h2>Your Blogs</h2>
+<?php 
+                            
+                            $query ="SELECT * from blogs where user_id=$uId";
+                            $results = mysqli_query($conn,$query) or die("Error while querying the database for getting all the blogs");
+                            $jump = 2;
+                            $total = ceil(mysqli_num_rows($results)/$jump);
+                            $page = empty($_GET['page']) ? 1: $_GET['page'];
+                            $skip = ($page - 1) * $jump;
+                            $query = 
+                            "SELECT blogs.blog_id,blogs.title, blogs.imageUrl,blogs.likes,blogs.views,blogs.approved,categories.category_name as category 
+                            from blogs inner join categories using(category_id) where user_id=$uId limit $skip,$jump";
+                            $results = mysqli_query($conn,$query) or die("Error while querying the database for getting the blogs of the user");
+                            if(mysqli_num_rows($results)>0)
+                            {
+                                
+                                while($ary = mysqli_fetch_array($results))
+                                {
+                                        $blgId = $ary['blog_id'];
+                                
+?>
+                                    <a href="<?php echo ($ary['approved']==1) ? "viewBlogFull.php?id=$blgId":"#"?>" class = "blog_item">
+                                        <img src ="<?php echo $ary['imageUrl']; ?>" alt ="error" />
+                                        <span><?php echo $ary['title']; ?></span>
+                                        <h4><?php echo $ary['likes']; ?></h4>
+                                        <h4><?php echo $ary['views']; ?></h4>
+                                        <h4><?php echo $ary['category']; ?></h4>
+                                        <?php
+                                            echo ($ary['approved'] == 1) ?
+                                            '<h4>Approved</h4>'
+                                            : 
+                                            '<h4>Approval Pending</h4>' 
+                                        ?>
+                                    </a>
+                                    <br>
+<?php
+                                }
+?>
+                                <div class = "pages">
+<?php
+                                if($page == 1)
+                                {
+?>
+                                    <a href="#"><i class = "fa fa-angle-left"></i></a>
+<?php
+                                }
+                                else
+                                {
+?>
+                                    <a href="userDashboard.php?user_id=<?php echo $_GET['user_id']; ?>&page=<?php echo ($page -1); ?>"><i class = "fa fa-angle-left"></i></a>
+<?php
+                                }
+                                for($i = 1; $i<=$total;$i++)
+                                {
+?>
+                                    <a id="<?php if($page == $i) echo "pg_selec" ?>" href="userDashboard.php?user_id=<?php echo $_GET['user_id']; ?>&page=<?php echo ($i); ?>"><?php echo $i; ?></a>
+<?php
+                                }
+                                if($page == $total)
+                                {
+?>
+                                    <a href="#"><i class = "fa fa-angle-right"></i></a>
+<?php
+                                }
+                                else
+                                {
+?>
+                                    <a href="userDashboard.php?user_id=<?php echo $_GET['user_id']; ?>&page=<?php echo ($page +1); ?>"><i class = "fa fa-angle-right"></i></a>
+<?php
+                                }
+?>
+                                </div>
+<?php
+                            }
+                            else
+                            {
+?>
+                                <h4>You have not uploaded a Blog yet ...</h4>
+<?php
+                            }
+?>
+                        </div>
                         
-                        <h2>Notifications</h2>
+                        <div class = "notifications">
+                            <h2>Notifications</h2>
+                        <div class = "notifications_box"> 
 <?php
                         $uId = $row['user_id'];
                         $query = "SELECT * from notifications where user_id=$uId";
@@ -84,8 +170,8 @@
                                         $val = mysqli_fetch_array($result);
                                         $dat['username']=$val['username'];
     ?>
-                                        <a href="viewBlogFull.php?id=<?php echo $dat['blog_id']; ?>&notif_id=<?php echo $notif['nottif_id']; ?>">
-                                            <?php echo $dat['username'] ?> added a Comment to your Blog
+                                        <a id = "notif_item" href="viewBlogFull.php?id=<?php echo $dat['blog_id']; ?>&notif_id=<?php echo $notif['nottif_id']; ?>">
+                                            <i class = "fa fa-comment"></i> <?php echo $dat['username'] ?> added a Comment to your Blog
                                         </a>
     <?php
                                     }
@@ -107,8 +193,8 @@
                                         // $ntf = $univ['notif_id'];
                                         
     ?>
-                                       <a href="viewBlogFull.php?id=<?php echo $blogId; ?>&notif_id=<?php echo $notif['nottif_id']; ?>">
-                                            <?php echo $username ?> added a like to your Blog
+                                        <a id = "notif_item" href="viewBlogFull.php?id=<?php echo $blogId; ?>&notif_id=<?php echo $notif['nottif_id']; ?>">
+                                            <i class = "fa fa-heart"></i><?php echo $username ?> added a like to your Blog
                                         </a> 
     
     <?php
@@ -122,7 +208,11 @@
                                         $username = mysqli_fetch_array($result)['username'];
                                         $notifId = $notif['nottif_id'];
     ?>
-                                        <a href="userDashboard.php?user_id=<?php echo $uId;?>&notif_id=<?php echo $notifId; ?>"><?php echo $username ?> started following you</a>
+                                        <a id = "notif_item" href="userDashboard.php?user_id=<?php echo $uId;?>&notif_id=<?php echo $notifId; ?>">
+                                            <i class = "fa fa-male"></i>
+                                            <?php echo $username ?>
+                                            started following you
+                                        </a>
     <?php
                                     }
                                     else if($notif['type'] == 4)
@@ -135,7 +225,8 @@
                                         $result = mysqli_query($conn,$query) or die("Error while getting the username");
                                         $username = mysqli_fetch_array($result)['username'];
     ?>
-                                        <a href="viewBlogFull.php?id=<?php echo $blgId; ?>&notif_id=<?php echo $notif['nottif_id']; ?>">
+                                        <a  id = "notif_item" href="viewBlogFull.php?id=<?php echo $blgId; ?>&notif_id=<?php echo $notif['nottif_id']; ?>">
+                                            <i class = "fa fa-plus"></i>
                                             <?php echo $username ?> added a new blog
                                         </a> 
     <?php
@@ -146,10 +237,12 @@
                         else
                         {
 ?>
-                            <h4>No Notifications</h4>
+                            <h4 >No Notifications ...</h4>
 <?php
                         }
-?>
+?>                      </div>
+                        </div>
+                        </div>
                     </div>
 <?php
                 

@@ -78,16 +78,19 @@
                         <?php
                             }
                             // echo $total,$page;
+                        ?>
+                        <div class = "pages">
+                        <?php
                             if($page === 1)
                             {        
                         ?>
-                                <a href="#"><--</a>
+                                <a href="#"><i class = "fa fa-angle-left"></i></a>
                         <?php
                             }
                             else
                             {
                         ?>
-                                <a href = "admin.php?page=<?php echo $page-1?>"><--</a>
+                                <a href = "admin.php?page=<?php echo $page-1?>"><i class = "fa fa-angle-left"></i></a>
                         <?php
                             }
                             for($i=1;$i<=$total;$i++)
@@ -99,16 +102,17 @@
                             if($page == $total)
                             {
                         ?>
-                                <a href="#">--></a>
+                                <a href="#"><i class = "fa fa-angle-right"></i></a>
                         <?php
                             }
                             else
                             {
                         ?>
-                                <a href="admin.php?page=<?php echo $page+1; ?>">--></a>
+                                <a href="admin.php?page=<?php echo $page+1; ?>"><i class = "fa fa-angle-right"></i></a>
                         <?php
                             }
                         ?>
+                        </div>
                     </div>
                 </div>
 <?php
