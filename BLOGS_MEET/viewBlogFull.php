@@ -135,7 +135,8 @@
                                     $query = "INSERT into notifications values(0,$userId,$followerId,'3')";
                                     mysqli_query($conn,$query) or die("Error while providing the notification about the new follower");   
                                     $msg ="You started following".$row['username'];
-                                    header("Refresh:3;url=viewBlogFull.php?id=$row['blog_id]");
+                                    $blgId = $row['blog_id'];
+                                    header("Refresh:3;url=viewBlogFull.php?id=$blgId");
                                 }
                                 else
                                 {
@@ -163,13 +164,13 @@
 
 ?>
 
-                        <div>
+                        <div class = "blog_full">
                             <?php
                                 if(!empty($msg))
                                     echo '<h2>'.$msg.'</h2>';
                             ?>
                             <h1><?php echo $row['title']; ?></h1>
-                            <h3>
+                            <h4 class = "">
                                 By: <i><?php echo $row['username'];?></i>
                                 <?php
                                     if(!empty($_SESSION['user_id']) &&  $row['user_id']!=$_SESSION['user_id'] && $flw == 0)
@@ -180,27 +181,30 @@
                                     }
                                 ?>
                                 
-                            </h3>
+                            </h4>
                             <?php 
                                 if(isset($_SESSION['user_id']))
                                 {
                                     if($_SESSION['user_id'] == $row['user_id']);
                                     {
             ?>
-                                        <a href = "viewBlogFull.php?id=<?php echo $id;?>&delete=yes">Delete</a>
+                                        <a href = "viewBlogFull.php?id=<?php echo $id;?>&delete=yes" class = "dlt">Delete</a>
                             <?php
                                     }
                                 }
                             ?>
                             
-                            <h3>category: <i><?php echo $row['category_name'];?></i></h3>
-                            <img src = "<?php echo $row['imageUrl'];?>" alt = "error"/>
+                            <h3><i><?php echo $row['category_name'];?></i></h3>
+                            <div class="blg_fl_img"><img src = "<?php echo $row['imageUrl'];?>" alt = "error"/></div>
+                            <div class="lk_vws">
+                                <h4> <i class = "fa fa-heart"></i><?php echo $row['likes']; ?></h4>
+                                <h4> <i class = "fa fa-eye"></i><?php echo $row['views']; ?></h4>
+                            </div>
                             <p>
                                 <?php echo $row['text']; ?>
                             </p>
-                            <h4> likes: <?php echo $row['likes']; ?></h4>
-                            <h4> views: <?php echo $row['views']; ?></h4>
-                            <h4>posted on <?php echo substr($row['posted'],0,10); ?></h4>
+                            
+                            <h4>Posted on:<?php echo substr($row['posted'],0,10); ?></h4>
                             <?php
                                 if(isset($_SESSION['user_id']))
                                 {
@@ -211,29 +215,32 @@
                                     if(mysqli_num_rows($result) === 0 )
                                     {
                             ?>
-                                        <a href = "viewBlogFull.php?id=<?php echo $id; ?>&like=like">Like</a>
+                                        <a href = "viewBlogFull.php?id=<?php echo $id; ?>&like=like" class = "like">Like</a>
                             <?php
                                     }
                                     else
                                     {
                             ?>
-                                        <a href = "viewBlogFull.php?id=<?php echo $id; ?>&like=remove">Liked</a>
+                                        <a href = "viewBlogFull.php?id=<?php echo $id; ?>&like=remove" class = "liked">Liked</a>
                             <?php
                                     }
                                 }
                             ?>
                             <div>
-                                <h3>Comments</h3>
-                                <?php
+                                <h3 class = "cmnt">
+                                    Comments
+                                    <?php
                                     if(isset($_SESSION['user_id']))
                                     {
-                                ?>
-                                        <a href = "addComment.php?id=<?php echo $id; ?>">Add a Comment</a>
-                                <?php
-                                    }
-                                ?>
+                                    ?>
+                                            <a href = "addComment.php?id=<?php echo $id; ?>">Add a Comment</a>
+                                    <?php
+                                        }
+                                    ?>
+                                </h3>
+                                
                             </div>
-                            <div>
+                            <div class = "comments_box">
             <?php
                             // $id = $row['blog_id'];
                             $query = "SELECT comments.comment_id,comments.text,comments.commented_on,users.username from comments inner join users using(user_id) where comments.blog_id=$id";
@@ -242,10 +249,8 @@
                             $total = ceil(mysqli_num_rows($results)/$limit);
                             // echo mysqli_num_rows($results)/$limit;
                             $skip = 0;
-                            if(isset($_GET['page']))
-                            {
-                                $skip = ($_GET['page'] - 1) * $limit;
-                            }
+                            $page = empty($_GET['page']) ? 1: $_GET['page'];
+                            $skip = ($page -1) * $limit;
                             $query.= " LIMIT $skip, $limit";
                             $results = mysqli_query($conn,$query) or die("Error while getting the commennts");
                             if(mysqli_num_rows($results) > 0)
@@ -254,74 +259,70 @@
                                 {
 
             ?>              
-                                    <div>
+                                    <div class = "comment">
                                         <h3><?php echo $flg['text']; ?></h3>
-                                        <h4>By: <?php echo $flg['username']; ?> posted on: <?php echo substr($flg['commented_on'],0,10) ;?></h4>
-                                        <?php
-                                            if(isset($_SESSION['username']) && $flg['username'] === $_SESSION['username'])
-                                            {
-                                        ?>
-                                                <a href = "updateComment.php?id=<?php echo $flg['comment_id']; ?>&blog_id=<?php echo $id; ?>">Update</a>
-                                                <a href = "deleteComment.php?id=<?php echo $flg['comment_id']; ?>&blog_id=<?php echo $id; ?>">Delete</a>
+                                        <h4><i><?php echo $flg['username']; ?></i> <?php echo substr($flg['commented_on'],0,10) ;?></h4>
+                                        <div class = "optn">
+                                            <?php
+                                                if(isset($_SESSION['username']) && $flg['username'] === $_SESSION['username'])
+                                                {
+                                            ?>
+                                                    <a href = "updateComment.php?id=<?php echo $flg['comment_id']; ?>&blog_id=<?php echo $id; ?>" class="upd">Update</a>
+                                                    <a href = "deleteComment.php?id=<?php echo $flg['comment_id']; ?>&blog_id=<?php echo $id; ?>" class="cmnt_dlt">Delete</a>
+                                        </div>
                                     </div>
             <?php
-                                            }
+                                                }
                                 }
-                                if(!empty($_GET['page']))
-                                {
-                                    // echo $total,$_GET['page'];
-                                    if($_GET['page'] == 1)
-                                        echo '<h4><--</h4>';
-                                    else
-                                    {
             ?>
-                                        <a href = "viewBlogFull.php?id=<?php echo $id; ?>&page=<?php echo $_GET['page'] - 1 ;?>"><--</a>
-            <?php
-                                    }
-                                }
-                                else
-                                {
-            ?>
-                                    <h4><--</h4>
-                                    
-            <?php
-                                    
-                                }
-                                // echo $total;
-                                for($i=1;$i<=$total;$i++)
-                                {
-            ?>
-                                    <a href = "viewBlogFull.php?id=<?php echo $id; ?>&page=<?php echo ($i) ;?>"><?php echo $i; ?></a>
-            <?php
-                                }
-                                if(!empty($_GET['page']))
-                                {
-                                    // echo $total,$_GET['page'];
-                                    if($_GET['page'] == $total)
-                                        echo '<h4>--></h4>';
-                                    else
-                                    {
-            ?>
-                                        <a href = "viewBlogFull.php?id=<?php echo $id; ?>&page=<?php echo $_GET['page'] + 1 ;?>">--></a>
-            <?php
-                                    }
-                                }
-                                else
-                                {
-            ?>
-                                    <h4>--></h4>
-            <?php
-                                }
+                                <div class = "pages">
+                
+                                <?php
+                                                if($page ==1)
+                                                {
+                                ?>
+                                                    <a href = "#"><i class = "fa fa-angle-left"></i></a>
+                                <?php
+                                                }
+                                                else
+                                                {
+                                ?>
+                                                    <a href="viewBlogs.php?page=<?php echo $page - 1; ?>"><i class = "fa fa-angle-left"></i></a>
+                                <?php
+                                                }
+                                                for($i=1;$i<=$total;$i++)
+                                                {
+                                ?>
+                                                    <a id="<?php if($page == $i) echo "pg_selec" ?>" href="viewBlogs.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                <?php
+                                                }
+                                                if($page == $total)
+                                                {
+                                                    
+                                ?>
+                                                    <a href = "#"><i class = "fa fa-angle-right"></i></a>
+                                <?php
+                                                }
+                                                else
+                                                {
+                                ?>
+                                                    <a href="viewBlogs.php?page=<?php echo $page + 1; ?>"><i class = "fa fa-angle-right"></i></a>
+                                <?php
+                                                }
+                                ?>
+                                </div>
+                <?php
                                 
                             }
                             else
                             {
             ?>
-                                    <h2>No Comments Yet..</h2>
+                                    <h2 id=empty>No Comments Yet..</h2>
             <?php
                             }
             ?>
                             </div>
+                            
                         </div>
 <?php
                 }
