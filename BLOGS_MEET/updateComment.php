@@ -60,7 +60,7 @@
     if($show === 0)
     {
         if(!empty($msg))
-            echo '<h4 class = "success msg">'.$msg.'</h4>';
+            echo '<h4 class = "success msg">'.$msg.'<i class = "fa fa-times msg_cut"></i></h4>';
 ?>
         <div class = "comment_form">
             <form action = "updateComment.php?id=<?php echo $_GET['id'] ;?>&blog_id=<?php echo $_GET['blog_id'] ;?>" method = "POST" class = "form">

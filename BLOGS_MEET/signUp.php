@@ -11,7 +11,7 @@
     $sub = 0;
     if(isset($_POST['submit']))
     {
-        $sub = 1;
+        $sub = 0;
         $username = mysqli_real_escape_string($conn,trim($_POST['username']));
         $password = mysqli_real_escape_string($conn,trim($_POST['password']));
         $description = mysqli_real_escape_string($conn,trim($_POST['description']));
@@ -68,7 +68,7 @@
                 $query = "INSERT INTO users VALUES(0,'$username','$password','$path','$description',0)";
                 mysqli_query($conn, $query) or die("Error while querying the database");
                 header('Refresh:4;url="homepage.php');
-                echo '<h2>'.$msg = 'User Registration Successfull You will be Redirected shortly'.'</h2>';
+                echo '<h4 class = "success msg">'.'User Registration Successfull You will be Redirected shortly'.'</h4>';
             }
             else
             {
@@ -84,7 +84,7 @@
         <div class = "signup">
             <?php
                 if(!empty($msg))
-                    echo '<h2>'.$msg.'</h2>'; 
+                    echo '<h4 class = "error msg">'.$msg.'<i class = "fa fa-times msg_cut"></i></h4>'; 
             ?>
             <form enctype = "multipart/form-data" method = "POST" action = "signUp.php" class = "form">
                 <h2>Sign Up</h2>

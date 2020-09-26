@@ -15,7 +15,7 @@
         if(mysqli_num_rows($result) === 0)
         {
             header('Refresh:3;url=viewBlogs.php');
-            echo '<div><h3>The Blog Does Not Exist.</h3></div>';
+            echo '<div id= "empty_div"><h2 id = "empty">The Blog Does Not Exist.</h2></div>';
         }
         else
         {
@@ -139,7 +139,7 @@
                                     mysqli_query($conn,$query) or die("Error while adding the new follower");
                                     $query = "INSERT into notifications values(0,$userId,$followerId,'3')";
                                     mysqli_query($conn,$query) or die("Error while providing the notification about the new follower");   
-                                    $msg ="You started following".$row['username'];
+                                    $msg ="You started following ".$row['username'];
                                     $blgId = $row['blog_id'];
                                     header("Refresh:3;url=viewBlogFull.php?id=$blgId");
                                 }
@@ -172,7 +172,7 @@
                         <div class = "blog_full">
                             <?php
                                 if(!empty($msg))
-                                    echo '<h2>'.$msg.'</h2>';
+                                    echo '<h4 class = "success msg">'.$msg.'<i class = "fa fa-times msg_cut"></i></h4>';
                             ?>
                             <h1><?php echo $row['title']; ?></h1>
                             <div class = "name">
@@ -198,6 +198,7 @@
                                     {
             ?>
                                         <a href = "viewBlogFull.php?id=<?php echo $id;?>&delete=yes" class = "dlt">Delete</a>
+                                        <a href = "updateBlog.php?blog_id=<?php echo $row['blog_id']; ?>" class = "update">Edit</a>
                             <?php
                                     }
                                 }
@@ -343,14 +344,17 @@
                 }
             if($dlt != 1)
             {
-                $newViews = $row['views'] + 1;
-                $blogId = $row['blog_id'];
-                $query = "UPDATE blogs SET views=$newViews where blog_id=$blogId";
-                mysqli_query($conn,$query) or die("Error while querying database for updating the views of the blog");
-                $userId= $row['user_id'];
-                $totalViews = $row['totalViews'] + 1;
-                $query = "UPDATE users set totalViews=$totalViews where user_id=$userId";
-                mysqli_query($conn,$query) or die("Error while querying the database for updating the total views of the users");
+                if($_SESSION['user_id'] != $row['user_id'])
+                {
+                    $newViews = $row['views'] + 1;
+                    $blogId = $row['blog_id'];
+                    $query = "UPDATE blogs SET views=$newViews where blog_id=$blogId";
+                    mysqli_query($conn,$query) or die("Error while querying database for updating the views of the blog");
+                    $userId= $row['user_id'];
+                    $totalViews = $row['totalViews'] + 1;
+                    $query = "UPDATE users set totalViews=$totalViews where user_id=$userId";
+                    mysqli_query($conn,$query) or die("Error while querying the database for updating the total views of the users");
+                }
             }
         }
     }

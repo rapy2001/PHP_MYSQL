@@ -1,10 +1,12 @@
 <?php
     require_once('./includes/session.php');
     require_once("./includes/vars.php");
+    require_once("./includes/header.php");
+    require_once("./includes/nav.php");
     if(empty($_SESSION['user_id']))
     {
         header('Refresh:3;url=homepage.php');
-        echo "You need to log in to delete a comment";
+        echo '<div id = "empty_div"><h2 id = "empty">Please Log In to delete a Comment</h2></div>';
     }
     else
     {
@@ -12,7 +14,7 @@
         if(empty($_GET['id']))
         {
             header('Refresh:3;url=homepage.php');
-            echo 'No Comment to delete';
+            echo '<div id = "empty_div"><h2 id = "empty">No Comment to Delete</h2></div>';
         }
         else
         {
@@ -22,17 +24,18 @@
             if(mysqli_num_rows($result) > 0)
             {
                 $row = mysqli_fetch_array($result);
-                echo $row['user_id'] ." " .$_SESSION['user_id'];
-                if($row['user_id'] === $_SESSION['user_id'])
+                // echo $row['user_id'] ." " .$_SESSION['user_id'];
+                if($row['user_id'] == $_SESSION['user_id'])
                 {
                     if(!isset($_GET['id']))
                     {
                         header('Refresh:3;url=homepage.php');
-                        echo "No Comment to delete";
+                        echo '<div id = "empty_div"><h2 id = "empty">No Comment to delete</h2></div>';
                     }
                     else
                     {
-                        
+                        $query = "DELETE from notifications where data_id=$comment_id and type=1";
+                        mysqli_query($conn,$query) or die("Error while deleting the notification");
                         $query = "DELETE from comments where comment_id=$comment_id";
                         mysqli_query($conn,$query) or die("Error while querying the database");
                         if(!empty($_GET['blog_id']))
@@ -43,7 +46,7 @@
                             
                         else
                             header('Refresh:3;url=homepage.php');
-                        echo 'Comment deleted';
+                        echo '<div id = "empty_div"><h2 id = "empty">Comment deleted</h2></div>';
                     }
                 }
                 else
@@ -54,15 +57,18 @@
                         header("Refresh:3;url=viewBlogFull.php?id=$blog_id");
                     }
                     else
+                    {
                         header('Refresh:3;url=homepage.php');
-                    echo "You are not allowed to delete the comment";
+                        echo '<div id = "empty_div"><h2 id = "empty">Comment deleted</h2></div>';
+                    }
+                       
                 }
             }
             else
             {
                 header('Refresh:3;url=homepage.php');
 ?>
-                <div >
+                <div id = "empty_div">
                     <h2 id = "empty">No comment to delete</h2>
                 </div>
 <?php
@@ -72,4 +78,6 @@
         }
         
     }
+    mysqli_close($conn);
+    require_once("./includes/footer.php");
 ?>

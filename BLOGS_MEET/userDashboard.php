@@ -75,8 +75,8 @@
                                     <a href="<?php echo ($ary['approved']==1) ? "viewBlogFull.php?id=$blgId":"#"?>" class = "blog_item">
                                         <img src ="<?php echo $ary['imageUrl']; ?>" alt ="error" />
                                         <span><?php echo $ary['title']; ?></span>
-                                        <h4><?php echo $ary['likes']; ?></h4>
-                                        <h4><?php echo $ary['views']; ?></h4>
+                                        <h4><i class = "fa fa-heart"></i><?php echo $ary['likes']; ?></h4>
+                                        <h4><i class = "fa fa-eye"></i><?php echo $ary['views']; ?></h4>
                                         <h4><?php echo $ary['category']; ?></h4>
                                         <?php
                                             echo ($ary['approved'] == 1) ?
@@ -141,10 +141,12 @@
                         $uId = $row['user_id'];
                         $query = "SELECT * from notifications where user_id=$uId";
                         $result = mysqli_query($conn,$query) or die("Error while querying the database for getting the notification type");
+                        // echo mysqli_num_rows($result);
                         if(mysqli_num_rows($result) > 0)
                         {
-                                while($notif = mysqli_fetch_array($result))
+                                while($notif = mysqli_fetch_assoc($result))
                                 {
+                                    // echo "<br>present";
                                     // $query = "SELECT * from notifications where user_id=$uId";
                                     // $result = mysqli_query($conn,$query) or die("Error while querying the database here");
                                     // $dat = mysqli_fetch_array($result);
@@ -164,7 +166,7 @@
                                         $my = mysqli_fetch_array($result);
                                         $uId = $my['user_id'];
                                         $dat['blog_id'] = $my['blog_id'];
-                                        echo $dat['blog_id']."here";
+                                        // echo $dat['blog_id']."here";
                                         $query = "SELECT users.username from users where user_id=$uId";
                                         $result = mysqli_query($conn,$query) or die("Error while querying the database there");
                                         $val = mysqli_fetch_array($result);
@@ -181,6 +183,7 @@
                                         // $result = mysqli_query($conn,$query) or die("Error while querying the database here");
                                         // $univ = mysqli_fetch_array($result);
                                         // $likeId = $univ['data_id'];
+                                        // echo "present";
                                         $likeId = $notif['data_id'];
                                         $query = "SELECT user_id,blog_id from likes where like_id=$likeId";
                                         $result = mysqli_query($conn,$query) or die("Error while qquerying the database for getting the user_id of the like");

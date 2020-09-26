@@ -16,7 +16,7 @@
     $mainTotal = -1;
     if(mysqli_num_rows($results) === 0)
     {
-        echo '<div><h3>No Blogs yet ...</h3></div>';
+        echo '<div id = "empty_div"><h2 id= "empty">No Blogs yet ...</h2></div>';
     }
     else
     {
@@ -63,7 +63,10 @@
         ?>
                             <a class = "blog_item" href = "viewBlogFull.php?id=<?php echo $row['blog_id']; ?>">
                                 <img src = "<?php echo $row['imageUrl']; ?>"/>
-                                <span class = "title"><?php echo $row['title'];?> <?php echo substr($row['text'],0,50);?> </span>
+                                <span class = "title"><?php echo $row['title'];?>  </span>
+                                <p>
+                                    <?php echo substr($row['text'],0,50);?>
+                                </p>
                                 <span class = "by">
                                     by: 
                                     <?php echo $row['username'];?>

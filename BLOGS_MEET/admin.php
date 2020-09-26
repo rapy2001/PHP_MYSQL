@@ -33,7 +33,7 @@
                     mysqli_query($conn,$query) or die("Error while querying the database for giving the followers notifications");
                 }
                 header('Refresh:2;url=admin.php');
-                echo 'The Blog was approved';
+                echo '<h4 class = "success msg">The Blog was approved <i class = "fa fa-times msg_cut"></i></h4>';
             }
         }
         else
@@ -96,7 +96,7 @@
                             for($i=1;$i<=$total;$i++)
                             {
                         ?>
-                                <a href = "admin.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                <a id="<?php if($page == $i) echo "pg_selec" ?>" href = "admin.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
                         <?php
                             }
                             if($page == $total)

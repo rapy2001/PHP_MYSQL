@@ -13,7 +13,7 @@
         $show = 0;
         if(isset($_POST['submit']))
         {
-            $show = 1;
+            // $show = 1;
             $title = $_POST['title'];
             $text = $_POST['text'];
             $file = $_FILES['file'];
@@ -67,8 +67,8 @@
                 $query = "INSERT INTO blogs VALUES(0,NOW(),'$id','$category','$title','$text','$path',0,0,0)";
                 mysqli_query($conn,$query) or die("There was Error while querying the database");
                 header('Refresh:4;url="homepage.php"');
-                echo 'The Blog has been submiited for Approval';
-                $show = 1;
+                echo '<h4 class = "success msg">The Blog has been submiited for Approval <i class = "fa fa-times msg_cut"></i></h4>';
+                // $show = 1;
                 
             }
 

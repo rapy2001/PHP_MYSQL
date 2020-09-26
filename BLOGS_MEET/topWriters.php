@@ -36,7 +36,7 @@
     }
     else
     {
-        echo "No blogs posted  yet";
+        echo "<div id = 'empty_div'><h2 id = 'empty'>No blogs posted  yet</h2></div>";
     }
     require_once("./includes/footer.php");
     mysqli_close($conn);

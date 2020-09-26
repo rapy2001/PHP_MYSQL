@@ -52,8 +52,8 @@
                 $query = "INSERT INTO notifications values(0,$ownerId,$cmntId,'1')";
                 mysqli_query($conn,$query) or die("Error while adding the notification");
                 header("Refresh:3;url=viewBlogFull.php?id=$blogId");
-                echo '<div><h2>Comment Added Successfully</h2></div>';
-                $show = 1;
+                echo '<h4 class="success msg">Comment Added Successfully <i class = "fa fa-times msg_cut"></i></h4>';
+                // $show = 1;
             }
         }
     }
