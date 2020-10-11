@@ -1,0 +1,183 @@
+:root{
+    --mainFamily:'Quicksand', sans-serif;
+    --mainColor:rgb(255, 128, 128);
+    --trans:.2s all linear;
+    --myH:calc(100vh - 12vh);
+    --myPad:0rem 4rem;
+}
+*{
+    margin:0px;
+    padding:0px;
+    font-family:var(--mainFamily);
+}
+a{
+    text-decoration:none;
+    outline:none;
+    color:rgba(255,255,255,.8);
+    transition:var(--trans);
+    margin-left:.5rem;
+    margin-right:.5rem;
+}
+a:hover{
+    cursor:pointer;
+    color:white;
+}
+.nav{
+    /* border:1px solid red; */
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0rem 2rem;
+    background-color:var(--mainColor);
+    box-sizing:border-box;
+    width:100%;
+    height:6vh;
+}
+.nav_box_1{
+    border:1px solid transparent;
+}
+.nav_box_1 a{
+    font-size:1.2rem;
+    color:rgba(255,255,255,.8);
+}
+.footer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color:var(--mainColor);
+    box-sizing: border-box;
+    width:100%;
+    height:6vh;
+}
+.footer h4{
+    font-weight:100;
+    color:white;
+}
+
+.hmg{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    height:var(--myH);
+    padding:var(--myPad);
+    padding-top:5rem;
+    padding-bottom:2rem;
+    display:flex;
+}
+.hmg_box_1{
+    /* border:1px solid red; */
+    flex-basis:50%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.hmg_box_1 p{
+    margin-top:2rem;
+}
+.hmg_box_1 h1{
+    font-weight:100;
+    text-align: left;
+    color:var(--mainColor);
+}
+.hmg_box_2{
+    /* border:1px solid red; */
+    flex-basis:50%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.hmg_box_2 div{
+    box-sizing: border-box;
+    width:20rem;
+    height:20rem;
+    border-radius:50%;
+    background:url("https://cdn.dribbble.com/users/22665/screenshots/14164378/media/cdefd13de4c264473aa7cd88fc3e41d8.png");
+    background-position:center center;
+    background-size:cover;
+    /* border:1px solid red; */
+}
+.register,.login{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    height:var(--myH);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url("https://cdn.dribbble.com/users/79571/screenshots/10753505/media/115e61882c77c6b2e2dcd5d3d8a519cb.png");
+    background-position:center center;
+    background-size:cover;
+}
+.login{
+    background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url("https://cdn.dribbble.com/users/1586/screenshots/4687869/dribbble.png");
+    background-position:center center;
+    background-size:cover;
+}
+.form{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction:column;
+    width:30vw;
+    padding:2rem 6rem;
+    min-height:45vh;
+    background-color:white;
+    box-shadow:0px 3px 8px rgba(0,0,0,.8);
+}
+.form h4{
+    font-weight:100;
+    margin-top:1rem;
+}
+.form a{
+    color:var(--mainColor);
+}
+.form h3{
+    text-align:center;
+    font-weight:100;
+    font-size:1.5rem;
+    margin-bottom:2rem;
+    color:var(--mainColor);
+}
+.form input{
+    box-sizing: border-box;
+    margin-top:.8rem;
+    margin-bottom:.8rem;
+    border:1.2px solid var(--mainColor);
+    padding:.5rem 1rem;
+    outline:none;
+}
+.form input[type='submit']
+{
+    border:1px solid var(--mainColor);
+    color:var(--mainColor);
+    transition:var(--trans);
+    background-color:white;
+}
+.form input[type='submit']:hover{
+    cursor:pointer;
+    background-color:var(--mainColor);
+    color:white;
+}
+.msg{
+    border-left:4px solid var(--mainColor);
+    box-sizing: border-box;
+    min-width:15vw;
+    position:fixed;
+    top:10vh;
+    right:0rem;
+    box-shadow:0px 3px 8px rgba(0,0,0,.8);
+    padding:1.2rem 2rem;
+    background-color:white;
+    font-weight:100;
+}
+.msg_slide{
+    right:-20vw;
+}
+.msg_cut{
+    margin-left:1rem;
+    color:rgba(0,0,0,.5);
+    transition: var(--trans);
+}
+.msg_cut:hover{
+    cursor:pointer;
+    color:black;
+}
