@@ -19,7 +19,7 @@
             }
             else
             {
-                header('Refresh:3;url="list.php"');
+                header('Refresh:0;url="list.php"');
             }
         }
         if(!empty($_GET['delete']))
@@ -30,33 +30,34 @@
             }
             else
             {
-                header('Refresh:3;url="list.php"');
+                header('Refresh:0;url="list.php"');
             }
         }
         
 ?>
-        <div>
+        <div class = "list">
             <?php
                 if(!empty($msg))
                 {
                     echo '<h4>'.$msg.'</h4>';
                 } 
             ?>
-            <div>
+            <div class ="list_box_1">
                 <img src = "<?php echo $details['imageUrl'];?>" alt = "error"/>
                 <h2><?php echo $details['username']; ?></h2>
             </div>
-            <div>
+            <div class = "list_box_2">
                 <h3>Your ToDo List</h3>
                 <a href = "addToDo.php">Add a To Do</a>
+                <div class = "toDo_container">
                 <?php
                     if(count($list)>0)
                         foreach($list as $item)
                         {
                             
                     ?>  
-                        <div>
-                            <a href = "list.php?check=<?php echo $item['id'];?>">
+                        <div id = "toDo_item">
+                            <a href = "list.php?check=<?php echo $item['id'];?>" id = "check">
                                 <?php 
                                     echo 
                                         ($item['checked'] == 'Y') 
@@ -65,16 +66,17 @@
                                         'check'; 
                                 ?>
                             </a>
-                            <h4 class ="<?php echo ($item['check'] == 'Y') ? 'checked':''; ?>"><?php echo $item['message'];?></h4>
-                        <a href = "list.php?delete=<?php echo $item['id'];?>">
+                            <h4 class ="<?php echo ($item['checked'] == 'Y') ? 'checked':''; ?>"><?php echo $item['message'];?></h4>
+                        <a href = "list.php?delete=<?php echo $item['id'];?>" id = delete>
                                 Delete
                         </a>
                         </div>
                     <?php
                         }
                     else
-                        echo '<div><h4>No To Do ....</h4></div>';
+                        echo '<div><h4 class = "empty_h4">No To Do ....</h4></div>';
                     ?>
+                </div>
             </div>
         </div>
 <?php
@@ -82,7 +84,7 @@
     }
     else
     {
-        echo '<div><h4>You need to be Logged in in order to access this page</h4></div>';
+        echo '<div class = "empty"><h4 class = "empty_h4">You need to be Logged in in order to access this page</h4></div>';
     }
     require_once("./includes/footer.php");
 ?>

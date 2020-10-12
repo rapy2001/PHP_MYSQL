@@ -4,6 +4,7 @@
     --trans:.2s all linear;
     --myH:calc(100vh - 12vh);
     --myPad:0rem 4rem;
+    --shadow:0px 3px 8px rgba(0,0,0,.8);
 }
 *{
     margin:0px;
@@ -96,7 +97,7 @@ a:hover{
     background-size:cover;
     /* border:1px solid red; */
 }
-.register,.login{
+.register,.login,.addToDo{
     /* border:1px solid red; */
     box-sizing: border-box;
     height:var(--myH);
@@ -109,6 +110,11 @@ a:hover{
 }
 .login{
     background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url("https://cdn.dribbble.com/users/1586/screenshots/4687869/dribbble.png");
+    background-position:center center;
+    background-size:cover;
+}
+.addToDo{
+    background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url("https://cdn.dribbble.com/users/637758/screenshots/7305403/media/e17562d033f9e6d8b0c666a10cdae6d6.png");
     background-position:center center;
     background-size:cover;
 }
@@ -130,14 +136,14 @@ a:hover{
 .form a{
     color:var(--mainColor);
 }
-.form h3{
+.form h3,#addToDo_form h3{
     text-align:center;
     font-weight:100;
     font-size:1.5rem;
     margin-bottom:2rem;
     color:var(--mainColor);
 }
-.form input{
+.form input,#addToDo_form input{
     box-sizing: border-box;
     margin-top:.8rem;
     margin-bottom:.8rem;
@@ -145,14 +151,14 @@ a:hover{
     padding:.5rem 1rem;
     outline:none;
 }
-.form input[type='submit']
+.form input[type='submit'],#addToDo_form input[type = "submit"]
 {
     border:1px solid var(--mainColor);
     color:var(--mainColor);
     transition:var(--trans);
     background-color:white;
 }
-.form input[type='submit']:hover{
+.form input[type='submit']:hover,#addToDo_form input[type = "submit"]:hover{
     cursor:pointer;
     background-color:var(--mainColor);
     color:white;
@@ -180,4 +186,157 @@ a:hover{
 .msg_cut:hover{
     cursor:pointer;
     color:black;
+}
+.list{
+    /* border:1px solid red; */
+    box-sizing:border-box;
+    min-height:var(--myH);
+    padding:4rem 15rem;
+}
+.list_box_1{
+    /* border:1px solid red; */
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0px 0px 3px rgba(0,0,0,.2);
+    padding:1rem 2rem;
+    border-radius:.5rem;
+}
+.list_box_1 img{
+    box-sizing:border-box;
+    width:15rem;
+    height:12rem;
+    /* box-shadow:var(--shadow); */
+}
+.list_box_1 h2{
+    font-weight:100;
+    color:var(--mainColor);
+}
+.list_box_2{
+    /* border:1px solid red; */
+    margin-top:3rem;
+    box-sizing: border-box;
+    height:50vh;
+    padding-bottom:2rem;
+    box-shadow:0px 0px 3px rgba(0,0,0,.2);
+    border-radius:.5rem;
+    padding:2rem 3rem;
+    
+}
+
+.list_box_2 h3{
+    font-weight:100;
+    text-align:center;
+    color:var(--mainColor);
+    font-size:2rem;
+    margin-bottom:2rem;
+}
+.list_box_2 a{
+    border:2px solid var(--mainColor);
+    color:var(--mainColor);
+    padding:.5rem 2rem;
+    font-size:1rem;
+    transition:var(--trans);
+    display:inline-block;
+    margin-bottom:3rem;
+}
+.list_box_2 a:hover{
+    cursor:pointer;
+    background-color:var(--mainColor);
+    color:white;
+}
+.empty_h4{
+    border:2px solid red;
+    box-sizing: border-box;
+    width:50vw;
+    height:10vh;
+    font-size:2rem;
+    font-weight:100;
+    color:red;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    margin:0px auto;    
+}
+#addToDo_form{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction:column;
+    width:30vw;
+    padding:2rem 6rem;
+    height:30vh;
+    background-color:white;
+    box-shadow:0px 3px 8px rgba(0,0,0,.8);
+}
+#toDo_item{
+    /* border:1px solid red; */
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width:40vw;
+    margin:0px auto;
+    margin-top:1rem;
+    margin-bottom:1rem;
+    border-radius:.3rem;
+    overflow:hidden;
+    box-shadow:none;
+    transform: scale(1);
+    background-color:white;
+    transition: var(--trans);
+}
+#toDo_item:hover{
+    cursor:pointer;
+    box-shadow: 0px 0px 3px rgba(0,0,0,.4);
+    transform: scale(1.05);
+}
+#check
+{
+    background-color:rgb(255, 153, 51);
+    border:none;   
+    margin:0rem;
+    color:white;
+    padding:.5rem 1rem;
+    flex-basis:5%;
+}
+#check:hover{
+    cursor:pointer;
+    background-color:rgb(255, 153, 51);
+}
+#delete
+{
+    background-color:red;
+    border:none;   
+    margin:0rem;
+    color:white;
+    padding:.5rem 1rem;
+    flex-basis:5%;
+    
+}
+#toDo_item h4{
+    /* border:1px solid red; */
+    height:100%;
+    display:flex;
+    flex-basis:90%;
+    height:100%;
+    font-weight:100;
+    justify-content: center;
+    color:var(--mainColor);
+}
+.checked{
+    text-decoration:line-through;
+}
+.toDo_container{
+    /* border:1px solid red; */
+    height:20vh;
+    overflow-y:auto;
+    padding-top:2rem;
+    padding-bottom:2rem;
+}
+.empty{
+    box-sizing: border-box;
+    height:var(--myH);
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }

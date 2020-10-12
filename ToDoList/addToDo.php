@@ -14,6 +14,10 @@
             {
                 $msg = 'Enter a To Do Please';
             }
+            else if(strlen($_POST['message'])>200)
+            {
+                $msg = 'To Do can\'t be longer than 200 characters';
+            }
             else
             {
                 $message = mysqli_real_escape_string($conn,trim($_POST['message']));
@@ -31,11 +35,13 @@
             }
         }
 ?>
-        <div>
+        <div class = "addToDo">
             <?php
-                echo '<h4>'.$msg.'</h4>'; 
+               if(!empty($msg))
+                echo '<h4 class = "msg">'.$msg.'<i class = "fa fa-times msg_cut"></i></h4>';
             ?>
-            <form action="addToDo.php" method="POST">
+            <form action="addToDo.php" method="POST"  id = "addToDo_form">
+                <h3>Add a To Do</h3>
                 <input type = "text" placeholder = "New To Do" name = "message" autocomplete = "off"/>
                 <input type = "submit" name = "submit"/>
             </form>
@@ -44,7 +50,7 @@
     }
     else
     {
-        echo '<div><h4>You need to Log In to add to yout to do List</h4></div>';
+        echo '<div class = "empty"><h4>You need to Log In to add to yout to do List</h4></div>';
     }
     require_once("./includes/footer.php");
 ?>

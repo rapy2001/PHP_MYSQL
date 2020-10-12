@@ -50,12 +50,12 @@
         }
     }
 ?>
-    <div>
+    <div class = "login">
         <?php
             if(!empty($msg))
-                echo '<h4>'.$msg.'</h4>';
+                echo '<h4 class = "msg">'.$msg.'<i class = "fa fa-times msg_cut"></i></h4>';
         ?>
-        <form action = "login.php" method = "POST">
+        <form action = "login.php" method = "POST" class = "form">
                 <h3>Log In</h3>
                 <input type = "text" placeholder = "Username" name = "username"value = "<?php if(!empty($username)) echo $username;?>" autocomplete = "off"/>
                 <input type = "password" placeholder = "Password" name = "password"/>

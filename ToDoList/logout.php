@@ -12,7 +12,7 @@
     }
     else
     {
-        echo '<div><h4>No one to Log Out !</h4></div>';
+        echo '<div class = "empty"><h4 class = "empty_h4">No one to Log Out !</h4></div>';
     }
     require_once("includes/footer.php");
 ?>
