@@ -1,0 +1,3 @@
+CREATE TRIGGER deleteRequests BEFORE INSERT ON friends FOR EACH ROW BEGIN
+	DELETE FROM requests WHERE requests.to_id = NEW.user_id AND requests.from_id = NEW.friend_id;
+END$$
