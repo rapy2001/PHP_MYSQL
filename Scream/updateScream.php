@@ -23,7 +23,7 @@
                 {
                     $msg = 'Errror while uploading the scream image';
                 }
-                else if($_FILES['file']['type'] != 'image/gif' && $_FILES['file']['type'] != 'image/jpeg' && $_FILES['file']['type'] != 'image/jpg' && $_FILES['file']['type'] != 'image/gif' && $_FILES['file']['size'] > 0)
+                else if($_FILES['file']['type'] != 'image/gif' && $_FILES['file']['type'] != 'image/jpeg' && $_FILES['file']['type'] != 'image/jpg' && $_FILES['file']['type'] != 'image/png' && $_FILES['file']['size'] > 0)
                 {
                     $msg = 'You must upload an Image File';
                 }

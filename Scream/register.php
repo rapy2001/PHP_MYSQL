@@ -34,9 +34,14 @@
         {
             $username = mysqli_real_escape_string($conn,trim($_POST['username']));
             $password = mysqli_real_escape_string($conn,trim($_POST['password']));
-            $ary = explode('.',$_FILES['file']['name']);
-            $path = "./Images/User/".$username.'_'.time().'.'.$ary[count($ary) - 1];
-            move_uploaded_file($_FILES['file']['tmp_name'],$path);
+            if($_FILES['file']['size'] > 0)
+            {
+                $ary = explode('.',$_FILES['file']['name']);
+                $path = "./Images/User/".$username.'_'.time().'.'.$ary[count($ary) - 1];
+                move_uploaded_file($_FILES['file']['tmp_name'],$path);
+            }
+            else
+                $path = '';
             $imageUrl =$path;
             // var_dump($_FILES['file']);
             $obj = new User();

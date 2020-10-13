@@ -14,6 +14,8 @@
                 <a href = "createScream.php">Create Scream</a>
                 <a href = "logout.php">Log Out (<?php echo $_SESSION['username']; ?>)</a>
                 <a href = "requests.php">View Friend Requests</a>
+                <a href = "yourScreams.php">Your Screams</a>
+                <a href = "feed.php">Your Feed</a>
                 <?php
                     if($_SESSION['username'] == 'Admin')
                     {

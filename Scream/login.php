@@ -36,7 +36,7 @@
                     setcookie('username',$user['username'],time()+60*60);
                     $_SESSION['user_id'] = $user['user_id'];
                     $_SESSION['username'] = $user['username'];
-                    header('Refresh:3;url="homepage.php"');
+                    header('Refresh:3;url="feed.php"');
                     $msg = 'Logged In Successfully';
                 }
                 else
