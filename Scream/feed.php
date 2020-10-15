@@ -30,6 +30,7 @@
                     <h2>
                         <?php echo $scream['Scream_text']; ?>
                     </h2>
+                    <a href = "viewScream.php?scream_id=<?php echo $scream['scream_id'];?>">View Scream</a>
                 </div>
 <?php
             }

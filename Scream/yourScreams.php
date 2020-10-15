@@ -49,6 +49,7 @@
                                 echo substr($scream['created_at'],0,10);
                             ?>
                         </h4>
+                        <a href = "viewScream.php?scream_id=<?php echo $scream['scream_id'];?>">View Scream</a>
                     </div>
     <?php
                 }

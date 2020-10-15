@@ -15,6 +15,8 @@
         mysqli_query($conn,$query) or die("Error while deleting the friends");
         $query = "DELETE FROM screams";
         mysqli_query($conn,$query) or die("Error while deleting the screams");
+        $query = "DELETE FROM comments";
+        mysqli_query($conn,$query) or die("Error while deleting the comments");
         // $password =  sha1('12345');
         // $query = "INSERT INTO users VALUES(0,'Admin,$password,'https://cdn.dribbble.com/users/556848/screenshots/6660123/admin_4x.png?compress=1&resize=800x600'";
         // mysqli_query($conn,$query) or die("Error while creating the Admin");
