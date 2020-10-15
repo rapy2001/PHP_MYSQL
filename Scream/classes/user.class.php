@@ -131,5 +131,15 @@
             $stmt = $connection->prepare($sql);
             $stmt->execute([$user_id,$friend_id]);
         }
+
+        public function getAllFriends($userId)
+        {
+            $connection = $this->connection();
+            $sql = "SELECT * FROM friends WHERE user_id = ?";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute([$userId]);
+            $friends = $stmt->fetchAll();
+            return $friends;
+        }
     }
 ?>

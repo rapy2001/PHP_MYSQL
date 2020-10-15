@@ -11,12 +11,22 @@
                 $sql = 'INSERT INTO screams(user_id,Scream_text) VALUES(?,?)';
                 $stmt = $connection->prepare($sql);
                 $stmt->execute([$user_id,$scream_text]);
+                $sql = "SELECT * FROM screams WHERE user_id = ? ORDER BY created_at DESC LIMIT 1";
+                $stmt = $connection->prepare($sql);
+                $stmt->execute([$user_id]);
+                $scream = $stmt->fetch();
+                return $scream;
             }
             else
             {
                 $sql = 'INSERT INTO screams(user_id,Scream_text,scream_image) VALUES(?,?,?)';
                 $stmt = $connection->prepare($sql);
                 $stmt->execute([$user_id,$scream_text,$scream_image]);
+                $sql = "SELECT * FROM screams WHERE user_id = ? ORDER BY created_at DESC LIMIT 1";
+                $stmt = $connection->prepare($sql);
+                $stmt->execute([$user_id]);
+                $scream = $stmt->fetch();
+                return $scream;
             }
         }
 

@@ -4,3 +4,20 @@ END$$
 
 
 insert into comments values(0,9,'DUMMY COMMENT',9,0);
+
+
+
+create table notifications (
+    notif_id int primary key auto_increment,
+    owner_id int not null,
+    scream_id int not null,
+    comment_id int not null,
+    like_id int not null,
+    FOREIGN KEY(scream_id) REFERENCES screams(scream_id) ON DELETE CASCADE,
+    FOREIGN KEY(comment_id) REFERENCES comments(comment_id) ON DELETE CASCADE,
+    FOREIGN KEY(like_id) REFERENCES likes(like_id) ON DELETE CASCADE
+	FOREIGN KEY(owner_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+insert into likes values(0,9,7,9);
+
+alter table notifications add type int not null default 1;

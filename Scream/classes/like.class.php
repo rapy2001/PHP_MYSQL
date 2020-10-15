@@ -35,6 +35,11 @@
                 // echo "Wroking 1";
                 $stmt = $connection->prepare($sql);
                 $stmt->execute([$user_id,$id]);
+                $sql = "SELECT * FROM likes WHERE user_id = ? AND scream_id = ?";
+                $stmt = $connection->prepare($sql);
+                $stmt->execute([$user_id,$id]);
+                $like = $stmt->fetch();
+                return $like['like_id'];
             }
             else if($type == 2)
             {
@@ -42,6 +47,11 @@
                 // echo "Wroking 2";
                 $stmt = $connection->prepare($sql);
                 $stmt->execute([$user_id,$scream_id,$id]);
+                $sql = "SELECT * FROM likes WHERE user_id = ? AND comment_id = ?";
+                $stmt = $connection->prepare($sql);
+                $stmt->execute([$user_id,$id]);
+                $like = $stmt->fetch();
+                return $like['like_id'];
             }
             // var_dump($sql);
             
@@ -77,6 +87,16 @@
             $stmt->execute([$id]);
             $results = $stmt->fetchAll();
             return count($results);
+        }
+
+        public function getLike($like_id)
+        {
+            $connection = $this->connection();
+            $sql = "SELECT * FROM likes where like_id = ?";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute([$like_id]);
+            $like = $stmt->fetch();
+            return $like;
         }
     }
 ?>

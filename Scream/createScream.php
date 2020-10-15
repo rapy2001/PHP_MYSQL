@@ -38,7 +38,19 @@
                 move_uploaded_file($_FILES['file']['tmp_name'],$imageUrl);
                 @unlink($FILES['file']['tmp_name']);
                 $obj = new Scream();
-                $obj->createScream($scream_text,$imageUrl,$_SESSION['user_id']);
+                $screamData = $obj->createScream($scream_text,$imageUrl,$_SESSION['user_id']);
+                $obj = new User();
+                $friends = $obj->getAllFriends($_SESSION['user_id']);
+                $obj = new Notification();
+                if(count($friends) > 0)
+                {
+                    foreach($friends as $friend)
+                    {
+                        echo $screamData['scream_id'];
+                        $obj->addNotification($friend['friend_id'],$screamData['scream_id'],1);
+                    }
+                    
+                }
                 header('Refresh:3;url="homepage.php"');
                 $msg = 'Scream created Successfully';
             }

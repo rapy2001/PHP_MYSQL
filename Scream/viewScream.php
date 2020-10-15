@@ -12,8 +12,12 @@
                 if(!empty($_GET['postLikeId']))
                 {
                     $obj = new Like();
-                    $obj->addLike($_SESSION['user_id'],$_GET['postLikeId'],1,-1);
+                    $likeId = $obj->addLike($_SESSION['user_id'],$_GET['postLikeId'],1,-1);
                     $screamId = $_GET['scream_id'];
+                    $obj = new Scream();
+                    $screamtData = $obj->getScream($_GET['scream_id']);
+                    $obj = new Notification();
+                    $obj->addNotification($screamtData['user_id'],$likeId,3);
                     header("Refresh:3;url=\"viewScream.php?scream_id=$screamId\"");
                     $msg = 'Like added Successfully';
                 }
@@ -28,8 +32,12 @@
                 if(!empty($_GET['commentLikeId']))
                 {
                     $obj = new Like();
-                    $obj->addLike($_SESSION['user_id'],$_GET['commentLikeId'],2,$_GET['scream_id']);
+                    $likeId = $obj->addLike($_SESSION['user_id'],$_GET['commentLikeId'],2,$_GET['scream_id']);
                     $screamId = $_GET['scream_id'];
+                    $obj = new Comment();
+                    $commentData = $obj->getCommentWithId($_GET['commentLikeId']);
+                    $obj = new Notification();
+                    $obj->addNotification($commentData['user_id'],$likeId,3);
                     header("Refresh:3;url=\"viewScream.php?scream_id=$screamId\"");
                     $msg = 'Like added to the comment Successfully';
                 }

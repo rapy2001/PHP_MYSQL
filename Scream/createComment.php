@@ -18,10 +18,14 @@
                 }
                 else
                 {
+                    $obj = new Scream();
+                    $screamData = $obj->getScream($_GET['scream_id']);
                     $obj = new Comment();
-                    $obj->createComment($_SESSION['user_id'],$commentText,$_GET['scream_id']);
+                    $commentData = $obj->createComment($_SESSION['user_id'],$commentText,$_GET['scream_id']);
                     $screamId = $_GET['scream_id'];
                     $commentText = '';
+                    $obj = new Notification();
+                    $obj->addNotification($screamData['user_id'],$commentData['comment_id'],2);
                     header("Refresh:3;url=\"viewScream.php?scream_id=$screamId\"");
                     $msg = 'Comment Added';
                 }
