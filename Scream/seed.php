@@ -13,10 +13,12 @@
         mysqli_query($conn,$query) or die("Error while deleting the firend Request");
         $query = "DELETE FROM friends";
         mysqli_query($conn,$query) or die("Error while deleting the friends");
-        $query = "DELETE FROM screams";
+        $query = "DELETE FROM screams WHERE scream_id <> 9";
         mysqli_query($conn,$query) or die("Error while deleting the screams");
-        $query = "DELETE FROM comments";
+        $query = "DELETE FROM comments WHERE comment_id <> 7";
         mysqli_query($conn,$query) or die("Error while deleting the comments");
+        $query = "DELETE FROM likes";
+        mysqli_query($conn,$query) or die("Error while deleting the likes");
         // $password =  sha1('12345');
         // $query = "INSERT INTO users VALUES(0,'Admin,$password,'https://cdn.dribbble.com/users/556848/screenshots/6660123/admin_4x.png?compress=1&resize=800x600'";
         // mysqli_query($conn,$query) or die("Error while creating the Admin");

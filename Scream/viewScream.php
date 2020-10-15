@@ -9,11 +9,44 @@
         if(!empty($_GET['scream_id']))
             {
                 $msg = '';
+                if(!empty($_GET['postLikeId']))
+                {
+                    $obj = new Like();
+                    $obj->addLike($_SESSION['user_id'],$_GET['postLikeId'],1,-1);
+                    $screamId = $_GET['scream_id'];
+                    header("Refresh:3;url=\"viewScream.php?scream_id=$screamId\"");
+                    $msg = 'Like added Successfully';
+                }
+                if(!empty($_GET['postUnlikeId']))
+                {
+                    $obj = new Like();
+                    $obj->deleteLike($_SESSION['user_id'],$_GET['postUnlikeId'],1,-1);
+                    $screamId = $_GET['scream_id'];
+                    header("Refresh:3;url=\"viewScream.php?scream_id=$screamId\"");
+                    $msg = 'Like deleted Successfully';
+                }
+                if(!empty($_GET['commentLikeId']))
+                {
+                    $obj = new Like();
+                    $obj->addLike($_SESSION['user_id'],$_GET['commentLikeId'],2,$_GET['scream_id']);
+                    $screamId = $_GET['scream_id'];
+                    header("Refresh:3;url=\"viewScream.php?scream_id=$screamId\"");
+                    $msg = 'Like added to the comment Successfully';
+                }
+                if(!empty($_GET['commentUnlikeId']))
+                {
+                    $obj = new Like();
+                    $obj->deleteLike($_SESSION['user_id'],$_GET['commentUnlikeId'],2);
+                    $screamId = $_GET['scream_id'];
+                    header("Refresh:3;url=\"viewScream.php?scream_id=$screamId\"");
+                    $msg = 'Like deleted from comment Successfully';
+                }
                 if(!empty($_GET['deleteCommentId']))
                 {
                     $screamId = $_GET['scream_id'];
                     $obj_6 =  new Comment();
                     $comment = $obj_6->getCommentWithId($_GET['deleteCommentId']);
+                    $screamId = $_GET['scream_id'];
                     if($comment['user_id'] == $_SESSION['user_id'])
                     {
                         $obj_6->deleteComment($_GET['deleteCommentId']);
@@ -53,6 +86,37 @@
                             <h4>Posted On: <?php echo substr($scream['created_at'],0,10); ?> at: <?php echo substr($scream['created_at'],11,15);?></h4>
                         </div>
                         <div>
+                            <?php
+                                $obj = new Like();
+                                $likes = $obj->getLikeCount($scream['scream_id'],1);
+                            ?>
+                            <h4>
+                                Likes:
+                                <?php
+                                    echo $likes;
+                                ?>
+                            </h4>
+                        </div>
+                        <?php
+                            $obj_1 = new Like();
+                            $flg = $obj_1->checkLikeStatus($_SESSION['user_id'],$scream['scream_id'],1);
+                            if($flg == 0)
+                            {
+                        ?>
+                                <a href = "viewScream.php?postLikeId=<?php echo $scream['scream_id'];?>&scream_id=<?php echo $scream['scream_id'];?>">Like</a>
+                        <?php
+                            }
+                            else
+                            {
+                        ?>
+                                <a href = "viewScream.php?postUnlikeId=<?php echo $scream['scream_id'];?>&scream_id=<?php echo $scream['scream_id'];?>">Liked</a>
+                        <?php
+                            }
+                        ?>
+                        <div>
+                            
+                        </div>
+                        <div>
                             <h3>Comments</h3>
                             <a href = "createComment.php?scream_id=<?php echo $scream['scream_id'];?>">Add a Comment</a>
                             <?php
@@ -71,6 +135,27 @@
                                             ?>
                                             <h5>Posted On: <?php echo substr($comment['created_at'],0,10); ?> at: <?php echo substr($comment['created_at'],11,15);?></h5>
                                             <h5>By: <?php echo $user['username'];?></h5>
+                                            <?php
+                                                $obj = new Like();
+                                                $likes = $obj->getLikeCount($comment['comment_id'],2);
+                                            ?>
+                                            <h5>Likes: <?php echo $likes;?></h5>
+                                            <?php
+                                                $obj = new Like();
+                                                $flg = $obj->checkLikeStatus($_SESSION['user_id'],$comment['comment_id'],2);
+                                                if($flg == 0)
+                                                {
+                                            ?>
+                                                    <a href = "viewScream.php?commentLikeId=<?php echo $comment['comment_id'];?>&scream_id=<?php echo $scream['scream_id'];?>">Like</a>
+                                            <?php
+                                                }
+                                                else
+                                                {
+                                            ?>
+                                                    <a href = "viewScream.php?commentUnlikeId=<?php echo $comment['comment_id'];?>&scream_id=<?php echo $scream['scream_id'];?>">Liked</a>
+                                            <?php
+                                                }
+                                            ?>
                                             <?php
                                                 if($comment['user_id'] == $_SESSION['user_id'])
                                                 {
@@ -98,7 +183,7 @@
                         </div>
                     </div>
         <?php
-
+                
                 }
                 else
                 {
