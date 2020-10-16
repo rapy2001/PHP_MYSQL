@@ -141,5 +141,13 @@
             $friends = $stmt->fetchAll();
             return $friends;
         }
+
+        public function deleteFriendship($user_Id,$friend_Id)
+        {
+            $connection = $this->connection();
+            $sql = "DELETE FROM friends WHERE user_id = ? AND friend_id = ? OR user_id = ? AND friend_id = ?";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute([$user_Id,$friend_Id,$friend_Id,$user_Id]);
+        }
     }
 ?>
