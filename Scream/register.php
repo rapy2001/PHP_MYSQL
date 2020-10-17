@@ -8,6 +8,7 @@
     $username = '';
     $password = '';
     $imageUrl = '';
+    $city = '';
     if(!empty($_POST['submit']))
     {
         if(empty($_POST{'username'}))
@@ -34,6 +35,7 @@
         {
             $username = mysqli_real_escape_string($conn,trim($_POST['username']));
             $password = mysqli_real_escape_string($conn,trim($_POST['password']));
+            $city = empty($_POST['city']) ? '':mysqli_real_escape_string($conn,trim($_POST['city']));
             if($_FILES['file']['size'] > 0)
             {
                 $ary = explode('.',$_FILES['file']['name']);
@@ -45,7 +47,7 @@
             $imageUrl =$path;
             // var_dump($_FILES['file']);
             $obj = new User();
-            if($obj->setNewUser($username,$password,$imageUrl) == 0)
+            if($obj->setNewUser($username,$password,$imageUrl,$city) == 0)
             {
                 $msg = 'The username already exists. Please try a different username';
             }
@@ -71,6 +73,7 @@
         <form enctype = "multipart/form-data" action = "register.php" method = "POST">
             <h3>Register</h3>
             <input type = "text" name = "username" placeholder = 'User Name' value = '<?php if (!empty($username)) echo $username; ?>'autocomplete = "off"/>
+            <input type = "text" name = "city" placeholder = 'City Name' value = '<?php if (!empty($city)) echo $city; ?>'autocomplete = "off"/>
             <input type = "password" name = "password" placeholder = 'Your Password' autocomplete = "off"/>
             <input type = "file" name = "file" placeholder = 'Image File'/>
             <input type = "submit" name = "submit"/>

@@ -17,6 +17,8 @@
                 <a href = "profile.php?user_id=<?php echo $_SESSION['user_id']; ?>">Your Profile</a>
                 <a href = "feed.php">Your Feed</a>
                 <a href ="notifications.php">View Notifications</a>
+                <a href ="blockList.php">View Blocked Users</a>
+                <a href ="searchUsers.php">Search Users</a>
                 
                 <?php
                     if($_SESSION['username'] == 'Admin')
