@@ -48,19 +48,25 @@
         }
     }
 ?>
-        <div>
+        <div class = "box login">
             <?php
                 if(!empty($msg))
                 {
-                    echo '<h4>'.$msg.'</h4>';
+                    echo '<h4 class = "msg">'.$msg.'<i class = "fa fa-times msg_cut"></i></h4>';
                 }
             ?>
-            <form action = "login.php" method = "POST">
-                <h3>Log In</h3>
-                <input type = "text" name = "username" placeholder = 'User Name' value = '<?php if (!empty($username)) echo $username; ?>'autocomplete = "off"/>
-                <input type = "password" name = "password" placeholder = 'Your Password' autocomplete = "off"/>
-                <input type = "submit" name = "submit"/>
-            </form>
+            <div class = "box_1">
+                <form action = "login.php" method = "POST" class = "form">
+                    <h3>Log In</h3>
+                    <input type = "text" name = "username" placeholder = 'User Name' value = '<?php if (!empty($username)) echo $username; ?>'autocomplete = "off"/>
+                    <input type = "password" name = "password" placeholder = 'Your Password' autocomplete = "off"/>
+                    <input type = "submit" name = "submit"/>
+                    <h4>Don't have an account ? Then <a href = "register.php">Register</a></h4>
+                </form>
+            </div>
+            <div class = "box_2">
+
+            </div>
     </div>
 <?php
     require_once("./includes/footer.php");

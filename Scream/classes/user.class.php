@@ -2,7 +2,7 @@
 
     class User extends dbh
     {
-        public function setNewUser($username,$password,$imageUrl)
+        public function setNewUser($username,$password,$imageUrl,$city)
         {
             $password = sha1($password);
             $connection = $this->connection();
@@ -15,14 +15,22 @@
             {
                 if(empty($imageUrl))
                 {
-                    $sql = "INSERT INTO users(username,password) values(?,?)";
+                    $sql = "INSERT INTO users(username,password,city) values(?,?,?)";
                     $stmt = $connection->prepare($sql);
-                    $stmt->execute([$username,$password]);
+                    $stmt->execute([$username,$password,$city]);
                 }   
-                else
-                    $sql = "INSERT INTO users values(0,?,?,?)";
+                else if(empty($city))
+                {
+                    $sql = "INSERT INTO users(username,password,imageUrl) values(?,?,?)";
                     $stmt = $connection->prepare($sql);
                     $stmt->execute([$username,$password,$imageUrl]);
+                }
+                else
+                {
+                    $sql = "INSERT INTO users values(0,?,?,?,?)";
+                    $stmt = $connection->prepare($sql);
+                    $stmt->execute([$username,$password,$imageUrl,$city]);
+                } 
                 return 1;
             }
         }
@@ -149,5 +157,32 @@
             $stmt = $connection->prepare($sql);
             $stmt->execute([$user_Id,$friend_Id,$friend_Id,$user_Id]);
         }
+
+        // public function getSearchResults($searchTerm)
+        // {
+        //     $connection = $this->connection();
+        //     $searchWord = strtolower($searchTerm);
+        //     $searchAry = explode(" ",$searchWord);
+        //     for($i = 0; $i<count($searchAry);$i++)
+        //     {
+        //         if($searchAry[$i] == ',' || $searchAry[$i] == '.' || $searchAry[$i] == '!' || $searchAry[$i] == '@')
+        //         {
+        //             array_shift($searchAry);
+        //         }
+        //     }
+        //     $sql = "SELECT * FROM users WHERE ";
+        //     for($i = 0; $i<count($searchAry);$i++)
+        //     {
+        //         if($i == count($searchAry) - 1)
+        //             $sql.= "username LIKE $searchAry[$i]";
+        //         else
+        //             $sql.="username LIKE $searchAry[$i] OR ";
+        //     }
+        //     $result = $connection->query($sql);
+        //     $searchResults = array();
+        //     while($row = $result->fetch())
+        //         $searchResults[] = $row;
+        //     return $searchResults;
+        // }
     }
 ?>

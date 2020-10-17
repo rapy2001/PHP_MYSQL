@@ -7,6 +7,8 @@
     $msg = '';
     if(!empty($_SESSION['user_id']))
     {
+        ?>
+        <?php
         $obj = new User();
         $users = $obj->getAllRequests($_SESSION['user_id']);
         if(!empty($_GET['friend_id']))
@@ -25,7 +27,8 @@
             }
         }
 ?>
-        <div>
+        <div class = "requests">
+            <h1>Friend Requests</h1>
 <?php
         if(!empty($msg))
         {
@@ -37,30 +40,30 @@
             {
                 // $flg = $obj->checkRequestStatus($_SESSION['user_id'],$user['user_id']);
 ?>
-                <div>
+                <div class = "user_card">
                     <img src = "<?php echo $user['imageUrl']; ?>" alt = "error"/>
                     <h2>
                         <?php
                             echo $user['username'];
                         ?>
                     </h2>
-                    <a href = "requests.php?friend_id=<?php echo $user['user_id']; ?>&friendName=<?php echo $user['username'];?>">Accept Friend Request</a>
+                    <a href = "requests.php?friend_id=<?php echo $user['user_id']; ?>&friendName=<?php echo $user['username'];?>" class = "btn">Accept Friend Request</a>
                 </div>
 <?php
             }
 ?>
+        </div>
 <?php
         }
         else
         {
 ?>
-            <div>
+            <div class = "empty">
                 <h4>No Friend Requests Yet ...</h4>
             </div>
 <?php
         }
 ?>
-        </div>
 <?php
     }
     else

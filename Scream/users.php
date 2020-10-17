@@ -40,7 +40,8 @@
     if(!empty($_SESSION['username']))
     {
         ?>
-        <div>
+        <div class = "users">
+            <h1>Users</h1>
             <h4 class = "scs_msg"></h4>
             <h4 class = "err_msg"></h4>
         <?php
@@ -58,37 +59,37 @@
                     $flg_3 = $obj->checkRequestStatus($_SESSION['user_id'],$user['user_id']);
                     
 ?>
-                        <div>
+                        <div class = "user_card">
                             <img src = "<?php echo $user['imageUrl']; ?>" alt = "error"/>
                             <h2>
                                 <?php
                                     echo $user['username'];
                                 ?>
                             </h2>
-                            <a href = "profile.php?user_id=<?php echo $user['user_id']; ?>">View Profile</a>
+                            <a href = "profile.php?user_id=<?php echo $user['user_id']; ?>" class = "btn">View Profile</a>
 <?php
                                 if($flg_1 == 1 && $flg_2 == 1 && $flg_3 == 1 && $_SESSION['user_id'] != $user['user_id'])
                                 {
 ?>
-                                    <a href ="users.php?user_id=<?php echo $user['user_id']; ?>">Send Friend Request</a>
+                                    <a href ="users.php?user_id=<?php echo $user['user_id']; ?>" class = "btn">Send Friend Request</a>
 <?php
                                 }
                                 if($flg_3 == 0)
                                 {
 ?>
-                                    <a href ="requests.php">Has Sent you a Friend Request</a>
+                                    <a href ="requests.php" class = "user_msg">Has Sent you a Friend Request</a>
 <?php
                                 }
                                 if($flg_2 == 0)
                                 {
 ?>
-                                    <h4>Friend Request Sent</h4>
+                                    <h4 class = "user_msg">Friend Request Sent</h4>
 <?php
                                 }
                                 if($flg_1 == 1 && $_SESSION['user_id'] != $user['user_id'])
                                 {
                                     ?>
-                                        <button class = "blk_btn" data-id = "<?php echo $user['user_id']; ?>">Block</button>
+                                        <button class = "blk_btn btn" data-id = "<?php echo $user['user_id']; ?>">Block</button>
                                     <?php
                                 }
 ?>
@@ -124,6 +125,7 @@
         <a href = "about.php">2020. Rajarshi Saha</a>
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src = "./public/index.js"></script>
     <script>
         $(document).ready(()=>{
             $('.scs_msg').hide();

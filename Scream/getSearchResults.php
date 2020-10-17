@@ -39,20 +39,21 @@
     {
         ?>
         <div>
+            <h1>Search Results</h1>
         <?php
         foreach($searchResults as $result)
         {
             $obj = new User();
             $userData = $obj->getUserWithId($result['user_id']);
             ?>
-            <div>
+            <div class = "user_card">
                 <img src = "<?php echo $userData['imageUrl'];  ?>" alt = "error" />
                 <h2>
                     <?php
                         echo $userData['username'];
                     ?>
                 </h2>
-                <a href = "profile.php?user_id=<?php echo $userData['user_id']; ?>">View Profile</a>
+                <a href = "profile.php?user_id=<?php echo $userData['user_id']; ?>" class = "btn">View Profile</a>
             </div>
             <?php
         }
