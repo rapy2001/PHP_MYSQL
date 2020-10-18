@@ -25,9 +25,10 @@
         if(!empty($_GET['user_id']))
         {
 ?>
-            <div>
-            <h4 class = "scs_msg"></h4>
-            <h4 class = "err_msg"></h4>
+            <div class = "profile">
+                <h1>Profile</h1>
+            <h4 class = "scs_msg msg"></h4>
+            <h4 class = "err_msg msg"></h4>
 <?php
                 $obj = new User();
                 $userData = $obj->getUserWithId($_GET['user_id']);
@@ -35,19 +36,33 @@
                 if($_SESSION['user_id'] == $_GET['user_id'] || $userData['mode'] == 'P' || $flg == 0)
                 {
 ?>
-                    <div>
-                        <img src = "<?php echo $userData['imageUrl']?>" alt = "error" />
-                        <h2>
-                            <?php
-                                echo $userData['username'];
-                            ?>
-                        </h2>
-                        <h3>
-                            City:
-                            <?php
-                                echo $userData['city'];
-                            ?>
-                        </h3>
+                    <div class = "profile_box">
+                        <div>
+                            <img src = "<?php echo $userData['imageUrl']?>" alt = "error" />
+                            <div>
+                                <h2>
+                                    <?php
+                                        echo $userData['username'];
+                                    ?>
+                                </h2>
+                                <h3>
+                                    City:
+                                    <?php
+                                        echo empty($userData['city']) ? 'EMPTY': $userData['city'];
+                                    ?>
+                                </h3>
+                            </div>
+                        </div>
+                        
+                        <?php
+                            if($_SESSION['user_id'] == $_GET['user_id'])
+                            {
+                                ?>
+                                <a href ="friendsList.php" class = "btn">View Friends</a>
+                                <?php
+                            }
+                        ?>
+                        
                     </div>
 <?php
                 }
@@ -55,36 +70,50 @@
                 {
                     
 ?>
-                    <div>
-                        <img src = "https://sisterhoodofstyle.com/wp-content/uploads/2018/02/no-image-1.jpg" alt = "error" />
-                        <h2>
-                            <?php
-                                echo $userData['username'];
-                            ?>
-                        </h2>
-                        
+                    <div class = "profile_box">
+                        <div>
+                            <img src = "<?php echo $userData['imageUrl']?>" alt = "error" />
+                            <div>
+                                <h2>
+                                    <?php
+                                        echo $userData['username'];
+                                    ?>
+                                </h2>
+                            </div>
+                        </div>
                     </div>
-                    <h2>Screams</h2>
 <?php
                 }
                 ?>
-                    <div>
+                    <div class = "profile_status">
                         <?php
                             if($_SESSION['user_id'] == $_GET['user_id'])
                             {
                                 ?>
-                                <div>Profile Status: <h4 class = "currentStatus"><?php echo $userData['mode'] == 'P' ? 'Public': 'Private'?></h4></div>
-                                <ul>
+                                <div>
+                                    <h4>
+                                        Profile Status :
+                                        <b>
+                                            <span class = "currentStatus">
+                                                <?php echo $userData['mode'] == 'P' ? 'Public': 'Private'?>
+                                            </span>
+                                        </b>
+                                    </h4>
+                                    
+                                    <button class = "toggleStatus btn">Toggle Status</button>
+                                </div>
+                                <!-- <ul>
                                     <h5>Note</h5>
                                     <li>Public :- Profile (including Profile Picture, Screams) will be visisble to all</li>
                                     <li>Private :- Profile (including Profile Picture, Screams) will be visisble to Friends only</li>
-                                </ul>
-                                <button class = "toggleStatus">Toggle Status</button>
-                                <a href ="friendsList.php">View Friends</a>
+                                </ul> -->
+                                
+                                
                                 <?php
                             }
                         ?>
                     </div>
+                    <h1>Screams</h1>
                 <?php
                 if($_SESSION['user_id'] == $_GET['user_id'] || $userData['mode'] == 'P' || $flg == 0)
                 {
@@ -93,7 +122,7 @@
                     if(count($screams) > 0)
                     {
                         ?>
-                        <div>
+                        <div class = "profile_screams">
                             <?php
                             if(!empty($msg))
                             {
@@ -102,9 +131,7 @@
                             foreach($screams as $scream)
                             {
                 ?>
-                                <div>
-                                    <a href = "updateScream.php?scream_id=<?php echo $scream['scream_id'];?>">Update Scream</a>
-                                    <a href = "yourScreams.php?scream_id=<?php echo $scream['scream_id'];?>">Delete Scream</a>
+                                <div class = "user_card scream_box">
                                     <img src = "<?php echo $scream['scream_image']; ?>" alt = "error"/>
                                     <h2>
                                         <?php echo $scream['Scream_text']; ?>
@@ -115,7 +142,18 @@
                                             echo substr($scream['created_at'],0,10);
                                         ?>
                                     </h4>
-                                    <a href = "viewScream.php?scream_id=<?php echo $scream['scream_id'];?>">View Scream</a>
+                                    <a href = "viewScream.php?scream_id=<?php echo $scream['scream_id'];?>" class = "view">View Scream</a>
+                                    <?php
+                                        if($_SESSION['user_id'] == $_GET['user_id'])
+                                        {
+                                    ?>
+                                            <a href = "updateScream.php?scream_id=<?php echo $scream['scream_id'];?>" class = "update">Update Scream</a>
+                                            <a href = "yourScreams.php?scream_id=<?php echo $scream['scream_id'];?>" class = "delete">Delete Scream</a>
+                                    <?php
+                                        }
+                                    ?>
+                                    
+                                    
                                 </div>
                 <?php
                             }
@@ -126,8 +164,8 @@
                     else
                     {
             ?>
-                        <div>
-                            <h4>No screams yet</h4>
+                        <div class = "empty">
+                            <h4>No screams Posted yet ... </h4>
                         </div>
             <?php
                     }
@@ -135,7 +173,7 @@
                 else
                 {
                     ?>
-                    <div>
+                    <div class = "empty">
                         <h4>No Screams Posted</h4>
                     </div>
                     <?php
@@ -144,7 +182,7 @@
         else
         {
 ?>
-            <div>
+            <div class = "empty">
                 <h4>No User was provided</h4>
             </div>
 <?php
@@ -156,7 +194,7 @@
     else
     {
 ?>
-        <div>
+        <div class = "empty">
             <h4>You need to Log In to view this Profile</h4>
         </div>
 <?php
@@ -166,10 +204,11 @@
         <a href = "about.php">2020. Rajarshi Saha</a>
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src = "./public/index.js"></script>
     <script>
         $(document).ready(()=>{
-            $('.scs_msg').slideUp();
-            $('.err_msg').slideUp();
+            $('.scs_msg').remove();
+            $('.err_msg').remove();
             $('.toggleStatus').click(()=>{
                 $.ajax({
                     url:'toggleProfile.php',
@@ -180,6 +219,7 @@
                         {
                             if($('.currentStatus').html() == 'Public')
                             {
+                                
                                 $('.currentStatus').html('Private');
                                 
                             }
@@ -195,6 +235,10 @@
                             $('.err_msg').html('Status could not be changed').slideDown();
                             $('.scs_msg').slideUp();
                         }
+                        setTimeout(function(){
+                                $('.scs_msg').fadeOut().remove();
+                                $('.err_msg').fadeOut().remove();
+                        },3000)
                     }
                 })
             });

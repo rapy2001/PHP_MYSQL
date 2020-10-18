@@ -14,6 +14,9 @@
     padding:0px;
     font-family:var(--mainFamily);
 }
+button,a {
+    outline:none;
+}
 a{
     text-decoration: none;
     outline:none;
@@ -249,7 +252,7 @@ footer a{
 }
 .user_card h2{
     /* border:1px solid red; */
-    min-width:20vw;
+    min-width:20%;
     box-sizing: border-box;
     text-align: center;
     font-weight:100;
@@ -258,13 +261,14 @@ footer a{
 }
 .user_card h4{
     box-sizing: border-box;
-    width:5vw;
+    min-width:30%;
+    font-weight:100;
 }
 .user_card h4 i{
     font-size:1.5rem;
     color:var(--mainColor); 
 }
-.user_card img,.user_box img,.comment_user img{
+.user_card img,.user_box img,.comment_user img,.profile_box img{
     box-sizing: border-box;
     width:6rem;
     height:6rem;
@@ -298,7 +302,7 @@ footer a{
     color:white;
 }
 
-.users h1,.search_users h1,#search_results h1,.requests h1,.friends_list h1,.notifications h1,.scream_comments h3{
+.users h1,.search_users h1,#search_results h1,.requests h1,.friends_list h1,.notifications h1,.scream_comments h3,.profile h1{
     font-family: var(--brand);
     text-align: center;
     font-weight:100;
@@ -587,4 +591,88 @@ footer a{
 .danger:hover{
     background-color:red;
     color:white;
+}
+
+.profile{
+    /* border:1px solid red; */
+    padding:0rem 10rem;
+    padding-top:4rem;
+    padding-bottom:3rem;
+    box-sizing: border-box;
+    min-height:var(--myH);
+    
+}
+
+.profile_box{
+    /* border:1px solid red; */
+    margin-top:3rem;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.profile_box div:first-child{
+    display:flex;
+    align-items:center;
+}
+.profile_box a{
+    float:right;
+}
+.profile_box img{
+    width:10rem;
+    height:10rem;
+}
+
+.profile_box div{
+    margin-left:5rem;
+}
+.profile_box div h2,h3{
+    font-weight:100;
+    margin-top:.5rem;
+    margin-bottom:.5rem;
+}
+.profile_status{
+    /* padding:0rem; */
+    margin-top:2rem;
+    border-top:1.5px solid var(--mainColor);
+    padding-top:1.5rem;
+}
+.profile_status div{
+    /* border:1px solid red; */
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    margin-bottom:3rem;
+}
+
+.profile_status div h4{
+    margin-left:2rem;
+    margin-right:3rem;
+}
+
+.profile_status h4{
+    font-weight:100;
+}
+
+.profile_screams{
+    border:1px solid transparent;
+    border-top:1.5px solid var(--mainColor);
+    margin-top:3rem;
+}
+
+.scream_box a{
+    margin-left:.5rem;
+    margin-right:.5rem;
+}
+
+.scream_box .update{
+    color:var(--ylw);
+}
+
+.scream_box .delete{
+    color:red;
+}
+
+.scream_box .view{
+    color:var(--mainColor);
 }
