@@ -36,15 +36,22 @@
         $(document).ready(function(){
             $('#search_results').hide();
             $(document).on("keyup","#search",function(){
+                $('#search_results').html('');
                 let searchTerm = $(this).val();
-                $.ajax({
-                    url:'getSearchResults.php',
-                    type:"POST",
-                    data:{searchTerm:searchTerm},
-                    success:function(data){
-                        $('#search_results').html(data).show();
-                    }
-                });
+                // console.log(searchTerm);
+                if(searchTerm != '')
+                {  
+                    $.ajax({
+                        url:'getSearchResults.php',
+                        type:"POST",
+                        data:{searchTerm:searchTerm},
+                        success:function(data){
+                            
+                            $('#search_results').html(data).show();
+                        }
+                    });
+                }
+                
             });
         });
     </script>

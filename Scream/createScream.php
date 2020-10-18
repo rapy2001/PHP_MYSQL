@@ -4,84 +4,71 @@
     require_once("./includes/header.php");
     require_once("./includes/loader.php");
     require_once("./includes/nav.php");
-
+    $msg = '';
+    $commentText = empty($_POST['commentText']) ? '':mysqli_real_escape_string($conn,trim($_POST['commentText']));
     if(!empty($_SESSION['user_id']))
     {
-        $scream_text = empty($_POST['screamText']) ? '':mysqli_real_escape_string($conn,trim($_POST['screamText']));
-        $msg = '';
-        if(!empty($_POST['submit']))
+        if(!empty($_GET['scream_id']))
         {
-            if(empty($_POST['screamText']))
+            if(!empty($_POST['submit']))
             {
-                $msg = 'Scream text can\' be empty';
-            }
-            else if($_FILES['file']['error'] == 1 && $_FILES['file']['size'] > 0)
-            {
-                $msg = 'Errror while uploading the scream image';
-            }
-            else if($_FILES['file']['type'] != 'image/gif' && $_FILES['file']['type'] != 'image/jpeg' && $_FILES['file']['type'] != 'image/jpg' && $_FILES['file']['type'] != 'image/gif')
-            {
-                $msg = 'You must upload an Image File';
-            }
-            else if($_FILES['file']['size'] > 1000000)
-            {
-                $msg = 'Image Size can\'t be greater than 10 MB';
-            }
-            else
-            {
-                $imageUrl = '';
-                $ary = explode('.',$_FILES['file']['name']);
-                if($_FILES['file']['size'] > 0)
+                if(empty($commentText))
                 {
-                    $imageUrl = './Images/Screams/'.$_SESSION['username'].'_'.time().'.'.$ary[count($ary) - 1];
+                    $msg = 'The Comment Text can\'t be empty';
                 }
-                move_uploaded_file($_FILES['file']['tmp_name'],$imageUrl);
-                @unlink($FILES['file']['tmp_name']);
-                $obj = new Scream();
-                $screamData = $obj->createScream($scream_text,$imageUrl,$_SESSION['user_id']);
-                $obj = new User();
-                $friends = $obj->getAllFriends($_SESSION['user_id']);
-                $obj = new Notification();
-                if(count($friends) > 0)
+                else
                 {
-                    foreach($friends as $friend)
-                    {
-                        echo $screamData['scream_id'];
-                        $obj->addNotification($friend['friend_id'],$screamData['scream_id'],1);
-                    }
-                    
+                    $obj = new Scream();
+                    $screamData = $obj->getScream($_GET['scream_id']);
+                    $obj = new Comment();
+                    $commentData = $obj->createComment($_SESSION['user_id'],$commentText,$_GET['scream_id']);
+                    $screamId = $_GET['scream_id'];
+                    $commentText = '';
+                    $obj = new Notification();
+                    $obj->addNotification($screamData['user_id'],$commentData['comment_id'],2);
+                    header("Refresh:3;url=\"viewScream.php?scream_id=$screamId\"");
+                    $msg = 'Comment Added';
                 }
-                header('Refresh:3;url="homepage.php"');
-                $msg = 'Scream created Successfully';
             }
-        }
 ?>
-         <div>
-            <?php
-                if(!empty($msg))
-                {
-                    echo '<h4>'.$msg.'</h4>';
-                }
-            ?>
-            <form enctype = "multipart/form-data" action = "createScream.php" method = "POST">
-                <h3>Create a Scream</h3>
-                <textarea name = "screamText" placeholder = "Text" autocomplete = "off">
-                    <?php if (!empty($scream_text)) echo $scream_text; ?>
-                </textarea>
-                <input type = "file" name = "file" />
-                <input type = "submit" name = "submit"/>
-            </form>
-    </div>
+            <div class = "box comment">
+                <?php
+                    if(!empty($msg))
+                    {
+                        echo '<h4>'.$msg.'</h4>';
+                    }
+                ?>
+                <div class = "box_1">
+                    <form action = "createComment.php?scream_id=<?php echo $_GET['scream_id']; ?>" method = "POST" class = "form">
+                        <h3>Add a Comment</h3>
+                        <input type = "text" placeholder = "Comment Text" name = "commentText" value = "<?php if(!empty($commentText)) echo $commentText; ?>" autocomplete = "off"/>
+                        <input type = "submit" name = "submit"/>
+                    </form>
+                </div>
+                <div class ="box_2">
+
+                </div>
+                
+            </div>
 <?php
-    }   
+        }
+        else
+        {
+?>
+            <div>
+                <h4>No Scream to add Comment to</h4>
+            </div>
+<?php
+        }
+    }
     else
     {
-        header('header:3?url="login.php"');
 ?>
         <div>
-            <h4>Please Log In to Create a Scream</h4>
+            <h4>You need to Log In to add a Comment</h4>
         </div>
 <?php
     }
+    
     require_once("./includes/footer.php");
 ?>

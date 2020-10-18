@@ -78,55 +78,62 @@
                     $obj_3 =  new User();
                     $scream_owner = $obj_3->getUserWithId($scream['user_id']);
         ?>
-                    <div>
+                    <div class = "viewScream">
                         <?php
                             if(!empty($msg))
                             {
                                 echo '<h4>'.$msg.'</h4>';
                             }
                         ?>
-                        <div>
+                        <div class = "user_box">
                             <img src = "<?php echo $scream_owner['imageUrl']; ?>" alt = "error"/>
-                            <h3><?php echo $scream_owner['username']; ?></h3>
+                            <div class = "user_box_info">
+                                <h3><?php echo $scream_owner['username']; ?></h3>
+                                <h4>
+                                    On: <b><?php echo substr($scream['created_at'],0,10); ?></b> 
+                                    at: <b><?php echo substr($scream['created_at'],11,5);?> </b>
+                                </h4>
+                            </div>
+                            
                         </div>
-                        <div>
+                        <div class = "scream_img">
                             <img src = "<?php echo $scream['scream_image']; ?>" alt = "error"/>
-                            <h4>Posted On: <?php echo substr($scream['created_at'],0,10); ?> at: <?php echo substr($scream['created_at'],11,15);?></h4>
                         </div>
-                        <div>
+                        <div class = "scream_like">
                             <?php
                                 $obj = new Like();
                                 $likes = $obj->getLikeCount($scream['scream_id'],1);
                             ?>
                             <h4>
-                                Likes:
+                                <i class = "fa fa-heart"></i>
                                 <?php
                                     echo $likes;
                                 ?>
                             </h4>
+                            <?php
+                                $obj_1 = new Like();
+                                $flg = $obj_1->checkLikeStatus($_SESSION['user_id'],$scream['scream_id'],1);
+                                if($flg == 0)
+                                {
+                            ?>
+                                    <a  class = "light" href = "viewScream.php?postLikeId=<?php echo $scream['scream_id'];?>&scream_id=<?php echo $scream['scream_id'];?>"><i class = "fa fa-heart"></i></a>
+                            <?php
+                                }
+                                else
+                                {
+                            ?>
+                                    <a class = "dark" href = "viewScream.php?postUnlikeId=<?php echo $scream['scream_id'];?>&scream_id=<?php echo $scream['scream_id'];?>">Liked</i></a>
+                            <?php
+                                }
+                            ?>
                         </div>
-                        <?php
-                            $obj_1 = new Like();
-                            $flg = $obj_1->checkLikeStatus($_SESSION['user_id'],$scream['scream_id'],1);
-                            if($flg == 0)
-                            {
-                        ?>
-                                <a href = "viewScream.php?postLikeId=<?php echo $scream['scream_id'];?>&scream_id=<?php echo $scream['scream_id'];?>">Like</a>
-                        <?php
-                            }
-                            else
-                            {
-                        ?>
-                                <a href = "viewScream.php?postUnlikeId=<?php echo $scream['scream_id'];?>&scream_id=<?php echo $scream['scream_id'];?>">Liked</a>
-                        <?php
-                            }
-                        ?>
-                        <div>
+                        
+                        <!-- <div>
                             
-                        </div>
-                        <div>
+                        </div> -->
+                        <div class = "scream_comments">
                             <h3>Comments</h3>
-                            <a href = "createComment.php?scream_id=<?php echo $scream['scream_id'];?>">Add a Comment</a>
+                            <a href = "createComment.php?scream_id=<?php echo $scream['scream_id'];?>" class = "btn">Add a Comment</a>
                             <?php
                                 $obj_4 = new Comment();
                                 $comments = $obj_4->getAllScreamComments($scream['scream_id']);
@@ -134,45 +141,58 @@
                                 {
                                     foreach($comments as $comment)
                                     {
+                                        $obj = new User();
+                                        $commentUser = $obj->getUserWithId($comment['user_id']);
             ?>
-                                        <div>
-                                            <h4><?php echo $comment['comment_text'];?></h4>
-                                            <?php
+                                        <?php
                                                 $obj_5 = new User();
                                                 $user = $obj_5->getUserWithId($comment['user_id'])
-                                            ?>
-                                            <h5>Posted On: <?php echo substr($comment['created_at'],0,10); ?> at: <?php echo substr($comment['created_at'],11,15);?></h5>
-                                            <h5>By: <?php echo $user['username'];?></h5>
-                                            <?php
-                                                $obj = new Like();
-                                                $likes = $obj->getLikeCount($comment['comment_id'],2);
-                                            ?>
-                                            <h5>Likes: <?php echo $likes;?></h5>
-                                            <?php
-                                                $obj = new Like();
-                                                $flg = $obj->checkLikeStatus($_SESSION['user_id'],$comment['comment_id'],2);
-                                                if($flg == 0)
-                                                {
-                                            ?>
-                                                    <a href = "viewScream.php?commentLikeId=<?php echo $comment['comment_id'];?>&scream_id=<?php echo $scream['scream_id'];?>">Like</a>
-                                            <?php
-                                                }
-                                                else
-                                                {
-                                            ?>
-                                                    <a href = "viewScream.php?commentUnlikeId=<?php echo $comment['comment_id'];?>&scream_id=<?php echo $scream['scream_id'];?>">Liked</a>
-                                            <?php
-                                                }
-                                            ?>
-                                            <?php
-                                                if($comment['user_id'] == $_SESSION['user_id'])
-                                                {
-                                            ?> 
-                                                    <a href = "viewScream.php?deleteCommentId=<?php echo $comment['comment_id']; ?>&scream_id=<?php echo $_GET['scream_id']; ?>">Delete</a>
-                                                    <a href = "updateComment.php?updateCommentId=<?php echo $comment['comment_id']; ?>&scream_id=<?php echo $_GET['scream_id']; ?>">Update</a>
-                                            <?php
-                                                } 
-                                            ?>
+                                        ?>
+                                        <div class = "comment user_card">
+                                            <div class = "comment_user">
+                                                <img src = "<?php echo $commentUser['imageUrl']; ?>" alt = "error" />
+                                                <?php
+                                                    $obj = new Like();
+                                                    $likes = $obj->getLikeCount($comment['comment_id'],2);
+                                                ?>
+                                                <div class = "comment_user_info">
+                                                    <h4><b><?php echo $user['username'];?></b></h4>
+                                                    <h3><?php echo $comment['comment_text'];?></h3>
+                                                    <div class = "comment_time">
+                                                        <h5> <?php echo substr($comment['created_at'],0,10); ?>  <?php echo substr($comment['created_at'],11,5);?></h5>
+                                                        
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class = "comment_manipulate">
+                                                <?php
+                                                    if($comment['user_id'] == $_SESSION['user_id'])
+                                                    {
+                                                ?> 
+                                                        <a class = "danger" href = "viewScream.php?deleteCommentId=<?php echo $comment['comment_id']; ?>&scream_id=<?php echo $_GET['scream_id']; ?>">Delete</a>
+                                                        <a class = "process" href = "updateComment.php?updateCommentId=<?php echo $comment['comment_id']; ?>&scream_id=<?php echo $_GET['scream_id']; ?>">Update</a>
+                                                <?php
+                                                    } 
+                                                ?>
+                                                <?php
+                                                    $obj = new Like();
+                                                    $flg = $obj->checkLikeStatus($_SESSION['user_id'],$comment['comment_id'],2);
+                                                    if($flg == 0)
+                                                    {
+                                                ?>
+                                                        <a class = "dark" href = "viewScream.php?commentLikeId=<?php echo $comment['comment_id'];?>&scream_id=<?php echo $scream['scream_id'];?>"><i class = "fa fa-heart"></i> <?php echo $likes;?></a>
+                                                <?php
+                                                    }
+                                                    else
+                                                    {
+                                                ?>
+                                                        <a class = "light" href = "viewScream.php?commentUnlikeId=<?php echo $comment['comment_id'];?>&scream_id=<?php echo $scream['scream_id'];?>"> Liked &nbsp; <i class = "fa fa-heart"></i> <?php echo $likes;?> </a>
+                                                <?php
+                                                    }
+                                                ?>
+                                                
+                                            </div>
                                         </div>
             <?php
                                     }
@@ -182,7 +202,7 @@
                                 else
                                 {
 ?>
-                                    <div>
+                                    <div class = "empty">
                                         <h4>No Comments Yet ...</h4>
                                     </div>
                                     <?php
@@ -197,7 +217,7 @@
                 {
                     header('Refresh:3;url=feed.php');
         ?>
-                    <div>
+                    <div class = "empty">
                         <h4>You are not authorzed to View this Scream</h4>
                     </div>
         <?php
@@ -207,7 +227,7 @@
             {
                 header('Refresh:3;url=feed.php');
         ?>
-                <div>
+                <div class = "empty">
                     <h4>No Scream selected</h4>
                 </div>
         <?php
@@ -217,7 +237,7 @@
     {
         header('Refresh:3;url=feed.php');
 ?>
-        <div>
+        <div class = "empty">
             You need to Log In to view this Scream
         </div>
 <?php

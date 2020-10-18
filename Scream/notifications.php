@@ -11,8 +11,8 @@
         if(count($notifications) > 0)
         {
 ?>
-            <div>
-                <h3>Your Notifications</h3>
+            <div class = "notifications">
+                <h1>Your Notifications</h1>
 <?php
                 foreach($notifications as $notification)
                 {
@@ -23,10 +23,11 @@
                         $obj = new User();
                         $friendData = $obj->getUserWithId($screamData['user_id']);
                         ?>
-                        <div>
+                        <div class = 'user_card'>
+                            <h4><i class = "fa fa-plus"></i></h4>
                             <img src = "<?php echo $friendData['imageUrl']?>" alt = "error"/>
-                            <h4><?php echo $friendData['username'];?> added a Scream</h4>
-                            <a href = "viewScream.php?scream_id=<?php echo $screamData['scream_id']; ?>">View</a>
+                            <h2><?php echo $friendData['username'];?> added a Scream</h2>
+                            <a href = "viewScream.php?scream_id=<?php echo $screamData['scream_id']; ?>" class = "btn">View</a>
                         </div>
                         <?php
                     }
@@ -37,10 +38,11 @@
                         $obj = new User();
                         $friendData = $obj->getUserWithId($commentData['user_id']);
                         ?>
-                        <div>
+                        <div class = 'user_card'>
+                            <h4><i class = "fa fa-sticky-note"></i></h4>
                             <img src = "<?php echo $friendData['imageUrl']?>" alt = "error"/>
-                            <h4><?php echo $friendData['username'];?> added a comment to Your Scream</h4>
-                            <a href = "viewScream.php?scream_id=<?php echo $commentData['scream_id']; ?>">View</a>
+                            <h2><?php echo $friendData['username'];?> added a comment to Your Scream</h2>
+                            <a href = "viewScream.php?scream_id=<?php echo $commentData['scream_id']; ?>" class = "btn">View</a>
                         </div>
                     <?php
                     }
@@ -51,14 +53,15 @@
                         $obj = new User();
                         $friendData = $obj->getUserWithId($likeData['user_id']);
                     ?>
-                        <div>
+                        <div class = 'user_card'>
+                            <h4><i class = "fa fa-heart"></i></h4>
                             <img src = "<?php echo $friendData['imageUrl']?>" alt = "error"/>
                             <?php
                                 if($likeData['comment_id'] == 7)
                                 {
                                     ?>
-                                    <h4><?php echo $friendData['username'];?> added a like to Your Scream</h4>
-                                    <a href = "viewScream.php?scream_id=<?php echo $likeData['scream_id']; ?>">View</a>
+                                    <h2><?php echo $friendData['username'];?> added a like to Your Scream</h2>
+                                    <a href = "viewScream.php?scream_id=<?php echo $likeData['scream_id']; ?>" class = "btn">View</a>
                                     <?php
                                 }
                                 else
@@ -66,8 +69,8 @@
                                     $obj = new Comment();
                                     $commentData = $obj->getCommentWithId($likeData['comment_id']);
                                     ?>
-                                    <h4><?php echo $friendData['username'];?> added a like to Your Comment</h4>
-                                    <a href = "viewScream.php?scream_id=<?php echo $commentData['scream_id']; ?>">View</a>
+                                    <h2><?php echo $friendData['username'];?> added a like to Your Comment</h2>
+                                    <a href = "viewScream.php?scream_id=<?php echo $commentData['scream_id']; ?>" class = "btn">View</a>
                                     <?php
                                 }
                             ?>
@@ -85,7 +88,7 @@
         else
         {
 ?>
-            <div>
+            <div class = "empty">
                 <h4>No Notifications Yet ...</h4>
             </div>
 <?php
@@ -94,7 +97,7 @@
     else
     {
 ?>
-        <div>
+        <div class = "empty">
             <h4>Please Log In to View Your Notifications</h4>
         </div>
 <?php

@@ -37,17 +37,24 @@
                     }
                 }
 ?>
-                <div>
+                <div class = "update_comment box">
                     <?php
                         if(!empty($msg))
                         {
                             echo '<h4>'.$msg.'</h4>';
                         }
                     ?>
-                    <form action = "updateComment.php?scream_id=<?php echo $_GET['scream_id']; ?>&updateCommentId=<?php echo $_GET['updateCommentId']; ?>" method = "POST">
-                        <input type = "text" placeholder = "Comment Text" name = "commentText" value = "<?php if(!empty($commentText)) echo $commentText; ?>"/>
-                        <input type = "submit" name = "submit"/>
-                    </form>
+                    <div class = "box_1">
+                        <form action = "updateComment.php?scream_id=<?php echo $_GET['scream_id']; ?>&updateCommentId=<?php echo $_GET['updateCommentId']; ?>" method = "POST" class = "form">
+                            <h3>Update Comment</h3>
+                            <input type = "text" placeholder = "Comment Text" name = "commentText" value = "<?php if(!empty($commentText)) echo $commentText; ?>" />
+                            <input type = "submit" name = "submit" value = "Update"/>
+                        </form>
+                    </div>
+                    <div class = "box_2">
+
+                    </div>
+                    
                 </div>
 <?php
             }

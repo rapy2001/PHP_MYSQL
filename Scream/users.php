@@ -5,7 +5,8 @@
     require_once("./includes/nav.php");
     require_once("./includes/loader.php");
     $obj = new User();
-    $users = $obj->getAllUsers();
+    $limit = 2;
+    $users = $obj->getAllUsers($limit);
     $msg = '';
 ?>
 <div>
@@ -44,11 +45,15 @@
             <h1>Users</h1>
             <h4 class = "scs_msg"></h4>
             <h4 class = "err_msg"></h4>
+            <h4 class = "prcs_msg"></h4>
+            <div class = "users_box">
         <?php
         if(count($users) > 0)
         {
+            $lastId= '';
             foreach($users as $user)
             {
+                $lastId = $user['user_id'];
                 $block_obj = new Block();
                 $blk_1 = $block_obj->getBlockStatus($user['user_id'],$_SESSION['user_id']);
                 $blk_2 = $block_obj->getBlockStatus($_SESSION['user_id'],$user['user_id']);
@@ -97,11 +102,17 @@
                                 <?php
                 }
             }
+            ?>
+            </div>
+            <?php
+            ?>
+                        <div class = "load_more_btn_div"><button id = "load_more_btn" data-lst_id = "2">Load More</button></div>
+            <?php
         }
         else
         {
 ?>
-            <div>
+            <div class = "load_more_btn_div">
                 <h4>No Users Yet</h4>
             </div>
 <?php
@@ -112,13 +123,39 @@
     }
     else
     {
-        header('Refresh:3;url="login.php"');
+        // header('Refresh:3;url="login.php"');
+        $obj = new User();
+        $limit = 2;
+        $users = $obj->getAllUsers($limit);
 ?>
-        <div>
-            <h4>Please Log In to View the users</h4>
+        <div class = "users">
+            <h1>Users</h1>
+            <h4 class = "scs_msg"></h4>
+            <h4 class = "err_msg"></h4>
+            <h4 class = "prcs_msg"></h4>
+            <div class = "users_box">
+                <?php
+                    foreach($users as $user)
+                    {
+                        ?>
+                        <div class = "user_card">
+                            <img src = "<?php echo $user['imageUrl'] ;?>" alt = "error"/>
+                            <h2>
+                                <?php
+                                    echo $user['username'];
+                                ?>
+                            </h2>
+                            <h4>Please Log In to send friend requests, create screams and access other features.</h4>
+                        </div>
+                        <?php
+                    }
+                ?>
+                <div class = "load_more_btn_div"><button id = "load_more_btn" data-lst_id = "2">Load More</button></div>
+            </div>
         </div>
 <?php
     } 
+    $userId = empty($_SESSION['user_id']) ? '"empty"' : $_SESSION['user_id'];
 ?>
 </div>
     <footer>
@@ -132,7 +169,9 @@
             $('.err_msg').hide();
             $(document).on("click",".blk_btn",function(){
                 let blockId = $(this).data("id");
-                let userId = <?php echo $_SESSION['user_id'];?>;
+                alert(blockId);
+                let userId = <?php echo $userId; ?>;
+                   
                 let blockedUser = this;
                 $.ajax({
                     url:'blockUser.php',
@@ -163,7 +202,35 @@
                         }
 
                     }
-                })
+                });
+            });
+            let userId = <?php echo $userId; ?>;
+            $('.prcs_msg').hide();
+            $(document).on('click','#load_more_btn',function(){
+                let lastId = $(this).data('lst_id');
+                let btn = this;
+                $.ajax({
+                    url:'loadMoreUsers.php',
+                    type:'POST',
+                    data:{lastId:lastId,userId:userId},
+                    beforesend:function(){
+                        $('.prcs_msg').show().html('Loading ...');
+                    },
+                    success:function(data){
+                        $('.prcs_msg').hide();
+                        $('.err_msg').hide();
+                        $('.scs_msg').hide();
+                        btn.remove();
+                        if(data != '')
+                        {
+                            $('.users_box').append(data);
+                        }
+                        else
+                        {
+                            $('.err_msg').html('Could not load Users').show();
+                        }
+                    }
+                });
             });
         });
     </script>
