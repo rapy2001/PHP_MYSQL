@@ -11,45 +11,56 @@
         {
             $obj = new Scream();
             $scream = $obj->getScream($_GET['scream_id']);
-            $scream_text = $scream['Scream_text'];
-            $msg = '';
-            if(!empty($_POST['submit']))
+            if($_SESSION['user_id'] == $scream['user_id'])
             {
-                if(empty($_POST['screamText']))
+                $scream_text = $scream['Scream_text'];
+                $msg = '';
+                if(!empty($_POST['submit']))
                 {
-                    $msg = 'Scream text can\' be empty';
-                }
-                else if($_FILES['file']['error'] == 1 && $_FILES['file']['size'] > 0)
-                {
-                    $msg = 'Errror while uploading the scream image';
-                }
-                else if($_FILES['file']['type'] != 'image/gif' && $_FILES['file']['type'] != 'image/jpeg' && $_FILES['file']['type'] != 'image/jpg' && $_FILES['file']['type'] != 'image/png' && $_FILES['file']['size'] > 0)
-                {
-                    $msg = 'You must upload an Image File';
-                }
-                else if($_FILES['file']['size'] > 1000000)
-                {
-                    $msg = 'Image Size can\'t be greater than 10 MB';
-                }
-                else
-                {
-                    @unlink($scream['scream_image']);
-                    $scream_text = $_POST['screamText'];
-                    $imageUrl = '';
-                    $ary = explode('.',$_FILES['file']['name']);
-                    if($_FILES['file']['size'] > 0)
+                    if(empty($_POST['screamText']))
                     {
-                        $imageUrl = './Images/Screams/'.$_SESSION['username'].'_'.time().'.'.$ary[count($ary) - 1];
+                        $msg = 'Scream text can\' be empty';
                     }
-                    move_uploaded_file($_FILES['file']['tmp_name'],$imageUrl);
-                    @unlink($FILES['file']['tmp_name']);
-                    $obj = new Scream();
-                    $obj->updateScream($_GET['scream_id'],$scream_text,$imageUrl);
-                    header('Refresh:3;url="homepage.php"');
-                    $msg = 'Scream updated Successfully';
-                    $scream = $obj->getScream($_GET['scream_id']);
-                    $scream_text = $scream['Scream_text'];
+                    else if($_FILES['file']['error'] == 1 && $_FILES['file']['size'] > 0)
+                    {
+                        $msg = 'Errror while uploading the scream image';
+                    }
+                    else if($_FILES['file']['type'] != 'image/gif' && $_FILES['file']['type'] != 'image/jpeg' && $_FILES['file']['type'] != 'image/jpg' && $_FILES['file']['type'] != 'image/png' && $_FILES['file']['size'] > 0)
+                    {
+                        $msg = 'You must upload an Image File';
+                    }
+                    else if($_FILES['file']['size'] > 1000000)
+                    {
+                        $msg = 'Image Size can\'t be greater than 10 MB';
+                    }
+                    else
+                    {
+                        @unlink($scream['scream_image']);
+                        $scream_text = $_POST['screamText'];
+                        $imageUrl = '';
+                        $ary = explode('.',$_FILES['file']['name']);
+                        if($_FILES['file']['size'] > 0)
+                        {
+                            $imageUrl = './Images/Screams/'.$_SESSION['username'].'_'.time().'.'.$ary[count($ary) - 1];
+                        }
+                        move_uploaded_file($_FILES['file']['tmp_name'],$imageUrl);
+                        @unlink($FILES['file']['tmp_name']);
+                        $obj = new Scream();
+                        $obj->updateScream($_GET['scream_id'],$scream_text,$imageUrl);
+                        header('Refresh:3;url="homepage.php"');
+                        $msg = 'Scream updated Successfully';
+                        $scream = $obj->getScream($_GET['scream_id']);
+                        $scream_text = $scream['Scream_text'];
+                    }
                 }
+            }
+            else
+            {
+                ?>
+                <div class = "empty">
+                    <h4>You are not authorized to access this page</h4>
+                </div>
+                <?php
             }
 ?>
          <div>

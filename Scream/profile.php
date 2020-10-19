@@ -14,7 +14,7 @@
             if($scream['user_id'] == $_SESSION['user_id'])
             {
                 $screamObj->deleteScream($_GET['scream_id']);
-                header('Refresh:3;url="yourScreams.php"');
+                header('Refresh:3;url="profile.php"');
                 $msg = 'Scream deleted successfully';
             }
             else
@@ -148,7 +148,7 @@
                                         {
                                     ?>
                                             <a href = "updateScream.php?scream_id=<?php echo $scream['scream_id'];?>" class = "update">Update Scream</a>
-                                            <a href = "yourScreams.php?scream_id=<?php echo $scream['scream_id'];?>" class = "delete">Delete Scream</a>
+                                            <a href = "profile.php?user_id=<?php echo $_SESSION['user_id']; ?>&scream_id=<?php echo $scream['scream_id'];?>" class = "delete">Delete Scream</a>
                                     <?php
                                         }
                                     ?>

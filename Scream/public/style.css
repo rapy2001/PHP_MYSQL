@@ -302,7 +302,7 @@ footer a{
     color:white;
 }
 
-.users h1,.search_users h1,#search_results h1,.requests h1,.friends_list h1,.notifications h1,.scream_comments h3,.profile h1{
+.users h1,.search_users h1,#search_results h1,.requests h1,.friends_list h1,.notifications h1,.scream_comments h3,.profile h1,.blockList h1,.feed h1{
     font-family: var(--brand);
     text-align: center;
     font-weight:100;
@@ -434,6 +434,8 @@ footer a{
     display:flex;
     align-items: center;
     margin-bottom:2rem;
+    border-bottom:1.5px solid rgba(0,0,0,.5);
+    padding-bottom:1.5rem;
 }
 .user_box_info{
     margin-left:3rem;
@@ -675,4 +677,31 @@ footer a{
 
 .scream_box .view{
     color:var(--mainColor);
+}
+
+.blockList{
+    box-sizing: border-box;
+    min-height:var(--myH);
+    padding-top:4rem;
+    padding-bottom:4rem;
+}
+.feed{
+    box-sizing: border-box;
+    min-height:var(--myH);
+    padding:0rem 10rem;
+    padding-top:4rem;
+    padding-bottom:4rem;
+}
+.scream_text{
+    line-height:1.5;
+    margin-top:2rem;
+    margin-bottom:2rem;
+}
+
+.feed_box{
+    margin-top:4rem;
+    margin-bottom:4rem;
+    /* padding-bottom:2rem; */
+    border-bottom:1.5px solid var(--mainColor);
+    border-top:1.5px solid var(--mainColor);
 }

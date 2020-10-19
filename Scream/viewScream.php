@@ -9,6 +9,11 @@
         if(!empty($_GET['scream_id']))
             {
                 $msg = '';
+                if(!empty($_GET['notif_id']))
+                {
+                    $notifObj = new Notification();
+                    $notifObj->changeStatus($_GET['notif_id']);
+                }
                 if(!empty($_GET['postLikeId']))
                 {
                     $obj = new Like();
@@ -94,11 +99,13 @@
                                     at: <b><?php echo substr($scream['created_at'],11,5);?> </b>
                                 </h4>
                             </div>
-                            
                         </div>
                         <div class = "scream_img">
                             <img src = "<?php echo $scream['scream_image']; ?>" alt = "error"/>
                         </div>
+                        <p class = "scream_text">
+                            <?php echo $scream['Scream_text']; ?>
+                        </p>
                         <div class = "scream_like">
                             <?php
                                 $obj = new Like();

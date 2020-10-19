@@ -15,14 +15,17 @@
 <?php 
             if(!empty($_SESSION['user_id']))
             {
+                $notifObj = new Notification();
+                $count = $notifObj->getNewNotificationCount($_SESSION['user_id']);
 ?>
                 <a href = "createScream.php">Create Scream</a>
                 <a href = "requests.php">View Friend Requests</a>
                 <a href = "profile.php?user_id=<?php echo $_SESSION['user_id']; ?>">Your Profile</a>
                 <a href = "feed.php">Your Feed</a>
-                <a href ="notifications.php">View Notifications</a>
+                <a href ="notifications.php">View Notifications ( <b><?php echo $count == 0 ? 'No New Notifications': $count; ?></b> ) </a> 
                 <a href ="blockList.php">View Blocked Users</a>
                 <a href ="searchUsers.php">Search Users</a>
+                <a href ="friendsList.php">View Friends List</a>
                 <a href = "logout.php">Log Out (<?php echo $_SESSION['username']; ?>)</a>
                 
                 <?php

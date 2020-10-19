@@ -1,9 +1,10 @@
 <?php
+    require_once("./includes/loader.php");
     require_once("./includes/connection.php");
     require_once("./includes/session.php");
     require_once("./includes/header.php");
     require_once("./includes/nav.php");
-    require_once("./includes/loader.php");
+    
     $obj = new User();
     $limit = 2;
     $users = $obj->getAllUsers($limit);
@@ -34,7 +35,7 @@
     }
     if(!empty($msg))
     {
-        echo '<h4>'.$msg.'</h4>';
+        echo '<h4 class = "msg">'.$msg.'</h4>';
     }
 ?>
 <?php
@@ -43,9 +44,9 @@
         ?>
         <div class = "users">
             <h1>Users</h1>
-            <h4 class = "scs_msg"></h4>
-            <h4 class = "err_msg"></h4>
-            <h4 class = "prcs_msg"></h4>
+            <h4 class = "scs_msg msg"></h4>
+            <h4 class = "err_msg msg"></h4>
+            <h4 class = "prcs_msg msg"></h4>
             <div class = "users_box">
         <?php
         if(count($users) > 0)
