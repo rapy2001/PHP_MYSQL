@@ -27,6 +27,7 @@
 ?>
             <div class = "profile">
                 <h1>Profile</h1>
+                    
             <h4 class = "scs_msg msg"></h4>
             <h4 class = "err_msg msg"></h4>
 <?php
@@ -38,14 +39,14 @@
 ?>
                     <div class = "profile_box">
                         <div>
-                            <img src = "<?php echo $userData['imageUrl']?>" alt = "error" />
+                            <img class = "profile_img" src = "<?php echo $userData['imageUrl']?>" alt = "error" />
                             <div>
                                 <h2>
                                     <?php
                                         echo $userData['username'];
                                     ?>
                                 </h2>
-                                <h3>
+                                <h3 class = "profile_city">
                                     City:
                                     <?php
                                         echo empty($userData['city']) ? 'EMPTY': $userData['city'];
@@ -59,6 +60,20 @@
                             {
                                 ?>
                                 <a href ="friendsList.php" class = "btn">View Friends</a>
+                                <div class = "edit_profile_box">
+                                    <form id = "edit_form" class = "form">
+                                        <h3>Edit Your Profile</h3>
+                                        <input type = "text" name = "city" id = "city" placeholder = "city"/>
+                                        <input type = "file" name = "image" id = "file" />
+                                        <input type = "hidden" name = "userId" value = "<?php echo $_SESSION['user_id']?>"/>
+                                        <input type = "submit" value = "submit" />
+                                        <h4 id = "edit_form_msg"></h4>
+                                    </form>
+                                    <h3 class = "edit_cut">
+                                        <i class = "fa fa-times"></i>
+                                    </h3>
+                                </div>        
+                                <button id = "edit_profile_btn" class = "btn">Edit Profile</button>
                                 <?php
                             }
                         ?>
@@ -134,7 +149,7 @@
                                 <div class = "user_card scream_box">
                                     <img src = "<?php echo $scream['scream_image']; ?>" alt = "error"/>
                                     <h2>
-                                        <?php echo $scream['Scream_text']; ?>
+                                        <?php echo substr($scream['Scream_text'],0,10) . ' ....'; ?>
                                     </h2>
                                     <h4>
                                         Posted On:
@@ -241,6 +256,96 @@
                         },3000)
                     }
                 })
+            });
+
+            $('.edit_profile_box').hide();
+            $('#edit_profile_btn').on("click",function(){
+                $('.edit_profile_box').show();
+                $('.edit_profile_img').remove();
+                $('#edit_form_msg').hide();
+                let userId = <?php echo empty($_SESSION['user_id']) ? '': $_SESSION['user_id']; ?>;
+                $.ajax({
+                    url:'http://localhost/projects/scream/getUserData.php',
+                    type:"POST",
+                    dataType:"JSON",
+                    data:{userId:userId},
+                    success:function(data){
+                        // console.log(data);
+                        if(data.msg == 0)
+                        {
+                            $('#edit_form_msg').html('Error while loading the data').show();
+                        }
+                        else
+                        {
+                            // console.log(data[0]);
+                            if(data[0].city != '')
+                            {
+                                $('#city').val(data[0].city);
+                            }
+                            else
+                            {
+                                $('#city').val("EMPTY");
+                            }
+                            $('.edit_profile_box').append('<img class= "edit_profile_img" src = "' + data[0].imageUrl +'" alt = "error" />');
+                        }
+                    }
+                });
+                
+            });
+            $('.edit_cut').on("click",function(){
+                $('.edit_profile_box').hide();
+            });
+
+            $('#edit_form').on("submit",function(e){
+                e.preventDefault();
+                // console.log("present");
+                let formData = new FormData(this);
+                let city = $("#city").val();
+                //let userId = <?php //echo empty($_SESSION['user_id']) ? '': $_SESSION['user_id']; ?>;
+                // data:{city:city,userId:userId}
+                console.log(formData);
+                $.ajax({
+                    url:'http://localhost/projects/scream/updateProfile.php',
+                    type:"POST",
+                    dataType:"JSON",
+                    data:formData,
+                    processData:false,
+                    beforesend:function(){
+                        $('#edit_form_msg').html('Loading ...').show();
+                    },
+                    contentType:false,
+                    success:function(data){
+                        console.log("present");
+                        if(data.status == 200)
+                        {
+                            $('#file').val("");
+                            $('.edit_profile_box').hide();
+                            $('.profile_city').html('City: '+city);
+                        }
+                        else if(data.status == 0)
+                        {
+                            $('#edit_form_msg').html('No User ID was Provided').show();
+                        }
+                        else if(data.status == 1)
+                        {
+                            $('#edit_form_msg').html('You should upload an image File').show();
+                        }
+                        else if(data.status == 2)
+                        {
+                            $('#edit_form_msg').html('File size should be less than 10 MB').show();
+                        }
+                        else if(data.status == 3)
+                        {
+                            $('#edit_form_msg').html('Error while uploading the new Image').show();
+                        }
+                        else if(data.status == 4)
+                        {
+                            // $('#edit_form_msg').html('Error while updating the data').show();
+                            $('#edit_form_msg').html(data.msg).show();
+                        }
+                    }
+                });
+
             });
         });
     </script>
