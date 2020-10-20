@@ -705,3 +705,11 @@ footer a{
     border-bottom:1.5px solid var(--mainColor);
     border-top:1.5px solid var(--mainColor);
 }
+
+.feed_container{
+    border:2px solid var(--mainColor);
+    padding:3rem;
+    box-sizing: border-box;
+    height:80vh;
+    overflow-y:auto;
+}
