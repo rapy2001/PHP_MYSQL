@@ -1,0 +1,105 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+
+body{
+    padding:4rem 5rem;
+    font-family:sans-serif;
+    text-align:center;
+}
+
+h1{
+    font-weight:100;
+    text-align:center;
+    color:cornflowerblue;
+}
+
+form{
+    border:1px solid transparent;
+    box-sizing: border-box;
+    width:40vw;
+    margin:0px auto;
+    margin-top:3rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:3rem;
+    box-shadow:0px 3px 3px rgba(0,0,0,.5);
+}
+form input{
+    box-sizing: border-box;
+    width:50%;
+    margin-top:1rem;
+    margin-bottom:1rem;
+    border:1.5px solid slateblue;
+    outline:none;
+}
+
+form input[type = "submit"]
+{
+    background-color:white;
+    padding:.5rem;
+    color:slateblue;
+    transition:.2s all linear;
+}
+
+form input[type = "submit"]:hover{
+    cursor:pointer;
+    background-color:slateblue;
+    color:white;
+}
+
+/* #img_div{
+    margin-top:2rem;
+} */
+
+
+#img_div{
+    margin-top:3rem;
+}
+
+#img_div h1{
+    margin-bottom:3rem;
+}
+
+.img_box{
+    display:flex;
+    justify-content: center;
+}
+.img_box img{
+    padding:.2rem;
+    box-shadow:0px 3px 3px rgba(0,0,0,.5);
+    margin:0px auto;
+}
+
+#delete_btn{
+    border:2px solid red;
+    padding:.5rem 2rem;
+    border-radius:2rem;
+    display:inline-block;
+    margin:0px auto;
+    color:red;
+    margin-top:2rem;
+    background-color:transparent;
+    outline:none;
+    transition:.2s all linear;
+}
+
+#delete_btn:hover{
+    cursor:pointer;
+    background-color:red;
+    color:white;
+}
+
+#msg{
+    border:1.5px solid rgb(106, 90, 205);
+    background-color:rgba(106, 90, 205,.5);
+    color:white;
+    padding:.5rem 2rem;
+    margin-top:2rem;
+    margin-bottom:2rem;
+    box-sizing: border-box;
+    width:40vw;
+    margin:0px auto;
+}
