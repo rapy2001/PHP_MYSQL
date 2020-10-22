@@ -720,41 +720,52 @@ footer a{
 }
 
 .edit_profile_box{
-    border:1px solid red;
+    /* border:1px solid red; */
     box-sizing: border-box;
     width:100vw;
     height:100vh;;
     position:absolute;
     top:0px;
-    left:0px;
-    background-color:rgba(0,0,0,.5);
+    left:-80px;
+    background-color:rgba(0,0,0,.8);
     display:flex;
     justify-content: center;
     align-items:center;
+    margin:0px;
     z-index:200;    
 }
 
 #edit_form{
-    height:10vh;
+    height:30vh;
 }
 
 .edit_cut{
     box-sizing: border-box;
-    width:2.5rem;
-    height:2.5rem;
-    border-radius:50%;
-    color:white;
-    background-color:rgba(255,0,0,.8);
+    width:4rem;
+    height:4rem;
+    border:2px solid white;
     display:flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
+    transition: var(--trans);
     position:absolute;
-    top:25vh;
-    right:34vw;
-    transition:var(--trans);
+    top:4rem;
+    right:4rem;
+    color:white;
 }
 
 .edit_cut:hover{
     cursor:pointer;
-    background-color:red;
+    background-color:white;
+    color:black;
+}
+
+#edit_profile_img{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    border-radius:0px;
+    width:10vw;
+    height:10vw;
+    position: absolute;
+    top:65vh;
 }

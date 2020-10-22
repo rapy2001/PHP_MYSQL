@@ -68,7 +68,9 @@
                                 <div class = "edit_profile_box">
                                     <form id = "edit_form" class = "form">
                                         <h3>Edit Your Profile</h3>
+                                        <label for = "city">City:</label>
                                         <input type = "text" name = "city" id = "city" placeholder = "city"/>
+                                        <label for = "file">Profile Image:</label>
                                         <input type = "file" name = "image" id = "file" />
                                         <input type = "hidden" name = "userId" value = "<?php echo $_SESSION['user_id']?>"/>
                                         <input type = "submit" value = "submit" />
@@ -265,6 +267,7 @@
 
             $('.edit_profile_box').hide();
             $('#edit_profile_btn').on("click",function(){
+                $('body').css("overflow-y","hidden");
                 $('.edit_profile_box').show();
                 $('.edit_profile_img').remove();
                 $('#edit_form_msg').hide();
@@ -291,7 +294,7 @@
                             {
                                 $('#city').val("EMPTY");
                             }
-                            $('.edit_profile_box').append('<img class= "edit_profile_img" src = "' + data[0].imageUrl +'" alt = "error" />');
+                            $('.edit_profile_box').append('<img id= "edit_profile_img" src = "' + data[0].imageUrl +'" alt = "error" />');
                         }
                     }
                 });
@@ -299,6 +302,7 @@
             });
             $('.edit_cut').on("click",function(){
                 $('.edit_profile_box').hide();
+                $('body').css("overflow-y","auto");
             });
 
             $('#edit_form').on("submit",function(e){
@@ -314,6 +318,7 @@
                     $('#edit_profile_box').hide();
                     setTimeout(function(){
                         location.reload();
+                        $('body').css("overflow-y","auto");
                     },1500);
                     
                 }
@@ -334,9 +339,10 @@
                             $('#file').val("");
                             $('.edit_profile_box').hide();
                             $('.profile_city').html('City: '+city);
-                            $(".edit_profile_img").remove();
+                            $("#edit_profile_img").remove();
                             if(data.imageUrl)
-                            $('.edit_profile_box').append('<img class= "edit_profile_img" src = "' + data.imageUrl +'" alt = "error" />');
+                            $('.edit_profile_box').append('<img id= "edit_profile_img" src = "' + data.imageUrl +'" alt = "error" />');
+                            $('body').css("overflow-y","auto");
 
                         }
                         else if(data.flg == -1)
