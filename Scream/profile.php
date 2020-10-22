@@ -4,6 +4,11 @@
     require_once("./includes/header.php");
     require_once("./includes/loader.php");
     require_once("./includes/nav.php");
+    // echo var_dump((int)"37");
+    // $userId = "37";
+    // $city = "delhi";    
+    // $sql = "UPDATE users SET city = '$city' WHERE user_id = $userId";
+    // mysqli_query($conn,$sql);
     if(!empty($_SESSION['user_id']))
     {
         $msg = '';
@@ -303,7 +308,15 @@
                 let city = $("#city").val();
                 //let userId = <?php //echo empty($_SESSION['user_id']) ? '': $_SESSION['user_id']; ?>;
                 // data:{city:city,userId:userId}
-                console.log(formData);
+                // console.log(formData);
+                if($('#file').val() != "")
+                {
+                    $('#edit_profile_box').hide();
+                    setTimeout(function(){
+                        location.reload();
+                    },1500);
+                    
+                }
                 $.ajax({
                     url:'http://localhost/projects/scream/updateProfile.php',
                     type:"POST",
@@ -315,33 +328,44 @@
                     },
                     contentType:false,
                     success:function(data){
-                        console.log("present");
-                        if(data.status == 200)
+                        // console.log(data);
+                        if(data.flg == 1)
                         {
                             $('#file').val("");
                             $('.edit_profile_box').hide();
                             $('.profile_city').html('City: '+city);
+                            $(".edit_profile_img").remove();
+                            if(data.imageUrl)
+                            $('.edit_profile_box').append('<img class= "edit_profile_img" src = "' + data.imageUrl +'" alt = "error" />');
+
                         }
-                        else if(data.status == 0)
+                        else if(data.flg == -1)
                         {
-                            $('#edit_form_msg').html('No User ID was Provided').show();
-                        }
-                        else if(data.status == 1)
-                        {
+                            
                             $('#edit_form_msg').html('You should upload an image File').show();
+                            $('#file').val("");
                         }
-                        else if(data.status == 2)
+                        else if(data.flg == -2)
                         {
+                            
                             $('#edit_form_msg').html('File size should be less than 10 MB').show();
+                            $('#file').val("");
                         }
-                        else if(data.status == 3)
+                        else if(data.flg == -3)
                         {
+                            
                             $('#edit_form_msg').html('Error while uploading the new Image').show();
+                            $('#file').val("");
                         }
-                        else if(data.status == 4)
+                        else if(data.flg == -4)
                         {
-                            // $('#edit_form_msg').html('Error while updating the data').show();
-                            $('#edit_form_msg').html(data.msg).show();
+                            $('#edit_form_msg').html('Error while Updation').show();
+                            $('#file').val("");
+                        }
+                        else if(data.flg == -5)
+                        {
+                            $('#edit_form_msg').html('No data was provided').show();
+                            $('#file').val("");
                         }
                     }
                 });
