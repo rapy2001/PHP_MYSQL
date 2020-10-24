@@ -1,0 +1,28 @@
+create table movies(
+    movie_id int primary key auto_increment,
+    name varchar(100) not null default "NO NAME",
+    year DATE not null,
+    description text not null default "NO DESCRIPTION",
+    rating int not null default 0,
+    imageUrl varchar(150) not null default "NO IMAGE",
+    genre int not null default 0,
+    director varchar(100) not null default "NO DIRECTOR"
+);
+
+
+create table users(
+    user_id int primary key auto_increment,
+    username varchar(100) not null default 'NO USERNAME',
+    password varchar(20) not null
+);
+
+
+//test for addMovie.php
+
+{
+    "movie_name":"test",
+    "year":"2020-05-11",
+    "description":"test",
+    "genre":"5",
+    "director":"test"
+}
