@@ -12,8 +12,8 @@ create table movies(
 
 create table users(
     user_id int primary key auto_increment,
-    username varchar(100) not null default 'NO USERNAME',
-    password varchar(20) not null
+    username varchar(50) not null unique,
+    password varchar(42) not null
 );
 
 
@@ -26,3 +26,4 @@ create table users(
     "genre":"5",
     "director":"test"
 }
+

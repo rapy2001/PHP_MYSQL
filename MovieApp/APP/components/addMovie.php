@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Movie App</title>
-    </head>
-    <body>
-        <nav>
-            <div>
-                <a href = "./homepage.html">Movie App</a>
-            </div>
-            <div>
-                <a href = "./addMovie.html"> Add a Movie</a>
-            </div>
-         </nav>
+<?php
+    require_once("../../API/Includes/connection.php");
+    require_once("../../API/Includes/session.php");
+    require_once("./partials/header.php");
+    require_once("./partials/nav.php");
+?>
          <h4 id = "msg"></h4>
         <div id = "main_form_div">
             <form id = "add_movie_form">
@@ -44,3 +36,7 @@
         <script type = "text/javascript" src = "../public/JS/addMovie.js"></script>
     </body>
 </html>
+
+<?php
+    mysqli_close($conn);
+?>

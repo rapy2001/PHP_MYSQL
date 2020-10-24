@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Movie App</title>
-    </head>
-    <body>
-        <nav>
-           <div>
-                <a href = "./homepage.html">Movie App</a>
-           </div>
-           <div>
-            <a href = "./addMovie.html">Add Movie</a>
-            <a href = "./viewMovies.html">View Movies</a>
-           </div>
-        </nav>
+<?php
+    require_once("../../API/Includes/connection.php");
+    require_once("../../API/Includes/session.php");
+    require_once("./partials/header.php");
+    require_once("./partials/nav.php");
+?>
         <?php
             if(!empty($_GET['id']))
             {
@@ -37,3 +28,7 @@
     <script type = "text/javascript" src = "../public/JS/JQUERY/jquery.js"></script>
     <script type = "text/javascript" src = "../public/JS/viewMovie.js"></script>
 </html>
+
+<?php
+    mysqli_close($conn);
+?>
