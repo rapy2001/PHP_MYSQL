@@ -21,3 +21,22 @@ create table notifications (
 insert into likes values(0,9,7,9);
 
 alter table notifications add type int not null default 1;
+
+
+alter table users add mode char(1) not null default 'P';
+
+
+create table block (
+    user_id int not null,
+    block_id int not null,
+    FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (block_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+create trigger delete_request_on_block before insert on block for each row begin
+	DELETE FROM requests WHERE from_id = NEW.block_id AND to_id = NEW.user_id OR from_id = NEW.user_id AND to_id = NEW.block_id;
+END
+
+alter table notifications add created_at DATETIME not null default NOW();
+
+alter table notifications add view char(1) not null default 'N';

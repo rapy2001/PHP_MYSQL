@@ -1,10 +1,10 @@
 $(document).ready(function(){
     $('.nav_box_2').hide();
     $('.brgr').on("click",function(){
-        $('.nav_box_2').slideDown();
+        $('.nav_box_2').slideDown('slow');
     });
     $('#cut').on("click",function(){
-        $('.nav_box_2').slideUp();
+        $('.nav_box_2').slideUp('slow');
     });
     $('.msg_cut').click(function(){
         $(this).closest('h4').fadeOut();

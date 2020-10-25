@@ -76,7 +76,7 @@
         public function getFriendsScreams($userId)
         {
             $connection = $this->connection();
-            $sql = "SELECT screams.scream_id,screams.user_id,screams.Scream_text,screams.scream_image,screams.created_at FROM screams inner join friends  ON screams.user_id = friends.friend_id AND friends.user_id = ?;";
+            $sql = "SELECT screams.scream_id,screams.user_id,screams.Scream_text,screams.scream_image,screams.created_at FROM screams inner join friends  ON screams.user_id = friends.friend_id AND friends.user_id = ? LIMIT 2;";
             $stmt = $connection->prepare($sql);
             $stmt->execute([$userId]);
             $screams = $stmt->fetchAll();

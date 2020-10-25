@@ -39,7 +39,7 @@
     {
         ?>
         <div>
-            <h1>Search Results</h1>
+            <h1>Search Results matching " <?php echo $searchTerm; ?>"</h1>
         <?php
         foreach($searchResults as $result)
         {

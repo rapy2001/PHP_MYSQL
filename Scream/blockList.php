@@ -1,9 +1,10 @@
 <?php
+    require_once("./includes/loader.php");
     require_once("./includes/connection.php");
     require_once("./includes/session.php");
     require_once("./includes/header.php");
     require_once("./includes/nav.php");
-    require_once("./includes/loader.php");
+    
     if(!empty($_SESSION['user_id']))
     {
         $blockObj = new Block();
@@ -11,22 +12,22 @@
         if(count($blockedUsers) > 0)
         {
             ?>
-            <div>
+            <div class = "blockList">
                 <h1>Your Block List</h1>
-                <h4 class = "scs_msg"></h4>
-                <h4 class = "err_msg"></h4>
+                <h4 class = "scs_msg msg"></h4>
+                <h4 class = "err_msg msg"></h4>
                 <?php
                     foreach($blockedUsers as $blockedUser)
                     {
                         $userObj = new User();
                         $userData = $userObj->getUserWithId($blockedUser['block_id']);
                         ?>
-                        <div>
+                        <div class = "user_card">
                             <img src = "<?php echo $userData['imageUrl']?>" alt = "error"/>
                             <h2>
                                 <?php echo $userData['username']?>
                             </h2>
-                            <button class = "unBlk_btn" data-unblk = "<?php echo $userData['user_id']; ?>">Unblock</button>
+                            <button class = "unBlk_btn btn" data-unblk = "<?php echo $userData['user_id']; ?>">Unblock</button>
                         </div>
                         <?php
                     }
@@ -37,7 +38,7 @@
         else
         {
             ?>
-            <div>
+            <div class = "empty">
                 <h4>Your Blocked List is Empty</h4>
             </div>
             <?php
@@ -46,7 +47,7 @@
     else
     {
         ?>
-        <div>
+        <div class = "empty">
             <h4>You need to Log In to View Your Block List</h4>
         </div>
         <?php
@@ -56,11 +57,12 @@
 <footer>
         <a href = "about.php">2020. Rajarshi Saha</a>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="./public/jquery.js"></script>
+    <script src = "./public/index.js"></script>
     <script>
         $(document).ready(()=>{
-            $('scs_msg').hide();
-            $('err_msg').hide();
+            $('.scs_msg').hide();
+            $('.err_msg').hide();
             $(document).on("click",".unBlk_btn",function(){
                 let blockId = $(this).data('unblk');
                 let userId = <?php echo $_SESSION['user_id']; ?>;

@@ -69,12 +69,12 @@
             }
         }
 
-        public function getAllUsers()
+        public function getAllUsers($limit)
         {
             $connection = $this->connection();
-            $sql = "SELECT * FROM users";
+            $sql = "SELECT * FROM users LIMIT ?";
             $stmt = $connection->prepare($sql);
-            $stmt->execute();
+            $stmt->execute([$limit]);
             $users = $stmt->fetchAll();
             return $users;
         }

@@ -1,9 +1,10 @@
 <?php
+    require_once("./includes/loader.php");
     require_once("./includes/connection.php");
     require_once("./includes/session.php");
     require_once("./includes/header.php");
     require_once("./includes/nav.php");
-    require_once("./includes/loader.php");
+    
     if(empty($_SESSION['user_id']))
     {
         echo '<div>No One to Log Out</div>';

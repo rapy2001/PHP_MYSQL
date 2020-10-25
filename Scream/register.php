@@ -1,9 +1,10 @@
 <?php
+    require_once("./includes/loader.php");
     require_once("./includes/connection.php");
     require_once("./includes/session.php");
     require_once("./includes/header.php");
     require_once("./includes/nav.php");
-    require_once("./includes/loader.php");
+    
     $msg = '';
     $username = '';
     $password = '';
@@ -82,7 +83,7 @@
             </form>
         </div>
         <div class = "box_2">
-
+            
         </div>
     </div>
     <?php

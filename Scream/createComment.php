@@ -31,24 +31,31 @@
                 }
             }
 ?>
-            <div>
+            <div class = "box comment">
                 <?php
                     if(!empty($msg))
                     {
-                        echo '<h4>'.$msg.'</h4>';
+                        echo '<h4 class = "msg">'.$msg.'</h4>';
                     }
                 ?>
-                <form action = "createComment.php?scream_id=<?php echo $_GET['scream_id']; ?>" method = "POST">
-                    <input type = "text" placeholder = "Comment Text" name = "commentText" value = "<?php if(!empty($commentText)) echo $commentText; ?>"/>
-                    <input type = "submit" name = "submit"/>
-                </form>
+                <div class = "box_1">
+                    <form action = "createComment.php?scream_id=<?php echo $_GET['scream_id']; ?>" method = "POST" class = "form">
+                        <h3>Add a Comment</h3>
+                        <input type = "text" placeholder = "Comment Text" name = "commentText" value = "<?php if(!empty($commentText)) echo $commentText; ?>" autocomplete = "off"/>
+                        <input type = "submit" name = "submit"/>
+                    </form>
+                </div>
+                <div class ="box_2">
+
+                </div>
+                
             </div>
 <?php
         }
         else
         {
 ?>
-            <div>
+            <div class = "empty">
                 <h4>No Scream to add Comment to</h4>
             </div>
 <?php
@@ -57,7 +64,7 @@
     else
     {
 ?>
-        <div>
+        <div class = "empty">
             <h4>You need to Log In to add a Comment</h4>
         </div>
 <?php
