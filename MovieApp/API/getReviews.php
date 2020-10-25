@@ -17,7 +17,7 @@
         $limit = 2;
         $total = ceil(mysqli_num_rows($result)/$limit);
         $skip = ($data['page_num'] - 1) * $limit;
-        $sql = "SELECT reviews.reviewText, reviews.rating, users.username FROM reviews inner join users ON reviews.user_id = users.user_id WHERE reviews.movie_id = $movieId LIMIT $skip,$limit";
+        $sql = "SELECT reviews.user_id, reviews.review_id, reviews.reviewText, reviews.rating, users.username FROM reviews inner join users ON reviews.user_id = users.user_id WHERE reviews.movie_id = $movieId LIMIT $skip,$limit";
         $result = mysqli_query($conn,$sql) or die("Error while querying the database");
         if(mysqli_num_rows($result) > 0)
         {

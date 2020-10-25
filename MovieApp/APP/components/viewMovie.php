@@ -13,7 +13,7 @@
                 <div id = "movie_div">
 
                 </div>
-                <input type = "hidden" value = "<?php echo $_SESSION['user_id']; ?>" id = "user_id" placeholder = "Your Rating"/>
+                <input type = "hidden" value = "<?php echo empty($_SESSION['user_id']) ? -1 : $_SESSION['user_id']; ?>" id = "user_id" placeholder = "Your Rating"/>
                 <div id = "review_form_div">
                     <form id = "add_review_form">
                         <textarea id = "reviewText">
@@ -22,6 +22,16 @@
                         <input type = "number" min = "0" step = "0.5" id = "rating"/>
                         <input type = "submit" id = "submit"/>
                     </form>
+                </div>
+                <div id = "update_review_form_div">
+                    <form id = "update_review_form">
+                        <textarea id = "update_reviewText">
+                            "Your Review"
+                        </textarea>
+                        <input type = "number" min = "0" step = "0.5" id = "update_rating"/>
+                        <input type = "submit" id = "submit" value = "update"/>
+                    </form>
+                    <h4 id = "upd_msg"></h4>
                 </div>
                 <div id = "reviews_div">
                     <h4 id = "rvw_msg"></h4>
