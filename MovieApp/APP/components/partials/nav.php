@@ -6,6 +6,8 @@
            <div>
                 <a href = "./addMovie.php">Add Movie</a>
                 <a href = "./viewMovies.php">View Movies</a>
+                <a href = "./register.php">Register</a>
+                <a href = "./search.php">search</a>
                 <?php
                     if(empty($_SESSION['user_id']))
                     {

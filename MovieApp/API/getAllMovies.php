@@ -12,7 +12,7 @@
         $limit = 2;
         $total = ceil(mysqli_num_rows($result)/$limit);
         $skip = ($data['page_num'] - 1) * $limit;
-        $sql = "SELECT * FROM movies LIMIT $skip,$limit";
+        $sql = "SELECT movies.movie_id,movies.name,movies.year,movies.description,movies.rating,movies.imageUrl,movies.director,genre.genre_name FROM movies inner join genre ON movies.genre = genre.genre_id LIMIT $skip,$limit";
         $result = mysqli_query($conn,$sql) or die("error while querying database");
         if(mysqli_num_rows($result) > 0)
         {

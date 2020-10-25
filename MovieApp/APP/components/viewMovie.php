@@ -13,6 +13,29 @@
                 <div id = "movie_div">
 
                 </div>
+                <input type = "hidden" value = "<?php echo $_SESSION['user_id']; ?>" id = "user_id" placeholder = "Your Rating"/>
+                <div id = "review_form_div">
+                    <form id = "add_review_form">
+                        <textarea id = "reviewText">
+                            "Your Review"
+                        </textarea>
+                        <input type = "number" min = "0" step = "0.5" id = "rating"/>
+                        <input type = "submit" id = "submit"/>
+                    </form>
+                </div>
+                <div id = "reviews_div">
+                    <h4 id = "rvw_msg"></h4>
+                    <h1>Reviews</h1>
+                    <?php
+                        if(!empty($_SESSION['user_id']))
+                        {
+                    ?>
+                            <button id= "add_review_btn">Add a Review</button>
+                    <?php
+                        }
+                    ?>
+                    
+                </div>
         <?php
             }
             else
