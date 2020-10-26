@@ -40,3 +40,6 @@ create table reviews(
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (movie_id) REFERENCES movies(movie_id) ON DELETE CASCADE
 );
+
+
+insert into users values(0,'Admin',SHA('12345'));

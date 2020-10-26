@@ -18,6 +18,7 @@
         </footer>
         <script type = "text/javascript" src = "../public/JS/JQUERY/jquery.js"></script>
         <!-- <script type = "text/javascript" src = "../public/JS/login.js"></script> -->
+        <script type = "text/javascript" src = "../public/JS/seed.js"></script>
         <script>
             $(document).ready(function(){
                 $("#msg").hide();

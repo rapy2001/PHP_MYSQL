@@ -19,6 +19,7 @@
     </body>
     <script type = "text/javascript" src = "../public/JS/JQUERY/jquery.js"></script>
     <script type = "text/javascript" src = "../public/JS/register.js"></script>
+    <script type = "text/javascript" src = "../public/JS/seed.js"></script>
 </html>
 <?php
     mysqli_close($conn);

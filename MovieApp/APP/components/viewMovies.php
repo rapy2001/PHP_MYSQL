@@ -12,6 +12,7 @@
             </div>
         </div>
         <script type = "text/javascript" src = "../public/JS/JQUERY/jquery.js"></script>
+        <script type = "text/javascript" src = "../public/JS/seed.js"></script>
         <script type = "text/javascript" src = "../public/JS/viewMovies.js"></script>
     </body>
 </html>

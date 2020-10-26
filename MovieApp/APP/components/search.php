@@ -15,6 +15,7 @@
         </footer>
         <script type = "text/javascript" src = "../public/JS/JQUERY/jquery.js"></script>
         <script type = "text/javascript" src = "../public/JS/search.js"></script>
+        <script type = "text/javascript" src = "../public/JS/seed.js"></script>
     </body>
 </html>
 <?php

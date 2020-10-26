@@ -29,8 +29,8 @@
                 $row = mysqli_fetch_assoc($result);
                 $rating = $row['rating'];
                 $sql = "UPDATE movies SET rating = $rating WHERE movie_id=$movieId";
-                mysqli_query($conn,$query) or die("Error while querying the database");
-                echo json_encode(array("flg"=>1,"review"=>$review,"data"=>$data));
+                mysqli_query($conn,$sql) or die("Error while querying the database");
+                echo json_encode(array("flg"=>1,"review"=>$review,"data"=>$rating));
             }
             else
             {

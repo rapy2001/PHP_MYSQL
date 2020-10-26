@@ -150,7 +150,7 @@ $(document).ready(function(){
                     if(data.flg == 1)
                     {
                         $("#msg").html("Review added successfully").show();
-                        $("#empty").remove();
+                        // $("#empty").remove();
                         // $("#reviews_div").append(
                         //     "<div>" + 
                         //     "<h3>" + data.review.rating + "</h3>" +
@@ -160,6 +160,7 @@ $(document).ready(function(){
                         $("#review_form_div").hide();
                         checkReviewStatus();
                         loadMovieData();
+                        loadReviews();
                     }
                     else if(data.flg == -1)
                     {
@@ -192,6 +193,7 @@ $(document).ready(function(){
     });
     $(document).on("click","#review_delete_btn",function(){
         let reviewId = $(this).data("rvw_id");
+        let movieId = $("#movie_id").val();
         let obj = {reviewId,movieId};
         let data = JSON.stringify(obj);
         $.ajax({
@@ -203,7 +205,7 @@ $(document).ready(function(){
                 $("#msg").html("Loading ..").show();
             },
             success:function(data){
-                // console.log(data);
+                console.log(data);
                 if(data.flg == 1)
                 {
                     let slc = "#" + reviewId;

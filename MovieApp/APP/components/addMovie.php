@@ -34,6 +34,7 @@
         </div>
         <script type = "text/javascript" src = "../public/JS/JQUERY/jquery.js"></script>
         <script type = "text/javascript" src = "../public/JS/addMovie.js"></script>
+        <script type = "text/javascript" src = "../public/JS/seed.js"></script>
     </body>
 </html>
 

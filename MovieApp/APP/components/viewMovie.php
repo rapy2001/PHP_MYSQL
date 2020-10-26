@@ -60,6 +60,7 @@
     </body>
     <script type = "text/javascript" src = "../public/JS/JQUERY/jquery.js"></script>
     <script type = "text/javascript" src = "../public/JS/viewMovie.js"></script>
+    <script type = "text/javascript" src = "../public/JS/seed.js"></script>
 </html>
 
 <?php

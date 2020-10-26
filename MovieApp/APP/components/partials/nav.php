@@ -1,9 +1,10 @@
 
-        <nav>
-           <div>
+        <nav class= "nav">
+           <div class = "nav_box_1">
                 <a href = "./homepage.php">Movie App</a>
            </div>
-           <div>
+           <div class = "nav_box_2">
+                <div class = "nav_cut_div"><h4 class = "nav_cut"><i class = "fa fa-times"></i></h4></div>
                 <a href = "./addMovie.php">Add Movie</a>
                 <a href = "./viewMovies.php">View Movies</a>
                 <a href = "./register.php">Register</a>
@@ -20,6 +21,12 @@
                 ?>
                         <a href = "../components/logout.php"> Log Out ( <?php echo $_SESSION['username']; ?> )</a>
                 <?php
+                        if($_SESSION['username'] == 'Admin')
+                        {
+                            ?>
+                            <button id = "seed">Seed</button>
+                            <?php
+                        }
                     }
                 ?>
            </div>

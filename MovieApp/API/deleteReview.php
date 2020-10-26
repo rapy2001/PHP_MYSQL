@@ -20,14 +20,15 @@
             $result = mysqli_query($conn,$sql) or die("Error while querying the database");
             $row = mysqli_fetch_assoc($result);
             $rating = $row['rating'];
+            $rating = (float)$rating;
             $sql = "UPDATE movies SET rating = $rating WHERE movie_id = $movieId";
             if(mysqli_query($conn,$sql))
             {
-                echo json_encode(array("flg"=>1));
+                echo json_encode(array("flg"=>1,"data"=>$data,"rating"=>$rating));
             }
             else
             {
-                echo json_encode(array("flg"=>-3));
+                echo json_encode(array("flg"=>-3,"rating"=>$rating));
             }
             
         }
