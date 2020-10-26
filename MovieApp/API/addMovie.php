@@ -25,7 +25,7 @@
         }
         else
         {
-            $sql = "INSERT INTO movies(name,year,description,genre,director) VALUES ('$movieName',$year,'$description',$genre,'$director')";
+            $sql = "INSERT INTO movies(name,year,description,genre,director) VALUES ('$movieName','$year','$description',$genre,'$director')";
             if(mysqli_query($conn,$sql))
             {
                 $sql = "SELECT * FROM movies WHERE name = '$movieName'";

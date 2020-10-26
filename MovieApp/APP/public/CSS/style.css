@@ -14,14 +14,19 @@
     padding:0px;
     font-family:var(--mainFamily);
 }
+body{
+    overflow-x:hidden;
+}
 a{
     text-decoration:none;
     outline:none;
 }
 .nav{
     /* border:1px solid red; */
+    box-sizing: border-box;
+    height:7vh;
     display:flex;
-    padding:1rem 2rem;
+    padding:0rem 2rem;
     justify-content: space-between;
     align-items:center;
     background-color:var(--mainColor);
@@ -49,20 +54,25 @@ a{
     min-height:40vh;
     position:absolute;
     top:5rem;
-    right:5rem;
+    right:-25vw;
     display:flex;
     flex-direction:column;
     box-shadow: var(--shadow);
     text-align:center;
-    justify-content: center;
+    /* justify-content: center; */
     border-radius:1rem;
+    transition:.8s all linear;
+}
+.slide{
+    right:2rem;
 }
 .nav_box_2 a{
     margin-top:.5rem;
     margin-bottom:.5rem;
+    font-size:1.2rem;
     color:var(--mainColor);
 }
-.nav_cit_div{
+.nav_cut_div{
     display:flex;
     justify-content: flex-end;
     margin-bottom:3rem;
@@ -96,4 +106,286 @@ a{
     border:none;
     color:var(--mainColor);
     font-size:1rem;
+}
+
+#brgr{
+    border:none;
+    background:none;
+    color:var(--lightWhite);
+    font-size:1.8rem;
+    outline:none;
+    font-weight:400;
+    transition:var(--trans);
+}
+#brgr:hover{
+    cursor:pointer;
+    color:white;
+}
+
+.footer{
+    box-sizing: border-box;
+    height:5vh;
+    /* border:1px solid red; */
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    background-color:var(--mainColor);
+}
+.footer h4{
+    font-weight:100;
+    color:white;
+}
+
+.homepage{
+    box-sizing: border-box;
+    min-height:var(--myH);
+}
+
+.empty{
+    box-sizing: border-box;
+    height:var(--myH);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.empty h4{
+    box-sizing: border-box;
+    width:25vw;
+    height:10vh;
+    font-weight:100;
+    color:var(--mainColor);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    border:2px solid var(--mainColor);
+}
+
+.form{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction:column;
+    width:30vw;
+    padding:2rem 6rem;
+    min-height:45vh;
+    background-color:white;
+    /* box-shadow:0px 3px 8px rgba(0,0,0,.8); */
+}
+
+.form h4{
+    font-weight:100;
+    margin-top:1rem;
+}
+.form a{
+    color:var(--mainColor);
+}
+.form h3,#addToDo_form h3{
+    text-align:center;
+    font-weight:100;
+    font-size:1.5rem;
+    margin-bottom:2rem;
+    color:var(--mainColor);
+}
+.form input,#addToDo_form input,.form textarea{
+    box-sizing: border-box;
+    margin-top:.8rem;
+    margin-bottom:.8rem;
+    border:1.2px solid var(--mainColor);
+    padding:.5rem 1rem;
+    outline:none;
+}
+.form textarea{
+    height:15vh;
+}
+.form input[type='submit'],#addToDo_form input[type = "submit"]
+{
+    border:1px solid var(--mainColor);
+    color:var(--mainColor);
+    transition:var(--trans);
+    background-color:white;
+}
+.form input[type='submit']:hover,#addToDo_form input[type = "submit"]:hover{
+    cursor:pointer;
+    background-color:var(--mainColor);
+    color:white;
+}
+
+.register{
+    box-sizing: border-box;
+    height:var(--myH);
+}
+.register .box_2{
+    background:url("https://cdn.dribbble.com/users/45541/screenshots/5909770/computer-teaser.jpg");
+    background-position:center center;
+    background-size:cover;
+}
+
+.box{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    height:var(--myH);
+    display:flex;
+}
+
+.box_1{
+    /* border:1px solid red; */
+    flex-basis:50%;
+    flex-shrink:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box_2{
+    /* border:1px solid red; */
+    flex-basis:50%;
+    flex-shrink:0;
+}
+
+.login{
+    box-sizing: border-box;
+    height:var(--myH);
+}
+
+.login .box_2{
+    background:url("https://cdn.dribbble.com/users/2693/screenshots/4998387/labyrinth_drib.jpg");
+    background-position:center center;
+    background-size:cover;
+}
+
+.movies{
+    box-sizing: border-box;
+    min-height:var(--myH);
+    padding:3rem 0rem;
+}
+.movies h1{
+    font-weight:100;
+    text-align:center;
+    color:var(--mainColor);
+}
+
+.msg{
+    border-left:4px solid var(--mainColor);
+    box-sizing: border-box;
+    min-width:15vw;
+    position:fixed;
+    top:10vh;
+    right:0rem;
+    box-shadow:0px 3px 8px rgba(0,0,0,.3);
+    padding:1.2rem 2rem;
+    background-color:white;
+    font-weight:100;
+}
+
+.add_movie{
+    box-sizing: border-box;
+    height:var(--myH);
+}
+
+.add_movie .box_2{
+    background:url("https://cdn.dribbble.com/users/2693/screenshots/4320064/tod_drib.jpg");
+    background-position:center center;
+    background-size:cover;
+}
+.img_div{
+    padding:2rem 0rem;
+}
+.img_div h1{
+    font-weight:100;
+    color:var(--mainColor);
+    text-align:center;
+    margin-bottom:1.5rem;
+}
+.img_div img{
+    box-sizing: border-box;
+    height:70vh;
+    padding:.5rem;
+    box-shadow:var(--shadow);
+    width:100%;
+}
+
+.btn{
+    box-sizing: border-box;
+    padding:.4rem 2rem;
+    border:2px solid var(--mainColor);
+    margin-left:1rem;
+    margin-right:1rem;
+    border-radius:2rem;
+    color:var(--mainColor);
+    transition: var(--trans);
+    background-color:transparent;
+    text-align:center;
+}
+.btn:hover{
+    cursor: pointer;
+    background-color:var(--mainColor);
+    color:white;
+}
+
+.movies{
+    box-sizing: border-box;
+    min-height:var(--myH);
+
+}
+
+.movie_card{
+    border:1.5px solid var(--mainColor);
+    box-sizing: border-box;
+    height:55vh;
+    width:10vw;
+    overflow:hidden;
+    border-radius:.8rem;
+    padding:1rem;
+    transform: scale(1);
+    transition: var(--trans);
+}
+.movie_card:hover{
+    border:none;
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    transform: scale(1.01);
+}
+#movies_div{
+    /* border:1px solid red; */
+    margin-top:2rem;
+    box-sizing: border-box;
+    height:var(--myH);
+    overflow-y:auto;
+    display:flex;
+    justify-content: space-between;
+    padding:2rem 4rem;
+}
+.movie_card h4,h3,h2{
+    font-weight:100;
+    margin-top:.8rem;
+}
+.movie_card h2{
+    color:var(--mainColor);
+}
+.movie_card h3 i{
+    margin-left:.5rem;
+    color:rgb(255, 209, 26);
+}
+.movie_card img{
+    box-sizing: border-box;
+    width:100%;
+    height:20vh;
+    margin-bottom:2rem;
+}
+.movie_card p{
+    margin-top:.5rem;
+    margin-bottom:1rem;
+}
+.movie_card a{
+    display: inline-block;
+    margin-top:1rem;
+    margin:0px auto;
+}
+
+#load_more_btn{
+    box-sizing: border-box;
+    position: absolute;
+    bottom:-3rem;
+    left:50vw;
 }

@@ -5,15 +5,23 @@
     require_once("./partials/header.php");
     require_once("./partials/nav.php");
 ?>
-        <h4 id = "msg"></h4>
-        <div>
-            <form id = "login_form">
-                <input type = "text" placeholder = "Username" name = "username" autocomplete = "off" id = "username"/>
-                <input type = "password" placeholder = "Password" name = "password" autocomplete = "off" id = "password" />
-                <input type = "submit" name = "submit" id = "submit"/>
-            </form>
+        <h4 id = "msg" class = "msg"></h4>
+        <div class = "login box">
+            <div class = "box_1">
+                <form id = "login_form" class = "form">
+                    <h3>Log In</h3>
+                    <input type = "text" placeholder = "Username" name = "username" autocomplete = "off" id = "username"/>
+                    <input type = "password" placeholder = "Password" name = "password" autocomplete = "off" id = "password" />
+                    <input type = "submit" name = "submit" id = "submit"/>
+                    <h4>Don't have an account ? Then <a href = "./register.php">Register</a></h4>
+                </form>
+            </div>
+            <div class = "box_2">
+
+            </div>
+            
         </div>
-        <footer>
+        <footer class = "footer">
             <h4>2020. Rajarshi Saha.</h4>
         </footer>
         <script type = "text/javascript" src = "../public/JS/JQUERY/jquery.js"></script>

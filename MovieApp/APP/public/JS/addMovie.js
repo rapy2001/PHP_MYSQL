@@ -87,7 +87,7 @@ $(document).ready(function(){
                     $("#img_div").show();
                     $("#img_div").append("<h1>Your Uploaded Image</h1>");
                     $("#img_div").append('<div class = "img_box"><img src = "' + data.path + '" alt = "error"/></div>');
-                    $("#img_div").append('<button id = "delete_btn" data-path = ' + data.path + '>Delete</button>');
+                    $("#img_div").append('<button id = "delete_btn" class = "btn" data-path = ' + data.path + '>Delete</button>');
                 }
                 else if(data.flg == -1)
                 {

@@ -3,6 +3,7 @@
            <div class = "nav_box_1">
                 <a href = "./homepage.php">Movie App</a>
            </div>
+           <button id = "brgr">M</button>
            <div class = "nav_box_2">
                 <div class = "nav_cut_div"><h4 class = "nav_cut"><i class = "fa fa-times"></i></h4></div>
                 <a href = "./addMovie.php">Add Movie</a>

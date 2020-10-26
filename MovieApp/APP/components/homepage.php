@@ -5,7 +5,7 @@
     require_once("./partials/nav.php");
     // echo $_SESSION['username'];
 ?>
-    <div>
+    <div class = "homepage">
         <h1>This is the homepage</h1>
     </div>
 <?php

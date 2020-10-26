@@ -1,4 +1,4 @@
-        <footer>
+        <footer class = "footer">
             <h4>2020. Rajarshi Saha.</h4>
         </footer>
         <script type = "text/javascript" src = "../public/JS/JQUERY/jquery.js"></script>

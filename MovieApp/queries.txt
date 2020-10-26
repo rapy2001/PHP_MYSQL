@@ -43,3 +43,12 @@ create table reviews(
 
 
 insert into users values(0,'Admin',SHA('12345'));
+
+
+{
+    "name":"test",
+    "year":"0000-00-00",
+    "description":"test",
+    "director":"test",
+    "genre":1
+}

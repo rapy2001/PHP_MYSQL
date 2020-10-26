@@ -31,3 +31,11 @@ $(document).ready(function(){
     });
     
 });
+
+$("#brgr").on("click",function(){
+    $(".nav_box_2").addClass("slide");
+});
+
+$(".nav_cut").on("click",function(){
+    $(".nav_box_2").removeClass("slide");
+});
