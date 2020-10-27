@@ -7,9 +7,10 @@
     header("Access-Control-Allow-Headers:Access-Control-Allow-Headers,Access-Control-Allow-Methods,Content-Type,Authorization,X-Requested-With");
     $name = empty($_POST['name']) ? '' : $_POST['name'];
     $birthday = empty($_POST['birthday']) ? '' : $_POST['birthday'];
-    if($name == '' || $birthday == '')
+    $userId = empty($_POST['userId']) ? '' : $_POST['userId'];
+    if($name == '' || $birthday == '' || empty($userId))
     {
-        echo json_encode(array("flg"=>-1));
+        echo json_encode(array("flg"=>-1,"data"=>$data));
     }
     else
     {
@@ -38,7 +39,7 @@
                             $path = "../APP/public/IMAGES/PERSONS/" . $name . "_" . time() . '.' .$ext;
                             if(move_uploaded_file($_FILES['image']['tmp_name'],$path))
                             {
-                                $query = "INSERT INTO birthdays(person_name,birthday,imageUrl) VALUES('$name','$birthday','$path');";
+                                $query = "INSERT INTO birthdays(person_name,birthday,imageUrl,user_id) VALUES('$name','$birthday','$path',$userId);";
                                 if(mysqli_query($conn,$query))
                                 {
                                     echo json_encode(array("flg"=>1));
@@ -63,7 +64,7 @@
             }
             else
             {
-                $query = "INSERT INTO birthdays(person_name,birthday) VALUES('$name','$birthday');";
+                $query = "INSERT INTO birthdays(person_name,birthday,user_id) VALUES('$name','$birthday',$userId);";
                 if(mysqli_query($conn,$query))
                 {
                     echo json_encode(array("flg"=>1));

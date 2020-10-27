@@ -10,3 +10,11 @@ create table birthdays(
     birthday date default NOW() not null,
     imageUrl varchar(200) default 'https://cdn.dribbble.com/users/788099/screenshots/12714143/media/e4cbfe548ab342499ab8df8413277a7b.png'
 );
+
+alter table birthdays add user_id int not null;
+
+alter table birthdays add FOREIGN KEY(user_id) REFERENECES users(user_id) ON DELETE CASCADE;
+
+SELECT * FROM birthdays WHERE user_id = $userId AND birthday = $date LIMIT $skip,$limit
+
+alter table birthdays add birthday_id int not null primary key auto_increment;

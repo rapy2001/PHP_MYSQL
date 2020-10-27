@@ -9,8 +9,9 @@
             if(!empty($_SESSION['user_id']))
             {
 ?>
-            <a href = "./addBrthday.php">Add a Birthday</a>
+            <a href = "./addBirthday.php">Add a Birthday</a>
             <a href = "./viewAllBirthdays.php">View All Birthdays</a>
+            <a href = "./viewBirthdays.php">View Today<?php echo "'"; ?>s Birthdays</a>
             <button id = "logout_btn">Log Out (<?php echo $_SESSION['username']; ?>)</button>
 <?php
             }

@@ -2,8 +2,8 @@ $(document).ready(function(){
     $("#msg").hide();
     $("#add_birthday_form").on("submit",function(e){
         e.preventDefault();
-        let name = $("#name").val("");
-        let birthday = $("#birthday").val("");
+        let name = $("#name").val();
+        let birthday = $("#birthday").val();
         if(name == '' || birthday == '')
         {
             $("#msg").html("All fields are neccessary").show();
@@ -26,6 +26,7 @@ $(document).ready(function(){
                     if(data.flg == 1)
                     {
                         $("#msg").html("Birthday added Successfully").show();
+                        $("#add_birthday_form").trigger("reset");
                     }
                     else if(data.flg == -1)
                     {

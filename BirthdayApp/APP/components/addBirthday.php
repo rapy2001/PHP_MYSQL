@@ -7,9 +7,10 @@
         <div>
             <h4 id = "msg"></h4>
             <form id = "add_birthday_form">
-                <input type = "text" placeholder = "Person 's Name" name = "name" aitocomplete = "off" id = "name"/>
-                <input type = "text" placeholder = "Person 's Birthday (yyyy-mm-dd)" name = "birthday" aitocomplete = "off" id = "birthday"/>
+                <input type = "text" placeholder = "Person 's Name" name = "name" aitocomplete = "off" id = "name" autocomplete = "off"/>
+                <input type = "text" placeholder = "Person 's Birthday (yyyy-mm-dd)" name = "birthday" aitocomplete = "off" id = "birthday" autocomplete = "off"/>
                 <input type = "file" name = "image" id = "image"/>
+                <input type = "hidden" id = "userId" value = "<?php echo $_SESSION['user_id']; ?>" name = "userId"/>
                 <input type = "submit" name = "submit" value = "submit"/>
             </form>
         </div>
