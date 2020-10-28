@@ -27,6 +27,9 @@ $(document).ready(function(){
                     {
                         $("#msg").html("Registration Successful").show();
                         $("#register_form").trigger("reset");
+                        setTimeout(function(){
+                            window.location.assign("./login.php");
+                        },3000);
                     }
                     else if(data.flg == -1)
                     {

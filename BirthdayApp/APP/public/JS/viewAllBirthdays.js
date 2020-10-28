@@ -17,15 +17,14 @@ $(document).ready(function(){
                 console.log(data);
                 if(data.flg == 1)
                 {
-                    $("#userData").append("<div><img src = '" + data.userData['imageUrl'] + "' alt = 'error'/>" + 
+                    $("#userData").append("<div class = 'user_card'><img src = '" + data.userData['imageUrl'] + "' alt = 'error'/>" + 
                     "<div><h1>" + data.userData['username'] +  "</div>" +
                     "</div>");
                     $("#loadMoreBtn").remove();
                     $.each(data.birthdays,function(key,birthday){
                         $("#birthdays_div").append(
-                            "<div class = 'birthday_card' id = '" + birthday['birthday_id'] +"'>" + "<div class = 'birthday_card_1'><img src = '" 
-                            + birthday['imageUrl'] + "' alt = 'error' /></div>" +
-                            "<div>" + "<h1>" + birthday['person_name'] + "</h1><h3>Age: " + birthday['age'] +"</h3></div>" +
+                            "<div class = 'birthday_card viewAll' id = '" + birthday['birthday_id'] +"'>" + "<div class = 'birthday_card_1'><img src = '" 
+                            + birthday['imageUrl'] + "' alt = 'error' /><h1>" + birthday['person_name'] + "</h1><h4>Age:" + birthday['age'] + " </h4></div>" +
                             "<div class = 'birthday_card_2'><button id = 'delete_btn' data-id = " + birthday['birthday_id']+">Delete</button>" + "</div>" +
                             "</div>"
                         );
@@ -34,8 +33,11 @@ $(document).ready(function(){
                 }
                 else if(data.flg == -2)
                 {
+                    $("#userData").html("<div class = 'user_card'><img src = '" + data.userData['imageUrl'] + "' alt = 'error'/>" + 
+                    "<div><h1>" + data.userData['username'] +  "</div>" +
+                    "</div>");
                     $("#loadMoreBtn").remove();
-                    $("#birthdays_div").append("<h4>No More Birthdays for Today</h4>");
+                    $("#birthdays_div").append("<h4>No More Birthdays</h4>");
                 }
             }
         });

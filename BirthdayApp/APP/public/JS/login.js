@@ -27,6 +27,9 @@ $(document).ready(function(){
                     {
                         $("#msg").html("Log In Successfull").show();
                         $("#login_form").trigger("reset");
+                        setTimeout(function(){
+                            window.location.assign("./viewBirthdays.php");
+                        },2500);
                     }
                     else if(data.flg == -1)
                     {
@@ -36,6 +39,9 @@ $(document).ready(function(){
                     {
                         $("#msg").html("Username does not exists").show();
                         $("#username").val("");
+                        setTimeout(function(){
+                            window.location.assign("../register.php");
+                        },2500);
                     }
                     else if(data.flg == -3)
                     {

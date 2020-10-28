@@ -27,6 +27,7 @@ $(document).ready(function(){
                     {
                         $("#msg").html("Birthday added Successfully").show();
                         $("#add_birthday_form").trigger("reset");
+                        window.location.assign("./viewAllBirthdays.php");
                     }
                     else if(data.flg == -1)
                     {

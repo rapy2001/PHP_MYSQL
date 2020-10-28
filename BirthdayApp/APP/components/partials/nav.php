@@ -1,5 +1,5 @@
 <nav class = "nav">
-    <h4 id = "logout_msg"></h4>
+    <h4 class = "msg" id = "logout_msg"></h4>
     <div class = "nav_box_1">
         <a href = "./homepage.php">Birthday App</a>
     </div>
@@ -17,7 +17,7 @@
                 if($_SESSION['username'] == 'Admin')
                 {
 ?>
-                    <button id = "seed_btn">Seed</button>
+                    <button id = "seed_btn" class = "btn">Seed</button>
 <?php
                 }
             }

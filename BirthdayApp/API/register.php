@@ -40,6 +40,7 @@
                             if(move_uploaded_file($_FILES['image']['tmp_name'],$path))
                             {
                                 $password = sha1($password);
+                                $path = "../public/IMAGES/USERS/" . $username . "_" . time() . '.' .$ext;;
                                 $query = "INSERT INTO users VALUES(0,'$username','$password','$path')";
                                 if(mysqli_query($conn,$query))
                                 {

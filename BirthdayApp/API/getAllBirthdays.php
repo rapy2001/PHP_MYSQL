@@ -37,7 +37,10 @@
         }
         else
         {
-            echo json_encode(array("flg"=>-2));
+            $query = "SELECT * FROM users WHERE user_id = $userId";
+            $result = mysqli_query($conn,$query) or die("Error while querying the database : ". mysqli_error($conn));
+            $userData = mysqli_fetch_assoc($result);
+            echo json_encode(array("flg"=>-2,"userData"=>$userData));
         }
     }
     mysqli_close($conn);

@@ -13,6 +13,10 @@
     else
     {
         $id = $data['id'];
+        $query = "SELECT imageUrl FROM birthdays WHERE birthday_id = $id";
+        $result = mysqli_query($conn,$query) or die("Error while getting the data :" . mysqli_error($conn));
+        $path = mysqli_fetch_assoc($result)['imageUrl'];
+        @unlink($path);
         $query = "DELETE FROM birthdays WHERE birthday_id = $id";
         if(mysqli_query($conn,$query))
         {
