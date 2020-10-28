@@ -17,13 +17,16 @@ $(document).ready(function(){
                 console.log(data);
                 if(data.flg == 1)
                 {
+                    $("#userData").append("<div><img src = '" + data.userData['imageUrl'] + "' alt = 'error'/>" + 
+                    "<div><h1>" + data.userData['username'] +  "</div>" +
+                    "</div>");
                     $("#loadMoreBtn").remove();
                     $.each(data.birthdays,function(key,birthday){
                         $("#birthdays_div").append(
-                            "<div class = 'birthday_card' id = '" + birthday['birthday_id'] +"'>" + "<div><img src = '" 
+                            "<div class = 'birthday_card' id = '" + birthday['birthday_id'] +"'>" + "<div class = 'birthday_card_1'><img src = '" 
                             + birthday['imageUrl'] + "' alt = 'error' /></div>" +
                             "<div>" + "<h1>" + birthday['person_name'] + "</h1><h3>Age: " + birthday['age'] +"</h3></div>" +
-                            "<div><button id = 'delete_btn' data-id = " + birthday['birthday_id']+">Delete</button>" + "</div>" +
+                            "<div class = 'birthday_card_2'><button id = 'delete_btn' data-id = " + birthday['birthday_id']+">Delete</button>" + "</div>" +
                             "</div>"
                         );
                     });

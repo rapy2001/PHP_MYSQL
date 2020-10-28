@@ -36,9 +36,11 @@
                         }
                         else
                         {
-                            $path = "../APP/public/IMAGES/PERSONS/" . $name . "_" . time() . '.' .$ext;
+                            $time = time();
+                            $path = "../APP/public/IMAGES/PERSONS/" . $name . "_" . $time . '.' .$ext;
                             if(move_uploaded_file($_FILES['image']['tmp_name'],$path))
                             {
+                                $path = "./public/IMAGES/PERSONS/" . $name . "_" . $time . '.' .$ext;
                                 $query = "INSERT INTO birthdays(person_name,birthday,imageUrl,user_id) VALUES('$name','$birthday','$path',$userId);";
                                 if(mysqli_query($conn,$query))
                                 {

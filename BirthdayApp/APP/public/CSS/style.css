@@ -1,0 +1,343 @@
+:root{
+    --mainColor:rgb(255, 77, 148);
+    --mainFamily:'Questrial', sans-serif;
+    --myH:calc(100vh - 11vh);
+    --lightWhite:rgba(255,255,255,.8);
+    --trans:.2s all linear;
+}
+*{
+    margin:0px;
+    padding:0px;
+    font-family:var(--mainFamily);
+}
+a{
+    text-decoration:none;
+    outline:none;
+    font-weight:100;
+}
+.nav{
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    padding:1rem 3rem;
+    background-color:var(--mainColor);
+    box-sizing: border-box;
+    height:6vh;
+}
+
+.nav_box_1{
+    /* border:1px solid red; */
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav_box_1 a{
+    font-size:1.5rem;
+    color:white;
+}
+.nav_box_2{
+    /* border:1px solid red; */
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav_box_2 a{
+    color:var(--lightWhite);
+    margin-left:.5rem;
+    margin-right:.5rem;
+    transition:var(--trans);
+}
+.nav_box_2 a:hover{
+    cursor:pointer;
+    color:white;
+}
+.footer{
+    box-sizing: border-box;
+    height:5vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color:var(--mainColor);
+}
+.footer h4{
+    color:white;
+    font-weight:100;
+}
+
+.homepage{
+    box-sizing: border-box;
+    height:var(--myH);
+}
+
+
+.box{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    height:var(--myH);
+    display:flex;
+}
+
+.box_1{
+    /* border:1px solid red; */
+    flex-basis:50%;
+    flex-shrink:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box_2{
+    /* border:1px solid red; */
+    flex-basis:50%;
+    flex-shrink:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.box_2 h3{
+    color:white;
+    font-weight:100;
+    font-size:4rem;
+}
+
+.form{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction:column;
+    width:30vw;
+    padding:2rem 6rem;
+    min-height:45vh;
+    background-color:white;
+    /* box-shadow:0px 3px 8px rgba(0,0,0,.8); */
+}
+
+.form h4{
+    font-weight:100;
+    margin-top:1rem;
+}
+.form a{
+    color:var(--mainColor);
+}
+.form h3,#addToDo_form h3{
+    text-align:center;
+    font-weight:100;
+    font-size:1.5rem;
+    margin-bottom:2rem;
+    color:var(--mainColor);
+}
+.form input,#addToDo_form input,.form textarea{
+    box-sizing: border-box;
+    margin-top:.8rem;
+    margin-bottom:.8rem;
+    border:1.2px solid var(--mainColor);
+    padding:.5rem 1rem;
+    outline:none;
+}
+.form textarea{
+    height:15vh;
+}
+.form input[type='submit'],#addToDo_form input[type = "submit"]
+{
+    border:1px solid var(--mainColor);
+    color:var(--mainColor);
+    transition:var(--trans);
+    background-color:white;
+}
+.form input[type='submit']:hover,#addToDo_form input[type = "submit"]:hover{
+    cursor:pointer;
+    background-color:var(--mainColor);
+    color:white;
+}
+
+.register{
+    box-sizing: border-box;
+    height:var(--myH);
+    
+}
+.register .box_2{
+    background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),url("https://cdn.dribbble.com/users/1787323/screenshots/9200289/media/3fc0a78fe1d534a6b001fef0fea650b4.png");
+    background-size:cover;
+    background-position:center center;
+}
+
+.login{
+    box-sizing: border-box;
+    height:var(--myH);
+    
+}
+.login .box_2{
+    background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),url("https://cdn.dribbble.com/users/1787323/screenshots/11491933/media/b000bafe8fdb072a4c0f88498c01da0b.png");
+    background-size:cover;
+    background-position:center center;
+}
+
+.msg{
+    border-left:4px solid var(--mainColor);
+    box-sizing: border-box;
+    min-width:15vw;
+    position:fixed;
+    top:10vh;
+    right:0rem;
+    box-shadow:0px 3px 8px rgba(0,0,0,.3);
+    padding:1.2rem 2rem;
+    background-color:white;
+    font-weight:100;
+}
+
+.btn{
+    background:none;
+    outline:none;
+    border:2px solid white;
+    padding:.5rem 1.5rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:.8rem;
+    margin-right:.8rem;
+    font-size:1rem;
+    color:white;
+    transition: var(--trans);
+}
+
+.btn:hover{
+    cursor:pointer;
+    background-color:white;
+    color:black;;
+}
+
+
+.add_birthday{
+    box-sizing: border-box;
+    height:var(--myH);
+    
+}
+.add_birthday .box_2{
+    background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),url("https://cdn.dribbble.com/users/1647174/screenshots/9137033/media/5d06f4da79204b8aa6d65016ecbebb80.png");
+    background-size:cover;
+    background-position:center center;
+}
+
+.viewBirthdays{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    box-sizing: border-box;
+    height:var(--myH);
+    background-color:rgb(255, 221, 153);
+}
+
+#birthdays_div{
+    /* border:1.5px solid red; */
+    box-sizing: border-box;
+    width:46rem;
+    max-height:75vh;
+    overflow-y:auto;
+    background-color:white;
+    border-radius:.8rem;
+    padding-bottom:4rem;
+    box-shadow:-2px 2px 3px rgba(0,0,0,.6);
+    display:flex;
+    flex-direction: column;
+}
+
+#birthdays_div h1{
+    font-weight:100;
+    color:var(--mainColor);
+    text-align:center;
+    padding:2rem 0rem;
+}
+
+.birthday_card{
+    /* border:1px solid red; */
+    display:flex;
+    margin-top:1.5rem;
+    margin-bottom:1.5rem;
+    padding:0rem 3rem;
+}
+.birthday_card_1{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    flex-shrink:0;
+    width:7rem;
+    height:7rem;
+}
+.birthday_card_1 img{
+    box-sizing: border-box;
+    /* border:1px solid red; */
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    box-shadow:-3px 3px 3px rgb(204, 102, 255);
+}
+.birthday_card_2{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    flex-shrink:0;
+    width:30rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding:0rem 2rem;
+}
+.birthday_card_2 h2,h4{
+    font-weight:100;
+}
+.birthday_card_2 h2{
+    font-size:2rem;
+    color:var(--mainColor);
+}
+
+.birthday_card_2 h4{
+    /* margin-top:1rem; */
+    font-size:1.2rem;
+}
+
+#loadMoreBtn{
+    border:2px solid var(--mainColor);
+    background:none;
+    outline:none;
+    padding:.5rem 1rem;
+    font-size:1rem;
+    margin:0px auto;
+    color:var(--mainColor);
+    transition:var(--trans);
+}
+#delete_btn{
+    border:2px solid var(--mainColor);
+    background:none;
+    outline:none;
+    padding:.5rem 1rem;
+    font-size:1rem;
+    margin:0px auto;
+    color:var(--mainColor);
+    transition:var(--trans);
+}
+
+#loadMoreBtn:hover{
+    cursor:pointer;
+    background-color:var(--mainColor);
+    color:white;
+}
+
+#birthdays_div h4{
+    color:var(--mainColor);
+    margin:0px auto;
+}
+
+.allBirthdays{
+    box-sizing: border-box;
+    height:var(--myH);
+    background-color:rgb(255, 221, 153);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.allBirthdays_box{
+    border:1px solid red;
+    box-sizing: border-box;
+    height:80vh;
+}

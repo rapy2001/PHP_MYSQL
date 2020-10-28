@@ -20,9 +20,9 @@ $(document).ready(function(){
                     $("#loadMoreBtn").remove();
                     $.each(data.birthdays,function(key,birthday){
                         $("#birthdays_div").append(
-                            "<div>" + "<div><img src = '" 
+                            "<div class = 'birthday_card'>" + "<div class = 'birthday_card_1'><img src = '" 
                             + birthday['imageUrl'] + "' alt = 'error' /></div>" +
-                            "<div>" + "<h1>" + birthday['person_name'] + "</h1><h3>Age: " + birthday['age'] +"</h3></div>" 
+                            "<div class = 'birthday_card_2'>" + "<h2>" + birthday['person_name'] + "</h2><h4>Age: " + birthday['age'] +"</h4></div>" 
                             + "</div>"
                         );
                     });
