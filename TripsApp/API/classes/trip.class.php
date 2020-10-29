@@ -63,6 +63,71 @@
             
         }
 
+        public function getTrip($id)
+        {
+            if($this->established)
+            {
+                $sql = "SELECT * FROM trips WHERE trip_id = $id";
+                $result = $this->connection->query($sql);
+                if($this->connection->error)
+                {
+                    return -2;
+                }
+                else
+                {
+                    $trip = $result->fetch_assoc();
+                    return $trip;
+                }
+            }   
+            else
+            {
+                return -1;
+            }
+        }
+
+        public function updateTrip($id,$tripName,$tripDescription,$tripPrice)
+        {
+            if($this->established)
+            {
+                $sql = "UPDATE trips SET trip_name = '$tripName', trip_description = '$tripDescription', trip_price = $tripPrice WHERE trip_id = $id ;";
+                if($this->connection->query($sql))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public function deleteTrip($id)
+        {
+            if($this->established)
+            {
+                $tripData = $this->getTrip($id);
+                @unlink($tripData['trip_image']);
+                $sql = "DELETE FROM trips WHERE trip_id = $id";
+                if($this->connection->query($sql))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return -1;
+            }
+            
+        }
+
 
         public function __destruct()
         {
