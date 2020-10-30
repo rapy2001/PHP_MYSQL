@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    let trips = [];
     $("#msg").hide();
     $("#update_form_div").hide();
     function loadTrips(page_num)
@@ -19,36 +20,39 @@ $(document).ready(function(){
                     
                     if(data.trips.length > 0)
                     {
+                        trips = data.trips;
                         $.each(data.trips,function(key,trip){
-                            $("#viewTrips_div").append("<div>" +
-                                "<div id = 'trip_card_" + trip.trip_id + "' data-id = '" + trip.trip_id + "'>" +
-                                    "<div>" +
+                            $("#viewTrips_container").append(
+                                "<div class = 'trip_card' id = 'trip_card_" + trip.trip_id + "' data-id = '" + trip.trip_id + "'>" +
+                                    "<div class = 'trip_card_img_box'>" +
                                         "<img src = '" + trip.trip_image + "' alt = 'error'/>" +
                                     "</div>" +
-                                    "<div>" +
-                                        "<div>" +
+                                    "<div class = 'trip_card_content_box'>" +
+                                        "<div class = 'trip_card_title_price_box'>" +
                                             "<h3 id = 'trip_name_" + trip.trip_id + "'>" + trip.trip_name + "</h3>" +
-                                            "<h4 id = 'trip_price_" + trip.trip_id + "'>" +trip.trip_price+ "</h4>" +
+                                            "<h4 id = 'trip_price_" + trip.trip_id + "'>$ " +trip.trip_price+ "</h4>" +
                                         "</div>" +
-                                        "<div>" +
-                                            "<p id = 'trip_description_" + trip.trip_id + "'>" + trip.trip_description +"</p>" +
+                                        "<div id = 'trip_card_description_box_" + trip.trip_id + "' class = 'trip_card_description_box'>" +
+                                            "<p id = 'trip_description_" + trip.trip_id + "'>" + trip.trip_description.substring(0,200) +" ...</p>" +
+                                            "<button id = 'read_more_btn' data-id = '" + trip.trip_id + "'" + ">Read More</button>" +
                                         "</div>" +
-                                        "<div>" +
+                                        "<div class = 'trip_card_int_btn_box'>" +
                                             "<button id = 'not_btn' data-id = '" + trip.trip_id + "'>Not Interested</button>" +
                                         "</div>" +
-                                        "<div>" +
+                                        "<div class = 'trip_card_upd_dlt_box'>" +
                                             "<button id = 'update_btn' data-upd_id = '" + trip.trip_id + "'>Update</button>" +
                                             "<button id = 'delete_btn' data-dlt_id = '" + trip.trip_id + "'>Delete</button>" +
                                         "</div>" +
                                     "</div>" +
-                            "</div>");
+                                "</div>" 
+                            );
                         });
-                        $("#viewTrips_div").append("<button id = 'loadMore_btn' data-page_num = '" + data.pageNum + "'>Load More</button>")
+                        $("#viewTrips_container").append("<button id = 'loadMore_btn' data-page_num = '" + data.pageNum + "'>Load More</button>")
                     }
                     else
                     {
                         $("#loadMore_btn").remove();
-                        $("#viewTrips_div").append("<h4>No More Trips</h4>");
+                        $("#viewTrips_container").append("<h4>No More Trips</h4>");
                     }
                 }
             }
@@ -139,8 +143,12 @@ $(document).ready(function(){
                         $(this).trigger("reset");
                         $("#update_form_div").hide();
                         $("#trip_name_" + tripId).html(tripName);
-                        $("#trip_description_" + tripId).html(tripDescription);
-                        $("#trip_price_" + tripId).html(tripPrice);
+                        $("#trip_card_description_box_" + tripId).html(
+                            "<p id = 'trip_description_" + trip_id + "'>" + tripDescription.substring(0,200) +" ...</p>" +
+                            "<button id = 'read_more_btn' data-id = '" + trip_id + "'" + ">Read More</button>"
+                        );
+                        $("#trip_price_" + tripId).html("$ " + tripPrice);
+                        $("#update_form_div").hide();
                     }
                     else if(data.flg == -1)
                     {
@@ -202,5 +210,34 @@ $(document).ready(function(){
     $(document).on("click","#not_btn",function(){
         let tripId = $(this).data("id");
         $("#trip_card_" + tripId).remove();
+    });
+
+    $(document).on("click","#read_more_btn",function(){
+        let tripId = $(this).data('id');
+        let des = '';
+        for(let i = 0; i<trips.length; i++)
+        {
+            if(trips[i].trip_id == tripId)
+                des = trips[i].trip_description;
+        }
+        $("#trip_description_" + tripId).html(des);
+        $("#trip_card_description_box_" + tripId).append("<button id = 'show_less_btn' data-id = '" + tripId +  "'>Show Less</button>");
+        $(this).remove();
+    });
+    $(document).on("click","#show_less_btn",function(){
+        let tripId = $(this).data('id');
+        let des = '';
+        for(let i = 0; i<trips.length; i++)
+        {
+            if(trips[i].trip_id == tripId)
+                des = trips[i].trip_description.substring(0,200) + " ...";
+        }
+        $("#trip_description_" + tripId).html(des);
+        $("#trip_card_description_box_" + tripId).append("<button id = 'read_more_btn' data-id = '" + tripId +  "'>Read More</button>");
+        $(this).remove();
+    });
+
+    $("#upd_cut").on("click",function(){
+        $("#update_form_div").hide();
     });
 });

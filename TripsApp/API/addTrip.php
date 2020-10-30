@@ -3,8 +3,8 @@
     require_once("./includes/autoload.php");
     header('Content-Type:application/json');
     header('Access-Control-Allow-Origin:*');
-    header('Access-Control-Allow-Methods:POST');
-    header('Access-Control-Allow-Headers:Access-Control-Allow-Headers,Access-Control-Allow-Methods,Content-Type,Authorization,X-Requested-With');
+    header('Access-Control-Allow-Methods:POST,GET');
+    header('Access-Control-Allow-Headers:Access-Control-Allow-Headers,Access-Control-Allow-Methods,Content-Type,Authorization,X-Requested-With,Access-Control-Allow-Origin');
     $tripName = empty($_POST['trip_name']) ? '' : $_POST['trip_name'];
     $tripPrice = empty($_POST['trip_price']) ? '' : $_POST['trip_price'];
     $tripDescription = empty($_POST['trip_description']) ? '' : $_POST['trip_description'];
