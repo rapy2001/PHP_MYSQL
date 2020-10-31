@@ -46,6 +46,46 @@
             }
         }
         
+        public function addCategory($category)
+        {
+            if($this->established)
+            {
+                $query = "INSERT INTO categories VALUES(0,'$category');";
+                if($this->connection->query($query))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public function deleteCategory($categoryId)
+        {
+            if($this->established)
+            {
+                $query = "DELETE FROM categories WHERE category_id = $categoryId";
+                if($this->connection->query($query))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
         public function __destruct()
         {
             $this->connection->close();
