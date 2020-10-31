@@ -1,0 +1,20 @@
+create table menu_items(
+    item_id int primary key auto_increment,
+    name varchar(255) not null default 'DISH NAME',
+    price float(5,2) not null default 0.0,
+    description text not null default 'ITEM DESCRIPTION',
+    imageUrl text not null default 'https://cdn.dribbble.com/users/143350/screenshots/14006097/media/6d7806731a1d2cfff7b37598338f5502.png'
+);
+
+create table categories(
+    category_id int primary key auto_increment,
+    category_name varchar(50) not null default 'CATEGORY NAME'
+);
+
+alter table menu_items add FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE;
+
+insert into categories values(0,'Breakfast');
+
+insert into categories values(0,'Lunch');
+
+insert into categories values(0,'Dinner');
