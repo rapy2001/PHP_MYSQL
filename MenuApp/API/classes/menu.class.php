@@ -77,7 +77,68 @@
 
         }
 
+        public function getItem($itemId)
+        {
+            if($this->established)
+            {
+                $query = "SELECT * FROM menu_items WHERE item_id = $itemId";
+                $result = $this->connection->query($query);
+                if($this->connection->error)
+                {
+                    return 0;
+                }
+                else
+                {
+                    $item = $result->fetch_assoc();
+                    return $item;
+                }
+            }
+            else
+            {
+                return -1;
+            }
+        }
 
+        public function updateItem($itemId,$name,$price,$description)
+        {
+            if($this->established)
+            {
+                $query = "UPDATE menu_items SET name = '$name' , price = $price , description = '$description' WHERE item_id = $itemId";
+                if($this->connection->query($query))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public function deleteItem($itemId)
+        {
+            if($this->established)
+            {
+                $query = "DELETE FROM menu_items WHERE item_id = $itemId";
+                if($this->connection->query($query))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        
         public function __destruct()
         {
             $this->connection->close();

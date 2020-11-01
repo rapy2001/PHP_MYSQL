@@ -2,16 +2,25 @@
     require_once("./partials/header.php");
     require_once("./partials/nav.php");
 ?> 
-    <div>
-        <div>
-            <h1>Menu App</h1>
-            <p>
-                We have the best collection of dishes to fill 
-                up your palette.
-            </p>
+    <div class = "homepage">
+        <div class = "homepage_box_1">
+            <div>
+                <h1>Menu App</h1>
+                <p>
+                    One Place for filling your hungry Palette.
+                    Etiam hendrerit tempus nisl eget consectetur. Mauris lacinia nec ante convallis suscipit.
+                    Etiam sed scelerisque est. Integer efficitur egestas lorem, sed tristique nisi elementum at.
+                    Nunc ornare, urna at venenatis egestas, ante erat blandit libero, quis molestie eros justo eu justo.
+                    Vestibulum vitae libero convallis, ultricies augue tempor, gravida tellus. Vivamus blandit sed urna in varius.
+                    Cras ut ultrices lectus, ut varius eros. Donec bibendum risus nec ante suscipit vestibulum.
+                </p>
+            </div>
+            
         </div>
-        <div>
-            <div></div>
+        <div class =  "homepage_box_2">
+            <div>
+
+            </div>
         </div>
     </div>
 <?php

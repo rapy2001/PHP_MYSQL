@@ -16,7 +16,7 @@ $(document).ready(function(){
                     $("#show_categories_div").html("");
                     $.each(data.categories,function(key,category){
                         $("#show_categories_div").append(
-                            "<h4 id = 'category' data-id = '" + category.category_id + "'>" + category.category_name + "<button id = 'dlt_btn' data-id = '" + category.category_id + "'>" + "Delete</button></h4>"
+                            "<h4 id = 'category' data-id = '" + category.category_id + "'>" + category.category_name + "<button class = 'c_dlt_btn' id = 'dlt_btn' data-id = '" + category.category_id + "'>" + "Delete</button></h4>"
                         );
                     });
                 }
