@@ -15,11 +15,11 @@ $(document).ready(function(){
                 if(data.flg == 1)
                 {
                     $("#category_div").append(
-                        "<button id = 'category_btn' data-id = '-1'>All</button>"
+                        "<button class = 'category_btn selected' id = 'category_btn' data-id = '-1'>All</button>"
                     );
                     $.each(data.categories,function(key,category){
                         $("#category_div").append(
-                            "<button id = 'category_btn' data-id = '" + category.category_id + "'>" + category.category_name + "</button>"
+                            "<button class = 'category_btn' id = 'category_btn' data-id = '" + category.category_id + "'>" + category.category_name + "</button>"
                         );
                     });
                     
@@ -54,30 +54,32 @@ $(document).ready(function(){
                 if(data.flg == 1)
                 {
                     $("#empty_msg").remove();
+                    $("#items_div").html("");
                     if(data.items.length > 0)
                     {
                         $.each(data.items,function(key,item){
                             $("#items_div").append(
-                                "<div id = 'item_card_" + item.item_id + "'>" +
-                                    "<div>" +
+                                "<div class = 'item_card' id = 'item_card_" + item.item_id + "'>" +
+                                    "<div class = 'item_card_box_1'>" +
                                         "<img src = '" + item.imageUrl + "' alt = 'error' />" + 
-                                    "<div>" +
-                                    "<div>" +
-                                        "<div>" +
-                                            "<h3 id = 'name_" + item.item_id + "'>" +
+                                    "</div>" +
+                                    "<div class = 'item_card_box_2'>" +
+                                        "<div class = 'item_card_name_price'>" +
+                                            "<h2 id = 'name_" + item.item_id + "'>" +
                                                 item.name +  
-                                            "</h3>" +
-                                            "<h3 id = 'price_" + item.item_id + "'>" +
+                                            "</h2>" +
+                                            "<h3 id = 'price_" + item.item_id + "'>$ " +
                                                 item.price + 
                                             "</h3>" +
                                         "</div>" +
-                                        "<div>" +
-                                            "<p id = 'description_" + item.item_id + "'>" + item.description + "</p>" +
+                                        "<div class = 'item_card_description'>" +
+                                            "<p id = 'description_" + item.item_id + "'>" + item.description.substring(0,100) + " ...</p>" +
                                         "</div>" +
-                                        "<div>" +
+                                        "<div class = 'item_card_buttons'>" +
                                             "<button id = 'upd_btn' data-id = '" + item.item_id + "'>" + "Update</button>" +
                                             "<button id = 'dlt_btn' data-id = '" + item.item_id + "'>" + "Delete</button>" +
                                         "</div>" +
+                                    "</div>" + 
                                 "</div>" +
                             "</div>"
                             )
@@ -86,7 +88,7 @@ $(document).ready(function(){
                     else
                     {
                         $("#items_div").html("");
-                        $("#items_div").append("<h4 id = 'empty_msg'>Menu is Empty</h4>");
+                        $("#items_div").append("<div class = 'empty'><h4 id = 'empty_msg'>Menu is Empty</h4></div>");
                     }
                     
                 }
@@ -106,8 +108,10 @@ $(document).ready(function(){
 
     $(document).on("click","#category_btn",function(){
         let categoryId = $(this).data('id');
-        console.log(categoryId);
+        // console.log(categoryId);
         $("#items_div").html("");
+        $(".category_btn").removeClass("selected");
+        $(this).addClass("selected");
         loadItems(categoryId);
     });
 
@@ -143,6 +147,7 @@ $(document).ready(function(){
 
     $(document).on("click","#upd_btn",function(){
         let itemId = $(this).data('id');
+        
         $("#update_item_form_div").show();
         loadItemData(itemId);
         setTimeout(function(){
@@ -183,8 +188,8 @@ $(document).ready(function(){
                         $("#update_item_form").trigger("reset");
                         $("#update_item_form_div").hide();
                         $("#name_" + itemId).html(name);
-                        $("#price_" + itemId).html(price);
-                        $("#description_" + itemId).html(description);
+                        $("#price_" + itemId).html('$ ' + price);
+                        $("#description_" + itemId).html(description.substring(0,100) + ' ...');
                     }
                     else
                     {
@@ -235,5 +240,9 @@ $(document).ready(function(){
         setTimeout(function(){
             $("#msg").html("").hide();
         },2500);
+    });
+
+    $("#upd_cut").on("click",function(){
+        $("#update_item_form_div").hide();
     });
 });

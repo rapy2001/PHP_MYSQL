@@ -10,6 +10,9 @@
     margin:0px;
     padding:0px;
 }
+body{
+    overflow-x:hidden;
+}
 a{
     color:white;
     text-decoration: none;
@@ -156,6 +159,7 @@ body{
     border:1.2px solid var(--mainColor);
     padding:.5rem 1rem;
     outline:none;
+    font-family:var(--mainFamily);
 }
 .form textarea{
     box-sizing: border-box;
@@ -163,6 +167,7 @@ body{
     height:15vh;
     overflow-x:hidden;
     overflow-y:hidden;
+    font-family:var(--mainFamily);
     
 }
 .form input[type='submit'],#addToDo_form input[type = "submit"]
@@ -288,4 +293,212 @@ body{
     padding:1.2rem 2rem;
     background-color:white;
     font-weight:100;
+}
+
+.viewMenu{
+    box-sizing: border-box;
+    width:100vw;
+    min-height:var(--myH);
+    padding:4rem 0rem;
+    /* background-color:var(--lighBlue); */
+    background-color:white;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+.viewMenu h1{
+    display:inline-block;
+    font-weight:100;
+    border-bottom:4px solid var(--mainColor);
+    padding-bottom:1rem; 
+}
+.viewMenu_container{
+    /* border:1px solid blue; */
+    box-sizing: border-box;
+    width:100%;
+    padding:0rem 20rem;
+}
+#category_div{
+    /* border:1px solid red; */
+    margin-top:4rem;
+    box-sizing:border-box;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
+}
+
+.category_btn{
+    box-sizing: border-box;
+    min-width:4rem;
+    padding:.2rem 2rem;
+    font-family:var(--mainFamily);
+    font-size:1rem;
+    outline:none;
+    background:none;
+    border:2px solid var(--mainColor);
+    color:var(--mainColor);
+    border-radius:.2rem;
+    transition:var(--trans);
+}
+
+.category_btn:hover{
+    cursor:pointer;
+    background-color:var(--mainColor);
+    color:white;
+}
+
+#items_div{
+    /* border:1px solid red; */
+    margin-top:5rem;
+    box-sizing: border-box;
+    min-height:50vh;
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.empty{
+    box-sizing: border-box;
+    width:100%;
+    height:50vh;
+    /* border:1px solid red; */
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+.selected{
+    background-color:var(--mainColor);
+    color:white;
+}
+.empty h4{
+    box-sizing: border-box;
+    width:25vw;
+    border:2px solid red;
+    height:5vw;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    font-weight:100;
+    color:red;
+    font-size:1.5rem;
+}
+
+.item_card{
+    /* border:1px solid black; */
+    box-sizing: border-box;
+    flex-shrink:0;
+    width:25vw;
+    min-height:24vh;
+    display:flex;
+    padding:1rem;
+    margin:2rem;
+    transform: scale(1);
+    border-radius:.2rem;
+    transition: var(--trans);
+}
+.item_card:hover{
+    transform: scale(1.05);
+    box-shadow:0px 0px 3px rgba(0,0,0,.3);
+    cursor:pointer;
+}
+.item_card_box_1{
+    box-sizing: border-box;
+    flex-shrink:0;
+    flex-basis:45%;
+    display:flex;
+    align-items: center;
+    margin-right:1.2rem;
+}
+
+.item_card_box_1 img{
+    box-sizing: border-box;
+    width:100%;
+    height:8vw;
+    border-radius:.2rem;
+    border:2px solid var(--mainColor);
+}
+
+.item_card_box_2{
+    border:1px solid transparent;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item_card_name_price{
+    /* border:1px solid red; */
+    border-bottom:1px solid var(--mainColor);
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom:.5rem;
+}
+
+.item_card_name_price h2{
+    font-weight:100;
+    
+}
+
+.item_card_name_price h3{
+    color:var(--mainColor);
+}
+
+.item_card_description p{
+    margin-top:1rem;
+    margin-bottom:1rem;
+    line-height:1.5;
+    text-align: justify;
+}
+
+.item_card_buttons{
+    display:flex;
+    justify-content: space-between;
+}
+
+#upd_btn,#dlt_btn{
+    color:rgb(255, 204, 0);
+    background:none;
+    outline:none;
+    border:none;
+    font-family:var(--mainFamily);
+    font-size:1rem;
+}
+#dlt_btn{
+    color:red;
+}
+
+#update_item_form_div{
+    box-sizing: border-box;
+    height:100vh;
+    background-color:rgba(0,0,0,.5);
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100vw;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    z-index:100;
+}
+
+#upd_cut{
+    box-sizing: border-box;
+    width:4rem;
+    height:4rem;
+    position:absolute;
+    top:5%;
+    right:5%;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    border:2px solid white;
+    color:white;
+    transition: var(--trans);
+}
+#upd_cut:hover{
+    cursor:pointer;
+    background-color:white;
+    color:black;
 }
