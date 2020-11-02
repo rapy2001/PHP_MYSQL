@@ -1,0 +1,5 @@
+create table list_items(
+    list_item_id int primary key auto_increment,
+    item_text text not null default 'ITEM TEXT',
+    checked int not null default 0
+);
