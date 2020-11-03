@@ -10,6 +10,10 @@
                         <input type = 'text' name = 'text' id = 'text' placeholder = 'List Text' autocomplete = 'off'/>
                         <input type = 'submit' value = 'Add to List'/>
                     </form>
+                    <form id = 'update_list_item_form'>
+                        <input type = 'text' name = 'upd_text' id = 'upd_text' placeholder = 'List Text' autocomplete = 'off'/>
+                        <input type = 'submit' value = 'Update'/>
+                    </form>
                 </div>
                 <div id = 'list_items_div'>
                 </div>
