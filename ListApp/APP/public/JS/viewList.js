@@ -23,14 +23,14 @@ $(document).ready(function(){
                             if(item.checked == 1)
                                 className = 'checked';
                             $("#list_items_div").append(
-                                "<div id = 'list_item_div_" + item.list_item_id + "'>" +
-                                    "<div>" +
-                                        "<h4 id = 'list_item_text_" + item.list_item_id + "' class = '" + className + "'>" + item.item_text + "</h4>" +
-                                    "<div>" +
-                                    "<div>" +
-                                        "<button data-id = '" + item.list_item_id + "' id = 'chk_btn'>Check</button>" +
-                                        "<button data-id = '" + item.list_item_id + "' id = 'upd_btn'>Update</button>" +
-                                        "<button data-id = '" + item.list_item_id + "' id = 'dlt_btn'>Delete</button>" +
+                                "<div class = 'list_item' id = 'list_item_div_" + item.list_item_id + "'>" +
+                                    "<div class = 'list_item_box_1'>" +
+                                        "<h3 id = 'list_item_text_" + item.list_item_id + "' class = '" + className + "'>" + item.item_text + "</h3>" +
+                                    "</div>" +
+                                    "<div class = list_item_box_2>" +
+                                        "<button data-id = '" + item.list_item_id + "' id = 'chk_btn'><i class = 'fa fa-check'></i></button>" +
+                                        "<button data-id = '" + item.list_item_id + "' id = 'upd_btn'><i class = 'fa fa-pencil'></i></button>" +
+                                        "<button data-id = '" + item.list_item_id + "' id = 'dlt_btn'><i class = 'fa fa-trash'></i></button>" +
                                     "</div>" +
                                 "</div>"
                             );
