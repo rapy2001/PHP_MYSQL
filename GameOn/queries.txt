@@ -22,3 +22,40 @@ insert into categories values(0,'Adventure');
 insert into categories values(0,'RPG');
 
 insert into categories values(0,'ONLINE');
+
+
+create table images (
+    image_id int primary key auto_increment,
+    image varchar(200),
+    game_id int not null,
+    FOREIGN KEY(game_id) REFERENCES games(game_id) ON DELETE CASCADE
+);
+
+{
+    "gameName":"test",
+    "gameDate":"2020-11-04",
+    "gameDescription":"test",
+    "gameCategory":1
+}
+
+alter table images add absolute_path varchar(200);
+
+create table platforms(
+    platform_id int primary key auto_increment,
+    platform_name varchar(50) not null default 'PLATFORM NAME'
+);
+
+create table game_platforms(
+    game_id int not null unique,
+    platform_id int not null unique,
+    FOREIGN KEY(game_id) REFERENCES games(game_id) oN DELETE CASCADE,
+    FOREIGN KEY(platform_id) REFERENCES platforms(platform_id) ON DELETE CASCADE
+);
+
+insert into platforms values(0,'PC');
+
+insert into platforms values(0,'XBOX ONE');
+
+insert into platforms values(0,'PS4');
+
+insert into platforms values(0,'Nintendo Switch');

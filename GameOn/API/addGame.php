@@ -8,17 +8,22 @@
 
     if(empty($data['gameName']) || empty($data['gameDate']) || empty($data['gameDescription']) || empty($data['gameCategory']))
     {
-        http_response_code(400);
+        http_response_code(200);
         echo json_encode(array("flg"=>-1));
     }
     else
     {
         $gameObj = new Game();
-        $flg = $gameObj->insertGame($data['gameName'],$data['gameDate'],'test image',$data['gameDescription'],$data['gameCategory']);
-        if($flg == 1)
+        $result = $gameObj->insertGame($data['gameName'],$data['gameDate'],$data['gameDescription'],$data['gameCategory']);
+        if(is_array($result))
         {
             http_response_code(200);
-            echo json_encode(array("flg"=>1));
+            echo json_encode($result);
+        }
+        else if($result == -2)
+        {
+            http_response_code(200);
+            echo json_encode(array("flg"=>-2));
         }
         else
         {

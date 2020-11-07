@@ -5,13 +5,20 @@
         <div>
             <h4 id = 'msg'></h4>
             <form id = 'add_game_form'>
+                <h3>Add a Game</h3>
                 <input type = 'text' id = 'gameName' placeholder = 'Game Name' autocomplete = 'off'/>
                 <input type = 'date' id = 'gameDate'/>
-                <textarea id = 'description'>
+                <textarea id = 'gameDescription'>
                     Game Description
                 </textarea>
+                <h4>
+                    <label for = 'category'>
+                        Select Category
+                    </label>
+                </h4>
                 <select id = 'category'>
                 </select>
+                <button type = 'submit'>Add Game</button>
             </form>
         </div>
         <footer>

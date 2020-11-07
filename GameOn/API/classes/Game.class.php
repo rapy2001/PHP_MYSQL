@@ -20,18 +20,59 @@
                 $this->established = true;
             }
         }
-        public function insertGame($gameName,$gameDate,$gameImage,$gameDescription,$gameCategory)
+
+        public function insertGame($gameName,$gameDate,$gameDescription,$gameCategory)
         {
             if($this->connection)
             {
-                $query = "INSERT INTO games VALUES (0,'$gameName','$gameDate','$gameImage','$gameDescription',$gameCategory);";
-                if($this->connection->query($query))
+                $query = "SELECT name FROM games WHERE name = '$gameName'";
+                $result = $this->connection->query($query);
+                if($this->connection->error)
                 {
-                    return 1;
+                    return -3;
                 }
                 else
                 {
+                    if($result->num_rows > 0)
+                    {
+                        return -2;
+                    }
+                    else
+                    {
+                        $query = "INSERT INTO games (name,game_date,description,category_id) VALUES ('$gameName','$gameDate','$gameDescription',$gameCategory);";
+                        if($this->connection->query($query))
+                        {
+                            $id = $this->connection->insert_id;
+                            return array("flg"=>1,"id"=>$id);
+                        }
+                        else
+                        {
+                            return 0;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public function getGame($gameId)
+        {
+            if($this->established)
+            {
+                $query = "SELECT * FROM games WHERE game_id = $gameId";
+                $result = $this->connection->query($query);
+                if($this->connection->error)
+                {
                     return 0;
+                }
+                else
+                {
+                    $image = $result->fetch_assoc();
+                    return $image;
+                    
                 }
             }
             else
