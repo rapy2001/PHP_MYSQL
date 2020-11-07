@@ -21,6 +21,8 @@
                 $flg = $imageObj->deleteImage($data['imageId']);
                 if($flg == 1)
                 {
+                    $obj = new Game();
+                    $flg = $obj->removeImage($result['game_id']);
                     http_response_code(200);
                     echo json_encode(array("flg"=>1));
                 }

@@ -1,0 +1,306 @@
+:root{
+    --mainColor:rgb(51, 153, 255);
+    --mainFamily:'Quicksand',sans-serif;
+    --transition:.2s all linear;
+    --myH:calc(100vh - 12vh);
+    --lightWhite:rgba(255,255,255,.8);
+}
+
+*{
+    margin:0px;
+    padding:0px;
+    font-family:var(--mainFamily);
+}
+
+a{
+    text-decoration:none;
+    outline:none;
+    color:var(--lightWhite);
+    transition:var(--transition);
+}
+a:hover{
+    cursor:pointer;
+    color:white;
+}
+.nav{
+    box-sizing: border-box;
+    height:7vh;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding:0rem 3rem;
+    background-color:var(--mainColor);
+}
+
+.nav_box_1 a{
+    font-size:1.5rem;
+}
+
+.footer{
+    box-sizing: border-box;
+    height:5vh;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    background-color:var(--mainColor);
+}
+.footer h4{
+    font-weight:100;
+    color:white;
+}
+
+.homepage{
+    box-sizing: border-box;
+    height:var(--myH);
+    display:flex;
+}
+
+.homepage_box_1{
+    /* border:1px solid red; */
+    flex-basis:50%;
+    flex-shrink:0;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+.homepage_box_1 div{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    width:50%;
+}
+.homepage_box_1 div h1{
+    font-weight:100;
+    color:var(--mainColor);
+}
+
+.homepage_box_1 div p{
+    line-height:1.5;
+    margin-top:1.2rem;
+    text-align:justify;
+}
+.homepage_box_2{
+    /* border:1px solid red; */
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    flex-basis:50%;
+    flex-shrink:0;
+}
+
+.homepage_box_2 div{
+    box-sizing: border-box;
+    width:30vh;
+    height:30vh;
+    border-radius:50%;
+    box-shadow:0px 0px 3px rgba(0,0,0,.5);
+    background:url("https://static0.srcdn.com/wordpress/wp-content/uploads/Assassins-Creed-Syndicate-Review.jpg");
+    background-size:cover;
+    background-position:center center;
+}
+
+.form{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction:column;
+    width:30vw;
+    padding:2rem 6rem;
+    min-height:45vh;
+    background-color:white;
+    /* box-shadow:0px 3px 8px rgba(0,0,0,.8); */
+}
+
+.form h4{
+    font-weight:100;
+    margin-top:1rem;
+    margin-bottom:1rem;
+}
+.form a{
+    color:var(--mainColor);
+}
+.form h3,#addToDo_form h3{
+    text-align:center;
+    font-weight:100;
+    font-size:1.5rem;
+    margin-bottom:2rem;
+    color:var(--mainColor);
+}
+.form input,#addToDo_form input,.form textarea{
+    box-sizing: border-box;
+    margin-top:.8rem;
+    margin-bottom:.8rem;
+    border:1.2px solid var(--mainColor);
+    padding:.5rem 1rem;
+    outline:none;
+    font-family:var(--mainFamily);
+}
+.form textarea{
+    box-sizing: border-box;
+    width:100%;
+    height:15vh;
+    overflow-x:hidden;
+    overflow-y:hidden;
+    font-family:var(--mainFamily);
+    
+}
+.form input[type='submit'],#addToDo_form input[type = "submit"]
+{
+    border:1px solid var(--mainColor);
+    color:var(--mainColor);
+    transition:var(--trans);
+    background-color:white;
+}
+.form input[type='submit']:hover,#addToDo_form input[type = "submit"]:hover{
+    cursor:pointer;
+    background-color:var(--mainColor);
+    color:white;
+}
+.box{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    height:var(--myH);
+    display:flex;
+}
+
+.box_1{
+    /* border:1px solid red; */
+    flex-basis:50%;
+    flex-shrink:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box_2{
+    /* border:1px solid red; */
+    flex-basis:50%;
+    flex-shrink:0;
+}
+
+.box_2{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+.box_2 h3{
+    font-size:3rem;
+    font-weight:100;
+    color:white;
+}
+.addGame{
+    box-sizing: border-box;
+    height:var(--myH);
+}
+.addGame .box_2{
+    background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url("https://preview.redd.it/rhhfjyquol631.jpg?width=4724&format=pjpg&auto=webp&s=270ccf5f9763d4a871d048cc81f0b81919102abc");
+    background-position:center center;
+    background-size:cover;
+}
+
+#platform_box{
+    display:flex;
+    align-items: center;
+    margin-top:1rem;
+    margin-bottom:2rem; 
+}
+#platform_box input {
+    margin-left:1rem;
+    margin-right:1rem;
+    
+}
+#platform_box label{
+    font-size:.8rem;
+}
+
+.btn{
+    background:none;
+    outline:none;
+    font-family:var(--mainFamily);
+    border:2.5px solid var(--mainColor);
+    padding:.5rem 0rem;
+    color:var(--mainColor);
+    font-size:1rem;
+    transition: var(--transition);
+}
+
+.btn:hover{
+    cursor:pointer;
+    background-color:var(--mainColor);
+    color:white;
+}
+
+#msg{
+    border-left:4px solid var(--mainColor);
+    box-sizing: border-box;
+    min-width:15vw;
+    position:fixed;
+    top:10vh;
+    right:0rem;
+    box-shadow:0px 3px 8px rgba(0,0,0,.3);
+    padding:1.2rem 2rem;
+    background-color:white;
+    font-weight:100;
+}
+
+.addGameImage{
+    box-sizing: border-box;
+    min-height:var(--myH);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding:4rem 0rem;
+}
+.addGameImage form{
+    border:2px solid var(--mainColor);
+    height:auto;
+}
+#image_div{
+    /* border:1px solid red; */
+    margin-top:2rem;
+    box-sizing: border-box;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+#image_div h1{
+    font-weight:100;
+    text-align:center;
+    color:var(--mainColor);
+}
+
+.image_card{
+    border:2px solid var(--mainColor);
+    box-sizing: border-box;
+    width:28vw;
+    min-height:25vw;
+    margin-top:2rem;
+    margin-bottom:2rem;
+    padding:2rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.image_card img{
+    box-sizing: border-box;
+    width:25vw;
+    height:20vw;
+    margin-bottom:2rem;
+    padding:.2rem;
+    box-shadow:0px 0px 3px rgba(0,0,0,.5);
+}
+
+.image_card button{
+    border:2.5px solid red;
+    color:red;
+    padding:.5rem 2rem;
+    border-radius:2rem;
+    margin-bottom:2rem;
+    transition: var(--transition);
+}
+.image_card button:hover{
+    cursor:pointer;
+    background-color:red;
+    color:white;
+}

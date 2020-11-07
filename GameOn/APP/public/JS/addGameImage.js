@@ -36,9 +36,9 @@ $(document).ready(function(){
                         $("#image_div").show();
                         // $("#image_div").html('');
                         $("#image_div").append(
-                            `  <div id = 'image_box_${data.imageId}'>
+                            `  <div class = 'image_card' id = 'image_box_${data.imageId}'>
                                     <img id = 'image_${data.imageId}'src = '${data.relative}' alt = 'Game Image'/>
-                                    <button id = 'delete_btn' data-image_id = ${data.imageId}>Delete</button>
+                                    <button class = 'btn' id = 'delete_btn' data-image_id = ${data.imageId}>Delete</button>
                                 </div>
                             `
                         )

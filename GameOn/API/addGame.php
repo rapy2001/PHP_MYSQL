@@ -14,7 +14,7 @@
     else
     {
         $gameObj = new Game();
-        $result = $gameObj->insertGame($data['gameName'],$data['gameDate'],$data['gameDescription'],$data['gameCategory']);
+        $result = $gameObj->insertGame(strtolower($data['gameName']),$data['gameDate'],$data['gameDescription'],$data['gameCategory']);
         if(is_array($result))
         {
             $gamePlatformObj = new GamePlatform();

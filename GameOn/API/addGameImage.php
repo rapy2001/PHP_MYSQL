@@ -48,6 +48,8 @@
                             {
                                 $imageObj = new Image();
                                 $result = $imageObj->insertImage($relative,$absolute,$gameId);
+                                $obj = new Game();
+                                $flg = $obj->addImage($gameId,$relative);
                                 if(is_array($result))
                                 {
                                     http_response_code(200);

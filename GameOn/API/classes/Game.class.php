@@ -116,7 +116,7 @@
         {
             if($this->established)
             {
-                $query = "SELECT games.name, games.game_date, games.imageUrl, games.description, categories.category_name FROM games inner join categories ON games.category_id = categories.category_id WHERE game_id = $gameId";
+                $query = "SELECT games.game_id, games.name, games.game_date, games.imageUrl, games.description, categories.category_name FROM games inner join categories ON games.category_id = categories.category_id WHERE game_id = $gameId";
                 $result = $this->connection->query($query);
                 if($this->connection->error)
                 {
@@ -133,6 +133,113 @@
                 return -1;
             }
         }
+
+        public function getCategoryGames($categoryId)
+        {
+            if($this->established)
+            {
+                $query = "SELECT games.game_id, games.name, games.game_date, games.imageUrl, games.description, categories.category_name FROM games inner join categories ON games.category_id = categories.category_id WHERE games.category_id = $categoryId AND games.game_date < NOW();";
+                $result = $this->connection->query($query);
+                if($this->connection->error)
+                {
+                    return 0;
+                }
+                else
+                {
+                    $games = [];
+                    while($row = $result->fetch_assoc())
+                    {
+                        $games[] = $row;
+                    }
+                    return $games;
+                }
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public function addImage($gameId,$imageUrl)
+        {
+            if($this->established)
+            {
+                $query = "UPDATE games SET imageUrl = '$imageUrl' WHERE game_id = $gameId";
+                if($this->connection->query($query))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public function removeImage($gameId)
+        {
+            if($this->established)
+            {
+                $query = "UPDATE games SET imageUrl = 'https://cdn.dribbble.com/users/1011940/screenshots/10183160/media/a55ccd5307e8419be2eef39d9c724a41.png' WHERE game_id = $gameId";
+                if($this->connection->query($query))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }   
+            else
+            {
+                return -1;
+            }
+        }
+    
+        public function getSearchResults($searchTerm)
+        {
+            $ary = explode(' ',$searchTerm);
+            for($i = 0; $i<count($ary); $i++)
+            {
+                if($ary[$i] == '.' || $ary[$i] == '@' || $ary[$i] == '&' || $ary[$i] == '#'|| $ary[$i] == '%'|| $ary[$i] == '*')
+                {
+                    array_shift($ary);
+                }
+            }
+            $query = 'SELECT game_id FROM games WHERE name';
+            for($i = 0; $i<count($ary); $i++)
+            {
+                if($i == count($ary) - 1)
+                    $query .= " LIKE '%$ary[$i]%'";
+                else
+                    $query .= " LIKE '%$ary[$i]%' OR name";
+            }
+            // echo $query;
+            $query .= " AND game_date < NOW()";
+            $result = $this->connection->query($query);
+            if($this->connection->error)
+            {
+                return 0;
+            }
+            else
+            {
+                $id = [];
+                $games = [];
+                while($row = $result->fetch_assoc())
+                    $id[] = $row;
+                for($i = 0; $i<count($id); $i++)
+                {
+                    
+                    $games[] = $this->getGameDetails($id[$i]['game_id']);
+                }
+                return $games;
+            }
+        }
+        
         public function __destruct()
         {
             if($this->established)

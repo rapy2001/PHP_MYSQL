@@ -26,6 +26,7 @@ $(document).ready(function(){
                 {
                     $("#msg").html('Failed to Load Categories').show();
                 }
+                
             }
         });
         setTimeout(function(){
@@ -46,11 +47,14 @@ $(document).ready(function(){
             },
             success:function(data)
             {
+                $('#add_game_form').append('<h4>Select a Platform</h4>');
+                $('#add_game_form').append('<div id = "platform_box"></div>');
+                
                 if(data.flg == 1)
                 {
                     globalPlatforms = data.platforms;
                     $.each(data.platforms,function(key, platform){
-                        $('#add_game_form').append(
+                        $('#platform_box').append(
                             `
                                 <label for = 'platform_${platform.platform_id}'>${platform.platform_name}</label>
                                 <input type = 'checkbox' value = '${platform.platform_id}' id = 'platform_${platform.platform_id}'/>
@@ -62,8 +66,10 @@ $(document).ready(function(){
                 {
                     $("#msg").html('Error while Loading the Platforms').show();
                 }
+                $("#add_game_form").append(" <button type = 'submit' class = 'btn'>Add Game</button>");
             }
         });
+        
         setTimeout(function(){
             $("#msg").html('').hide();
         },2500);
