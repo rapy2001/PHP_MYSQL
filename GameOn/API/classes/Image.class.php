@@ -98,6 +98,32 @@
                 return -1;
             }
         }
+
+        public function getGameImages($gameId)
+        {
+            if($this->established)
+            {
+                $query = "SELECT * FROM images WHERE game_id = $gameId";
+                $result = $this->connection->query($query);
+                if($this->connection->error)
+                {
+                    return 0;
+                }
+                else
+                {
+                    $images = [];
+                    while($row = $result->fetch_assoc())
+                    {
+                        $images[] = $row;
+                    }
+                    return $images;
+                }
+            }
+            else
+            {
+                return -1;
+            }
+        }
         public function __destruct()
         {
             if($this->established)

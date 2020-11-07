@@ -70,9 +70,62 @@
                 }
                 else
                 {
-                    $image = $result->fetch_assoc();
-                    return $image;
+                    $game = $result->fetch_assoc();
+                    return $game;
                     
+                }
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public function getUpcomingGames()
+        {
+            if($this->established)
+            {
+                $query = 'SELECT games.game_id, games.name, games.game_date, games.description, categories.category_name FROM games inner join categories ON games.category_id = categories.category_id WHERE game_date > NOW()';
+                $result = $this->connection->query($query);
+                if($this->connection->error)
+                {
+                    return 0;
+                }
+                else
+                {
+                    $games = [];
+                    $imageObj = new Image();
+                    while($row = $result->fetch_assoc())
+                    {
+                        
+                        $data = $imageObj->getGameImages($row['game_id']);
+                        $row['imageUrl'] = $data[0]['image'];
+                        $games[] = $row;
+
+                    }
+                    return $games;
+                }
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public function getGameDetails($gameId)
+        {
+            if($this->established)
+            {
+                $query = "SELECT games.name, games.game_date, games.imageUrl, games.description, categories.category_name FROM games inner join categories ON games.category_id = categories.category_id WHERE game_id = $gameId";
+                $result = $this->connection->query($query);
+                if($this->connection->error)
+                {
+                    return 0;
+                }
+                else
+                {
+                    $game = $result->fetch_assoc();
+                    return $game;
                 }
             }
             else

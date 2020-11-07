@@ -52,8 +52,8 @@ $(document).ready(function(){
                     $.each(data.platforms,function(key, platform){
                         $('#add_game_form').append(
                             `
-                                <label for = '${platform.platform_name}'>${platform.platform_name}</label>
-                                <input type = 'checkbox' data-platform_id = '${platform.platform_id}' id = '${platform.platform_name}'/>
+                                <label for = 'platform_${platform.platform_id}'>${platform.platform_name}</label>
+                                <input type = 'checkbox' value = '${platform.platform_id}' id = 'platform_${platform.platform_id}'/>
                             `
                         )
                     });
@@ -79,15 +79,15 @@ $(document).ready(function(){
         let dataPlatforms = [];
         for(let i = 0; i<globalPlatforms.length; i++)
         {
-            let selector = globalPlatforms[i].platform_name;
-            if(document.getElementById(selector).checked)
+            let selector_1 = 'platform_' + globalPlatforms[i].platform_id;
+            let selector_2 = '#platform_' + globalPlatforms[i].platform_id;
+            if(document.getElementById(selector_1).checked)
             {
-                dataPlatforms.push($(selector).data('platform_id'));
-                console.log($(selector).data('platform_id'));
+                dataPlatforms.push($(selector_2).val());
             }
                 
         }
-        console.log(dataPlatforms);
+        // console.log(dataPlatforms);
         if(gameName == '' || gameDate == '' || gameDescription == '')
         {
             $("#msg").html('All fields are necessary').show();

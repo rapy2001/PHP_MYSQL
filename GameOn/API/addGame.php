@@ -17,8 +17,27 @@
         $result = $gameObj->insertGame($data['gameName'],$data['gameDate'],$data['gameDescription'],$data['gameCategory']);
         if(is_array($result))
         {
-            http_response_code(200);
-            echo json_encode($result);
+            $gamePlatformObj = new GamePlatform();
+            $error = false;
+            foreach($data['dataPlatforms'] as $platform)
+            {
+                $flg = $gamePlatformObj->insertGamePlatform($result['id'],$platform);
+                if($flg != 1)
+                {
+                    $error = true;
+                    break;
+                }
+            }
+            if($error)
+            {
+                http_response_code(200);
+                echo json_encode(array("flg"=>-3));
+            }
+            else
+            {
+                http_response_code(200);
+                echo json_encode($result);
+            }
         }
         else if($result == -2)
         {
