@@ -10,12 +10,15 @@
     margin:0px;
     padding:0px;
     font-family:var(--mainFamily);
+    box-sizing: border-box;
 }
 
 a{
     text-decoration:none;
     outline:none;
     color:var(--lightWhite);
+    margin-left:.5rem;
+    margin-right:.5rem;
     transition:var(--transition);
 }
 a:hover{
@@ -303,4 +306,191 @@ a:hover{
     cursor:pointer;
     background-color:red;
     color:white;
+}
+
+.categories
+{
+    box-sizing: border-box;
+    min-height:var(--myH);
+    padding:4rem 0rem;
+    text-align: center;
+}
+
+.categories h1,.viewGames h1,#upcoming_games h1{
+    font-weight:100;
+    display:inline-block;
+    padding-bottom:1rem;
+    color:var(--mainColor);
+    border-bottom:5px solid var(--mainColor);
+}
+
+.category_box{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    height:auto;
+    padding:4rem;
+    margin-top:2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#category_div{
+    box-sizing: border-box;
+    
+    width:30vw;
+    padding:2rem;
+    border-radius:.5rem;
+    margin-top:3rem;
+    border:1.5px solid var(--mainColor);
+    /* border:1px solid red; */
+}
+
+.newForm{
+    box-sizing: border-box;
+    /* border:1px solid red; */
+    width:30vw;
+    border-radius:.3rem;
+    overflow: hidden;
+    display:flex;
+}
+
+.newForm input{
+    box-sizing: border-box;
+    outline:none;
+    font-size:.8rem;
+    padding:.8rem 1rem;
+    width:80%;
+    flex-shrink:0;
+    background:rgb(230, 242, 255);
+    border:none;
+}
+
+.newForm button{
+    width:20%;
+    background:none;
+    border:none;
+    font-family:var(--mainFamily);
+    background-color:var(--mainColor);
+    color:white;
+    outline:none;
+    padding:.5rem;
+}
+.newForm button:hover{
+    cursor:pointer;
+}
+.category_card{
+    /* border:1px solid red; */
+    display:flex;
+    margin-top:1.5rem;
+    margin-bottom:1.5rem;
+    padding:1rem;
+    border-radius:.2rem;
+    position: relative;
+    top:0px;
+    transition: var(--transition);
+}
+
+.category_card:hover{
+    cursor:pointer;
+    top:-10px;
+    box-shadow:0px 3px 3px var(--mainColor);
+}
+.category_card h4{
+    box-sizing: border-box;
+    flex-shrink: 0;
+    flex-basis:75%;
+    font-weight:100;
+    text-transform: capitalize;
+    color:var(--mainColor);
+}
+.category_card div{
+    box-sizing: border-box;
+    flex-shrink: 0;
+    flex-basis:25%;
+    display: flex;
+    justify-content: space-between;
+
+}
+.category_card div button{
+    background:none;
+    outline:none;
+    border:none;
+    font-size:1rem;
+}
+.category_card div button:hover{
+    cursor:pointer;
+}
+.category_card div button:nth-child(1)
+{
+    color:red;
+}
+
+.category_card div button:nth-child(2)
+{
+    color:rgb(255, 204, 0);
+}
+
+#cancel_update{
+    margin-top:2rem;
+    background:none;
+    border:none;
+    font-family:var(--mainFamily);
+    background-color:var(--mainColor);
+    color:white;
+    outline:none;
+    padding:.5rem;
+    border-radius:.2rem;
+}
+#cancel_update:hover{
+    cursor:pointer;
+}
+
+.viewGames{
+    min-height:var(--myH);
+    padding:4rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    border:1px solid red;
+}
+
+.search_form_div{
+    border:1px solid red;
+    margin-top:4rem;
+    margin-bottom:4rem;
+}
+
+.search_form_div form{
+    justify-content: center;
+}
+
+#upcoming_games{
+    border:1px solid red;
+    padding:4rem;
+    width:80vw;
+}
+
+.empty{
+    width:20vw;
+    border:2px solid red;
+    height:5vw;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:2rem;
+    margin-bottom:2rem;
+}
+
+.empty h4{
+    font-weight:100;
+    font-size:1.2rem;
+    color:red;
+}
+
+#category_games{
+    border:1px solid red;
+    width:80vw;
+    margin-top:4rem;
+    margin-bottom:4rem;
 }

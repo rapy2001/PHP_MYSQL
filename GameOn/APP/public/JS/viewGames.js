@@ -14,7 +14,7 @@ $(document).ready(function(){
                 if(data.flg == 1)
                 {
                     $("#upcoming_games").html('');
-                    $("#upcoming_games").append('<h2>Upcoming Games</h2>');
+                    $("#upcoming_games").append('<h1>Upcoming Games</h1>');
                     if(data.games.length > 0)
                     {
                         $.each(data.games,function(key,game){
@@ -37,7 +37,7 @@ $(document).ready(function(){
                     else
                     {
                         $('#upcoming_games').append(`
-                            <div>
+                            <div class = 'empty'>
                                 <h4>No Upcoming Games ...</h4>
                             </div>
                         `);
