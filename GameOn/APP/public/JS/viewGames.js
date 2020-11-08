@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $("#msg").hide();
-    $("#game_full_box").hide();
+    $("#game_full_container").hide();
+    // $("#game_full_box").hide();
     $("#search_results").hide();
     function loadUpcomingGames()
     {
@@ -14,6 +15,7 @@ $(document).ready(function(){
                 if(data.flg == 1)
                 {
                     $("#upcoming_games").html('');
+                    $(body).css("overflow-y","hidden");
                     $("#upcoming_games").append('<h1>Upcoming Games</h1>');
                     if(data.games.length > 0)
                     {
@@ -159,14 +161,17 @@ $(document).ready(function(){
             type:"POST",
             success:function(data)
             {
+                // console.log(data);
                 if(data.flg == 1)
                 {
-                    $("#game_full_box").show();
+                    $(".viewGames").toggleClass("fade");
+                    $("#game_full_container").show();
+                    // $("#game_full_box").show();
                     $("#game_full_box").html('');
                     $("#game_full_box").append(
                         `
                             <div>
-                                <h1>${data.game.name}</h1>
+                                <h2>${data.game.name}</h2>
                             </div>
                             <div>
                                 <h4>${data.game.game_date}</h4>
@@ -175,11 +180,13 @@ $(document).ready(function(){
                         `
                     )
                     $("#game_full_box").append(
-                        "<div>"
+                        "<div id = 'platform_box'>"
                     )
                     for(let i = 0; i<data.platforms.length; i++)
                     {
-                        $("#game_full_box").append(
+                        let icon = '';
+                        
+                        $("#platform_box").append(
                             "<h4>"+ data.platforms[i].platform_name + "</h4>"
                         );
                     }
@@ -188,8 +195,11 @@ $(document).ready(function(){
                     );
                     $("#game_full_box").append(
                         `
-                            <div>
-                                ${data.game.description}
+                            <div id = 'description_box'>
+                                <p>
+                                    ${data.game.description}
+                                </p>
+                                
                             </div>
                         `
                     );
@@ -277,5 +287,10 @@ $(document).ready(function(){
             $("#msg").html('').hide();
         },2500);
         
+    });
+
+    $("#game_full_container").click(function(){
+        $(this).hide();
+        $(".viewGames").toggleClass("fade");
     });
 });

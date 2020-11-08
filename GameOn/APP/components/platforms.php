@@ -2,25 +2,27 @@
     require_once("./partials/header.php");
     require_once("./partials/nav.php");
 ?>
-        <div>
+        <div class = 'categories'>
             <h4 id = 'msg'></h4>
             <h1>Game Platforms</h1>
-            <div id = 'add_platform_div'>
-                <form id = 'add_platform_form'>
-                    <input type = "text" id = 'platformText' placeholder = "New Platform Name" autocomplete = "off"/>
-                    <button type = "submit">Add Platform</button>
-                </form>
+            <div id = 'add_platform_box' class = 'category_box'>
+                <div id = 'add_platform_div'>
+                    <form id = 'add_platform_form' class = 'newForm'>
+                        <input type = "text" id = 'platformText' placeholder = "New Platform Name" autocomplete = "off"/>
+                        <button type = "submit">Add Platform</button>
+                    </form>
+                </div>
                 
-            </div>
-            <div id = 'update_platform_div'>
-                <form id = 'update_platform_form'>
-                    <input type = "text" plaeholder = "Updated Platform Text" id = 'updatedPlatformText' autocomplete = 'off'/>
-                    <input type = "hidden" id = 'hiddenPlatformId'/>
-                    <button type = "submit">Update Platform</button>
-                </form>
-                <button id = 'cancel_update'>Cancel Update</button>
-            </div>
-            <div id = 'platforms_div'>
+                <div id = 'update_platform_div'>
+                    <form id = 'update_platform_form' class = 'newForm'>
+                        <input type = "text" plaeholder = "Updated Platform Text" id = 'updatedPlatformText' autocomplete = 'off'/>
+                        <input type = "hidden" id = 'hiddenPlatformId'/>
+                        <button type = "submit">Update Platform</button>
+                    </form>
+                    <button id = 'cancel_update'>Cancel Update</button>
+                </div>
+                <div id = 'platforms_div'>
+                </div>
             </div>
         </div>
         <footer class = "footer">

@@ -17,11 +17,12 @@ $(document).ready(function(){
                     {
                         $.each(data.platforms,function(key,platform){
                             $("#platforms_div").append(`
-                                <div id = 'platform_${platform.platform_id}'>
+                                <div class = 'category_card' id = 'platform_${platform.platform_id}'>
                                     <h4>${platform.platform_name}</h4>
                                     <div>
-                                        <button id = 'upd_btn' data-platform_id = '${platform.platform_id}'>Update</button>
                                         <button id = 'dlt_btn' data-platform_id = '${platform.platform_id}'>Delete</button>
+                                        <button id = 'upd_btn' data-platform_id = '${platform.platform_id}'>Update</button>
+                                        
                                     </div>
                                 </div>
                             `);
