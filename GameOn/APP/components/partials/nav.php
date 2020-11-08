@@ -6,5 +6,6 @@
         <a href = 'addGame.php'>Add a Game</a>
         <a href = 'viewGames.php'>View Games</a>
         <a href = 'categories.php'>View Categories</a>
+        <a href = 'platforms.php'>View Platforms</a>
     </div>
 </nav>
