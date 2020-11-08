@@ -100,7 +100,7 @@ $(document).ready(function(){
                     else
                     {
                         $("#" + category_name).append(`
-                            <div>
+                            <div class = 'empty'>
                                 <h4>No Games Yet</h4>
                             </div>
                         `);
@@ -130,7 +130,7 @@ $(document).ready(function(){
                 if(data.flg == 1)
                 {
                     $.each(data.categories,function(key,category){
-                        $("#category_games").append("<div id = '" + category.category_name + "' >");
+                        $("#category_games").append("<div class = 'category_games_div' id = '" + category.category_name + "' >");
                         $("#category_games").append("</div>");
                         loadCategoryGames(category.category_id,category.category_name);
                     });
