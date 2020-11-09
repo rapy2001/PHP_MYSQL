@@ -11,7 +11,7 @@
     padding:0px;
     font-family:var(--mainFamily);
     box-sizing: border-box;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
 }
 
 a{
@@ -644,4 +644,27 @@ a:hover{
 #description_box p{
     text-align: justify;
     line-height:1.5;
+}
+
+.register .box_2{
+    background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url("https://www.theindianwire.com/wp-content/uploads/2019/12/red-dead-redemption-cover-1-scaled.png");
+    background-position:center center;
+    background-size:cover;
+}
+
+.regitser{
+    height:var(--myH);
+}
+
+.empty_box{
+    height:var(--myH);
+}
+
+.login {
+    height:var(--myH);
+}
+.login .box_2{
+    background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url("https://static.techspot.com/images2/news/bigimage/2020/09/2020-09-16-image.jpg");
+    background-position:center center;
+    background-size:cover;
 }

@@ -59,3 +59,12 @@ insert into platforms values(0,'XBOX ONE');
 insert into platforms values(0,'PS4');
 
 insert into platforms values(0,'Nintendo Switch');
+
+create table users(
+    user_id int primary key auto_increment,
+    username varchar(50) not null unique,
+    password varchar(50) not null,
+    imageUrl text not null default 'https://cdn.dribbble.com/users/788099/screenshots/11196500/media/5d953948d87af6a7b802791cb11058e1.png'
+);
+
+insert into users values(0,'Admin',SHA('12345'),'https://cdn.dribbble.com/users/171004/screenshots/14304355/media/c97f69f5044e73bfd831212ef0cad7fe.png');

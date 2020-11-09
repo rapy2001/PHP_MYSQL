@@ -1,8 +1,11 @@
 <?php
+    require_once("./session/session.php");
     require_once('./partials/header.php');
     require_once('./partials/nav.php');
+    if(!empty($_SESSION['username']) && $_SESSION['username'] == 'Admin')
+    {
 ?>
-        <div class = "categories">
+       <div class = "categories">
             <h4 id = 'msg'></h4>
             <h1>Categories</h1>
             <div class = "category_box">
@@ -22,8 +25,21 @@
 
                 </div>
             </div>
-            
         </div>
+<?php
+    }
+    else
+    {
+?>
+        <div class = 'empty_box'>
+            <div class = 'empty'>
+                <h4>Only Administrator can Access this Page</h4>
+            </div>
+        </div>
+<?php
+    }
+?>
+        
         <footer class = "footer">
             <h4>2020. Rajarshi Saha.</h4>
             <script type = 'text/javascript' src = '../public/JS/jquery.js'></script>
