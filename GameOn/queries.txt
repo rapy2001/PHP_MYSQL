@@ -68,3 +68,13 @@ create table users(
 );
 
 insert into users values(0,'Admin',SHA('12345'),'https://cdn.dribbble.com/users/171004/screenshots/14304355/media/c97f69f5044e73bfd831212ef0cad7fe.png');
+
+create table reviews(
+    review_id int primary key auto_increment,
+    reviewText text not null,
+    rating float(4,2) not null default 0.0,
+    user_id int not null,
+    game_id int not null,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES games(game_id) ON DELETE CASCADE
+);

@@ -476,7 +476,7 @@ a:hover{
 
 .empty{
     width:20vw;
-    /* border:2px solid red; */
+    border:2px solid red;
     height:5vw;
     display:flex;
     justify-content: center;
@@ -576,6 +576,7 @@ a:hover{
     display:flex;
     padding:4rem 0rem;
     overflow-y:auto;
+    padding-bottom:8rem;
     justify-content: center;
 }
 #game_full_box{
@@ -585,7 +586,7 @@ a:hover{
     width:60vw;
     position: absolute;
     top:0px;
-    margin-top:4rem;
+    margin-top:10rem;
     margin-bottom:4rem;
     /* min-height:80%; */
     padding:4rem 5rem;
@@ -658,6 +659,9 @@ a:hover{
 
 .empty_box{
     height:var(--myH);
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login {
@@ -667,4 +671,51 @@ a:hover{
     background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url("https://static.techspot.com/images2/news/bigimage/2020/09/2020-09-16-image.jpg");
     background-position:center center;
     background-size:cover;
+}
+.logout{
+    height:var(--myH);
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.addReview .box_2{
+    background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url("https://i.redd.it/1jj71qtwaa711.jpg");
+    background-position:center center;
+    background-size:cover;
+}
+
+.game_cut_box{
+    /* border:1px solid red; */
+    position: absolute;
+    top:25px;
+    width:100%;
+    display:flex;
+    justify-content: flex-end;
+}
+
+#game_cut{
+    margin-right:3rem;
+    width:5rem;
+    height:5rem;
+    border:2px solid white;
+    color:white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+}
+
+#game_cut:hover{
+    cursor:pointer;
+    background-color:white;
+}
+#game_cut:hover i {
+    color:black;
+}
+
+.review_text{
+    border-bottom:2px solid var(--mainColor);
+    margin-top:2rem;
+    margin-bottom:2rem;
 }

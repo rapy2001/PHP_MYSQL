@@ -15,7 +15,6 @@ $(document).ready(function(){
                 if(data.flg == 1)
                 {
                     $("#upcoming_games").html('');
-                    $(body).css("overflow-y","hidden");
                     $("#upcoming_games").append('<h1>Upcoming Games</h1>');
                     if(data.games.length > 0)
                     {
@@ -153,7 +152,7 @@ $(document).ready(function(){
         let gameId = $(this).data('game_id');
         let obj = {gameId};
         let data = JSON.stringify(obj);
-        console.log(data);
+        // console.log(data);
         $.ajax({
             url:"http://localhost/projects/GameOn/API/getGameDetails.php",
             data:data,
@@ -162,6 +161,7 @@ $(document).ready(function(){
             success:function(data)
             {
                 // console.log(data);
+                $('body').css("overflow-y","hidden");
                 if(data.flg == 1)
                 {
                     $(".viewGames").toggleClass("fade");
@@ -219,6 +219,30 @@ $(document).ready(function(){
                             </div>
                         `);
                     }
+                    let userId = $("#userId").val();
+                    if(userId !=  '')
+                    {
+                        $("#game_full_box").append(`
+                            <a class = 'btn' href = "./addReview.php?gameId='${data.game.game_id}'">Add a Review</a>
+                        `);
+                    }
+                    else
+                    {
+                        $("#game_full_box").append(`
+                            <div class = 'empty'>
+                                <h4>Please Log In to add a Review</h4>
+                            </div>
+                        `);
+                    }
+                    $("#game_full_box").append(`
+                        <div id = 'review_show_box'>
+                            
+                        </div>
+                    `);
+                    $("#game_full_box").append(`<input type = 'hidden' value = '${data.game.game_id}' id = 'gameId' />`);
+                    $("#game_full_box").append(`
+                        <button id = 'load_review_btn' data-page = '1'>Load Reviews</button>
+                    `);
                 }
                 else
                 {
@@ -289,8 +313,80 @@ $(document).ready(function(){
         
     });
 
-    $("#game_full_container").click(function(){
-        $(this).hide();
+    $("#game_cut").click(function(){
+        $("#game_full_container").hide();
         $(".viewGames").toggleClass("fade");
+        $('body').css("overflow-y","auto");
+    });
+
+
+    $(document).on("click","#load_review_btn",function(){
+        let page = $(this).data('page');
+        let gameId = $("#gameId").val();
+        if(page == '' || gameId == '')
+        {
+            $("#msg").html("Enough data not available").show();
+        }
+        else
+        {
+            let obj = {page,gameId};
+            let data = JSON.stringify(obj);
+            $.ajax({
+                url:"http://localhost/projects/GameOn/API/loadReviews.php",
+                type:"POST",
+                dataType:"JSON",
+                data:data,
+                success:function(data)
+                {
+                    if(data.flg == 1)
+                    {
+                        $("#load_review_btn").remove();
+                        if(data.reviews.length > 0)
+                        {
+                            $.each(data.reviews,function(key,review){
+                                $("#review_show_box").append(`
+                                    <div class = 'review_card' id = 'review_${review.review_id}'>
+                                        <div>
+                                            <h3>${review.rating}</h3>
+                                            <h4>${review.reviewText}</h4>
+                                            <h5>By: ${review.username}</h5>
+                                        </div>
+                                    </div>
+                                `);
+                                let userId = $("#userId").val();
+                                if(userId !== '')
+                                {
+                                    $("review_" + userId).append(`
+                                        <div class = 'rvw_dlt_upd_div'>
+                                            <button id = 'upd_btn' data-rvw_id = '${review.review_id}'>Update</button>
+                                            <button id = 'dlt_btn' data-rvw_id = '${review.review_id}'>Delete</button>
+                                        </div>
+                                    `);
+                                }
+                            });
+                            $("#game_full_box").append(`
+                                <button id = 'load_review_btn' data-page = '${data.page}'>Load Reviews</button>
+                            `);
+                        }
+                        else
+                        {
+                            $("#review_show_box").append(`
+                                <div class = 'empty'>
+                                    <h4>No More Reviews</h4>
+                                </div>
+                            `);
+                        }
+                        
+                    }
+                    else
+                    {
+                        $("#msg").html("Failed to Load Reviews").show();
+                    }
+                }
+            });
+        }
+        setTimeout(function(){
+            $("#msg").html("").hide();
+        },2500);
     });
 });
