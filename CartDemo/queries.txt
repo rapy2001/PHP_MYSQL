@@ -4,3 +4,15 @@ create table users (
     password varchar(200) not null default 'PASSWORD',
     image text not null
 );
+
+create table products (
+    product_id int primary key auto_increment,
+    name text not null default 'PRODUCT NAME',
+    price int not null default 0,
+    quantity int not null default 0,
+    image text not null default 'https://cdn.dribbble.com/users/997338/screenshots/11042582/media/6a5e4c40661818c9b7fa40ff458d8643.png?compress=1&resize=1000x750'
+);
+
+alter table products drop price;
+
+alter table products add price float(6,2) not null default 0.0;

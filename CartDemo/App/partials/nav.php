@@ -5,5 +5,6 @@
     <div class = 'nav_box_2'>
         <a href = './register.php'>Register</a>
         <a href = './login.php'>Log In</a>
+        <a href = './addProduct.php'>Add a Product</a>
     </div>
 </nav>

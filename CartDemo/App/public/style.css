@@ -220,6 +220,8 @@ body{
 }
 
 
+
+
 .empty{
     box-sizing: border-box;
     width:100%;
@@ -261,4 +263,12 @@ body{
     color:white;
     margin-left:1rem;
     margin-right:1rem;
+}
+
+
+#add_product .box_2{
+    background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),url("https://cdn.dribbble.com/users/2217210/screenshots/13951770/media/df57e13096deff2c752ee49308ea69b0.jpg?compress=1&resize=1000x750");
+    background-position:center;
+    background-size:cover;
+    /* border:1px solid red; */
 }
