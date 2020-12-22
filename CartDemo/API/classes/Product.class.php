@@ -41,6 +41,32 @@
                 return $ary;
             }
         }
+
+        public function getProducts()
+        {
+            if($this->isConnected)
+            {
+                $query = 'SELECT * FROM products';
+                $results = $this->connection->query($query);
+                if($this->connection->error)
+                {
+                    return array("flg" => -1);
+                }
+                else
+                {
+                    $ary = [];
+                    while($row = $results->fetch_assoc())
+                    {
+                        $ary[] = $row;
+                    }
+                    return array("flg" => 1, "data" => $ary);
+                }
+            }
+            else
+            {
+                return array("flg" => -1);
+            }
+        }
         public function __destruct()
         {
             if($this->isConnected)

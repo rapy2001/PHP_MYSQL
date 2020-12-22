@@ -1,4 +1,5 @@
 <?php
+    require_once('./session/session.php');
     require_once('./partials/header.php');
     require_once('./partials/nav.php');
 ?>

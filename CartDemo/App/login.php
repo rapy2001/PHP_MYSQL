@@ -3,11 +3,11 @@
     require_once('./partials/header.php');
     require_once('./partials/nav.php');
 ?>
-        <div class = 'box register'>
-            <h4 id = 'msg' class = 'msg'></h4>
+        <div class = 'login box'>
+            <h4 class = 'msg' id = 'msg'></h4>
             <div class = 'box_1'>
-                <form class = 'form' id = 'register_form'>
-                    <h3>Register</h3>
+                <form id = 'login_form' class = 'form'>
+                    <h3>Log In</h3>
                     <input
                         type = 'text'
                         id = 'username'
@@ -16,20 +16,14 @@
                     />
                     <input
                         type = 'password'
-                        placeholder = 'Password'
                         id = 'password'
+                        placeholder = 'Password'
                         autocomplete = 'off' 
                     />
-                    <input
-                        type = 'text'
-                        id = 'image'
-                        placeholder = 'Image Url'
-                        autocomplete = 'off' 
-                    />
-                    <button class = 'btn' type = 'submit'>
-                        Register
+                    <button type = 'submit' class = 'btn'>
+                        Log In
                     </button>
-                    <h4>Already have an account ? Then <a href = './login.php'>Log In</a></h4>
+                    <h4>Don't have an account ? Then kindly <a href = './register.php'>Register</a>.</h4>
                 </form>
             </div>
             <div class = 'box_2'>
@@ -40,6 +34,6 @@
             <h4>2020. Rajarshi Saha</h4>
         </footer>
         <script type = 'text/javascript' src = './public/js/jquery.js'></script>
-        <script type = 'text/javascript' src = './public/js/register.js'></script>
+        <script type = 'text/javascript' src = './public/js/login.js'></script>
     </body>
 </html>

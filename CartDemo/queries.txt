@@ -16,3 +16,5 @@ create table products (
 alter table products drop price;
 
 alter table products add price float(6,2) not null default 0.0;
+
+insert into users values (0,'Admin',SHA('12345'),'https://images.pexels.com/photos/2444429/pexels-photo-2444429.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
