@@ -43,7 +43,8 @@
         {
             try
             {
-                $query = 'SELECT products.product_id,products.name,products.price,products.quantity,products.image FROM products INNER JOIN cart ON products.product_id = cart.product_id WHERE cart.user_id = :userId';
+                $query = 'SELECT DISTINCT product_id FROM cart WHERE user_id = :userId';
+                // $query = 'SELECT products.product_id,products.name,products.price,products.quantity,products.image FROM products INNER JOIN cart ON products.product_id = cart.product_id WHERE cart.user_id = :userId';
                 $stmt = $this->pdoConnection->prepare($query);
                 $stmt->execute(array(":userId" => $userId));
                 $ary = [];
@@ -51,7 +52,23 @@
                 {
                     $ary[] = $row;
                 }
-                return $ary;
+                return array("flg" => 1, "products" => $ary);
+            }
+            catch(Exception $e)
+            {
+                return array("flg" => -1, "err" => $e->getMessage());
+            }
+        }
+
+        public function count($userId,$productId)
+        {
+            try
+            {
+                $query = 'SELECT count(product_id) as total FROM cart WHERE user_id = :userId AND product_id = :productId';
+                $stmt = $this->pdoConnection->prepare($query);
+                $stmt->execute(array(":userId" => $userId, ":productId" => $productId));
+                $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                return array("flg" => 1, "count" => $data['total']);
             }
             catch(Exception $e)
             {
@@ -85,6 +102,22 @@
                 return array("flg" => -1, "err" => $e->getMessage());
             }
         }
+
+        public function removeItemFromCart($userId,$productId)
+        {
+            try
+            {
+                $query = 'DELETE FROM cart WHERE user_id = :userId AND product_id = :productId';
+                $stmt = $this->pdoConnection->prepare($query);
+                $stmt->execute(array(":userId" => $userId, ":productId" => $productId));
+                return array("flg" => 1);
+            }
+            catch(Exception $e)
+            {
+                return array("flg" => -1, "err" => $e->getMessage());
+            }
+        }
+        
         public function __destruct()
         {
             if($this->isConnected)

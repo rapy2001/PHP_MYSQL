@@ -8,5 +8,9 @@ $(document).ready(function(){
             $("#msg").text('').hide();
         },2500)
     }
+
+    const fetchCart = () => {
+        
+    }
 });
 

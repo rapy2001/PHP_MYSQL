@@ -123,7 +123,7 @@
             }
         }
 
-
+        
         public function __destruct()
         {
             if($this->isConnected)

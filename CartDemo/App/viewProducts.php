@@ -2,6 +2,21 @@
     require_once('./session/session.php');
     require_once("./partials/header.php");
     require_once("./partials/nav.php");
+    if(empty($_SESSION['userId']))
+    {
+?>
+        <div class = 'empty'>
+            <h4>Please Log In to View Products</h4>
+        </div>
+        <footer class = 'footer'>
+            <h4>2020. Rajarshi Saha</h4>
+        </footer>
+    </body>
+</html>
+<?php
+    }
+    else
+    {
 ?>
         <div class = 'viewProducts'>
             <h4 class = 'msg' id = 'msg'></h4>
@@ -20,3 +35,7 @@
         <script type = 'text/javascript' src = './public/js/viewProducts.js'></script>
     </body>
 </html>
+        
+<?php
+    }
+?>
