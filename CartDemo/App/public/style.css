@@ -247,7 +247,7 @@ body{
 
 
 .msg{
-    position:absolute;
+    position:fixed;
     /* display:none; */
     top:5rem;
     min-width:10vw;
@@ -360,4 +360,10 @@ body{
 .product_btn_box{
     display:flex;
     justify-content: center;
+}
+
+.added{
+    color:var(--mainColor);
+    text-align: center;
+    font-weight:100;
 }

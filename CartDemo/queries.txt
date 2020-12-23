@@ -18,3 +18,10 @@ alter table products drop price;
 alter table products add price float(6,2) not null default 0.0;
 
 insert into users values (0,'Admin',SHA('12345'),'https://images.pexels.com/photos/2444429/pexels-photo-2444429.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+
+create table cart (
+    user_id int not null,
+    product_id int not null,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY(product_id) REFERENCES products(product_id) ON DELETE CASCADE
+);

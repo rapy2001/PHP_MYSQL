@@ -67,6 +67,63 @@
                 return array("flg" => -1);
             }
         }
+
+        public function getProduct($productId)
+        {
+            try
+            {
+                $query = 'SELECT * FROM products WHERE product_id = :productId';
+                $stmt = $this->pdoConnection->prepare($query);
+                $stmt->execute(array(":productId" => $productId));
+                $product = $stmt->fetch(PDO::FETCH_ASSOC);
+                return array("flg" => 1, "product" => $product);
+            }
+            catch(Exception $e)
+            {
+                return array("flg" => -1, "err" => $e->getMessage());
+            }
+        }
+
+        public function alterQuantity($productId,$flg)
+        {
+            try
+            {
+                $results = $this->getProduct($productId);
+                if($results['flg'] == -1)
+                {
+                    return array("flg" => -1, "err" => $results['err']);
+                }
+                else
+                {
+                    $quantity = (int) $results['product']['quantity'];
+                    if($flg === 1)
+                    {
+                        $quantity -= 1;
+                    }
+                    else
+                    {
+                        $quantity += 1;
+                    }
+                    try
+                    {
+                        $query = 'UPDATE products SET quantity = :quantity WHERE product_id = :productId';
+                        $stmt = $this->pdoConnection->prepare($query);
+                        $stmt->execute(array(":quantity" => $quantity, ":productId" => $productId));
+                        return array("flg" => 1);
+                    }
+                    catch(Exception $e)
+                    {
+                        return array("flg" => -1, "err" => $e->getMessage());
+                    }
+                }
+            }
+            catch(Exception $e)
+            {
+                return array("flg" => -1, "err" => $e->getMessage());
+            }
+        }
+
+
         public function __destruct()
         {
             if($this->isConnected)

@@ -16,6 +16,7 @@
                 }
         ?>
                 <a href = './logout.php'>Log Out ( <?php echo $_SESSION['username'];?> )</a>
+                <a href = './viewCart.php'>View Cart</a>
         <?php
             } 
             else
