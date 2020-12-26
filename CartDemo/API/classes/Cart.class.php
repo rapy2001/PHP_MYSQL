@@ -107,7 +107,7 @@
         {
             try
             {
-                $query = 'DELETE FROM cart WHERE user_id = :userId AND product_id = :productId';
+                $query = 'DELETE FROM cart WHERE user_id = :userId AND product_id = :productId LIMIT 1';
                 $stmt = $this->pdoConnection->prepare($query);
                 $stmt->execute(array(":userId" => $userId, ":productId" => $productId));
                 return array("flg" => 1);

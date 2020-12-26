@@ -15,11 +15,15 @@
 ?>
             <div class = 'viewCart'>
                 <h4 class = 'msg' id = 'msg'></h4>
+                <input id = 'userId' type = 'hidden' value = '<?php echo $_SESSION['userId']; ?>'/>
                 <div class = 'userDashboard'>
                 </div>
                 <div class = 'cartBox'>
                     <h1>CART</h1>
-                    <div class = 'cart'>
+                    <div id = 'cart'>
+                    </div>
+                    <div>
+                        <h1 id = 'total'></h1>
                     </div>
                 </div>
             </div>
