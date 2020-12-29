@@ -13,13 +13,13 @@
             $this->pdoConnection->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         }
 
-        public function addRoom($name,$primaryImage,$image1,$image2,$image3,$description,$price,$size,$pets,$snacks)
+        public function addRoom($name,$primaryImage,$image1,$image2,$image3,$description,$price,$size,$pets,$snacks,$type,$guests)
         {
             try
             {
-                $query = 'INSERT INTO rooms VALUES (0,:name,:primaryImage,:image1,:image2,:image3,:description,:price,:size,:pets,:snacks)';
+                $query = 'INSERT INTO rooms VALUES (0,:name,:primaryImage,:image1,:image2,:image3,:description,:price,:size,:pets,:snacks,:type,:guests)';
                 $stmt = $this->pdoConnection->prepare($query);
-                $stmt->execute(array(":name" => $name, ":primaryImage" => $primaryImage, ":image1" => $image1, ":image2" => $image2, ":image3" => $image3, ":description" => $description, ":price" => $price, ":size" => $size, ":pets" => $pets, ":snacks" => $snacks));
+                $stmt->execute(array(":name" => $name, ":primaryImage" => $primaryImage, ":image1" => $image1, ":image2" => $image2, ":image3" => $image3, ":description" => $description, ":price" => $price, ":size" => $size, ":pets" => $pets, ":snacks" => $snacks, ":type" => $type, ":guests" => $guests));
                 return array("flg" => 1);
             }
             catch(Exception $e)
@@ -55,6 +55,26 @@
                 $stmt = $this->pdoConnection->prepare($query);
                 $stmt->execute(array(":roomId" => $roomId, ":feature" => $feature));
                 return array("flg" => 1, "stmt" => $stmt);
+            }
+            catch(Exception $e)
+            {
+                return array("flg" => -1, "err" => $e->getMessage());
+            }
+        }
+
+        public function searchRooms($price,$size,$pets,$snacks,$guests,$type)
+        {
+            try
+            {
+                $query = 'SELECT * FROM rooms WHERE price = :price AND size = :size AND pets_allowed = :pets AND free_snacks = :snacks AND guests = :guests AND type = :typeVal';
+                $stmt = $this->pdoConnection->prepare($query);
+                $stmt->execute(array(":price" => $price, ":size" => $size, ":pets" => $pets, ":snacks" => $snacks, ":guests" => $guests, ":typeVal" => $type));
+                $rooms = [];
+                while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+                {
+                    $rooms[] = $row;
+                }
+                return array('flg' => 1, 'rooms' => $rooms);
             }
             catch(Exception $e)
             {

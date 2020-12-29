@@ -18,3 +18,7 @@ create table extras (
     feature text not null default 'FEATURE NAME',
     FOREIGN KEY(room_id) REFERENCES rooms(room_id) ON DELETE CASCADE
 );
+
+alter table rooms add type int not null default 0;
+
+alter table rooms add guests int not null default 0;

@@ -7,7 +7,7 @@
 
     $data = json_decode(file_get_contents("php://input"),true);
 
-    if(empty($data['name']) || empty($data['description']) || empty($data['price']) || empty($data['size']) || empty($data['pets']) || empty($data['snacks']))
+    if(empty($data['name']) || empty($data['description']) || empty($data['price']) || empty($data['size']) || empty($data['pets']) || empty($data['snacks']) || empty($data['guests']) || empty($data['type']))
     {
         http_response_code(400);
         echo json_encode(array("flg" => -1,"data" => $data));
@@ -36,7 +36,7 @@
 
         $obj = new Room();
 
-        $result = $obj->addRoom($data['name'],$data['primaryImage'],$data['image1'],$data['image2'],$data['image3'],$data['description'],$data['price'],$data['size'],$data['pets'],$data['snacks']);
+        $result = $obj->addRoom($data['name'],$data['primaryImage'],$data['image1'],$data['image2'],$data['image3'],$data['description'],$data['price'],$data['size'],$data['pets'],$data['snacks'],$data['type'],$data['guests']);
         if($result['flg'] === 1)
         {   
             echo json_encode(array("flg" => 1));

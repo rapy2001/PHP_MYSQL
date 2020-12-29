@@ -5,5 +5,6 @@
     <div class = 'nav_box_2'>
         <a href = './addRoom.php'>Add a Room</a>
         <a href = './editRooms.php'>Edit Rooms</a>
+        <a href = './viewRooms.php'>View Rooms</a>
     </div>
 </nav>

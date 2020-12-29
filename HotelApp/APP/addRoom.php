@@ -73,6 +73,27 @@
                             type = 'checkbox'
                             id = 'snacks'
                         />
+                        <label>
+                            Select Room Type:
+                        </label>
+                        <select value = '1' id = 'type'>
+                            <option value = '0'>--TYPE--</option>
+                            <option value = '1'>Family</option>
+                            <option value = '2'>Single</option>
+                            <option value = '3'>Double</option>
+                        </select>
+                        <label>
+                            Select Number of Guests:
+                        </label>
+                        <select value = '1' id = 'guests'>
+                            <option value = '0'>--Guests--</option>
+                            <option value = '1'>1</option>
+                            <option value = '2'>2</option>
+                            <option value = '3'>3</option>
+                            <option value = '4'>4</option>
+                            <option value = '5'>5</option>
+                            <option value = '6'>6</option>
+                        </select>
                         <button class = 'btn' type = 'submit'>Add Room</button>
                     </form>
                 </div>

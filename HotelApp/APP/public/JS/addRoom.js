@@ -24,6 +24,8 @@ $(document).ready(() => {
         let size = $("#size").val();
         let pets = document.querySelector('#pets').checked ? 1 : -1;
         let snacks = document.querySelector('#snacks').checked ? 1 : -1;
+        let type = $("#type").val();
+        let guests = $("#guests").val();
         // console.log(pets,snacks);
         if(name == '' || description == '')
         {
@@ -44,7 +46,7 @@ $(document).ready(() => {
         {
             fetch('http://localhost/projects/HotelApp/API/addRoom.php',{
                 method:'POST',
-                body:JSON.stringify({name,primaryImage,image1,image2,image3,description,price,size,pets,snacks})
+                body:JSON.stringify({name,primaryImage,image1,image2,image3,description,price,size,pets,snacks,type,guests})
             })
             .then((response) => response.json())
             .then((data) => {
