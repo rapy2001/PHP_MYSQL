@@ -270,3 +270,128 @@ select{
     margin-top:1rem;
     margin-bottom:1rem;
 }
+
+.editRooms{
+    /* border:1px solid red; */
+    min-height:var(--myH);
+}
+
+.editRooms h1{
+    margin-top:4rem;
+    text-align:center;
+    color:var(--mainColor);
+    font-weight:100;
+    font-size:3rem;
+}
+
+.table_box{
+    /* border:1px solid red; */
+    margin-top:5rem;
+    display:flex;
+    justify-content: center;
+}
+
+#table{
+    /* border:1px solid red; */
+    border-collapse: collapse;
+    border-top-left-radius:.5rem;
+    border-top-right-radius:.5rem;
+}
+
+#table th,td{
+    /* border:1px solid red; */
+    padding:.5rem 2rem;
+}
+
+#table th{
+    font-size:1.5rem;
+    color:white;
+    background-color:var(--mainColor);
+    
+}
+
+#table tr:nth-child(2)
+{
+    background-color:rgba(192,192,192,.3);
+}
+
+#table td:nth-child{
+    color:white;
+}
+
+#table td:last-child
+{
+    color:rgb(204, 51, 255);
+}
+
+#table td:last-child:hover{
+    cursor:pointer;
+}
+
+#edit_room_extra_form{
+    /* border:1px solid red; */
+    box-sizing: border-box;
+    width:100vw;
+    height:100vh;
+    position: fixed;
+    top:0px;
+    left:0px;
+    z-index:100;
+    background-color:rgba(0,0,0,.5);
+}
+
+#cut{
+    /* border:1px solid red; */
+    display:flex;
+    justify-content: flex-end;
+    margin-top:3rem;
+    margin-right:3rem;
+}
+
+#cut h4{
+    box-sizing: border-box;
+    width:6rem;
+    height:6rem;
+    border:3px solid white;
+    color:white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--trans);
+    font-size:1.5rem;
+}
+
+#cut h4:hover{
+    cursor: pointer;
+    background-color:white;
+}
+#cut h4:hover i{
+    color:black;
+}
+
+.form_box{
+    /* border:1px solid red; */
+    margin-top:10rem;
+    display: flex;
+    justify-content: center;
+}
+
+#extra_form{
+    /* border:1px solid red; */
+    width:30vw;
+    height:20vh;
+    border-radius:.6rem;
+    background-color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#extra_form input{
+    width:60%;
+    padding:.5rem;
+    font-size:1rem;
+    outline:none;
+    border:2.5px solid var(--mainColor);
+    border-right:none;
+}

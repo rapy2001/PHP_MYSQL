@@ -29,6 +29,9 @@ $(document).ready(() => {
                             <div class = 'room_title_div'>
                                <h2>${rooms[i].name}</h2>
                             </div>
+                            <div>
+                                <a href = './viewRoom.php?id=${rooms[i].room_id}'>View Details</a>
+                            </div>
                         </div>
                     `);
                 }

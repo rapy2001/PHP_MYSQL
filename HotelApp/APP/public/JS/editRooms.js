@@ -29,7 +29,7 @@ $(document).ready(() => {
                         $("#table_body").append(`
                             <tr>
                                 <td>${rooms[i].name}</td>
-                                <td>${rooms[i].description}</td>
+                                <td>${rooms[i].description.substr(0,50)} ...</td>
                                 <td>${rooms[i].price}</td>
                                 <td>${rooms[i].size}</td>
                                 <td>${rooms[i].pets_allowed}</td>

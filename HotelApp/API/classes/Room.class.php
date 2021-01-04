@@ -81,5 +81,42 @@
                 return array("flg" => -1, "err" => $e->getMessage());
             }
         }
+
+        public function getRoom($roomId)
+        {
+            try
+            {
+                $query = 'SELECT * FROM rooms WHERE room_id = :roomId';
+                $stmt = $this->pdoConnection->prepare($query);
+                $stmt->execute(array(':roomId' => $roomId));
+                $room = $stmt->fetch(PDO::FETCH_ASSOC);
+                return array('flg' => 1, 'room' => $room);
+            }
+            catch(Exception $e)
+            {
+                return array('flg' => -1, 'err' => $e->getMessage());
+            }
+        }
+
+        public function getRoomExtras($roomId)
+        {
+            try
+            {
+                $query = 'SELECT * FROM extras WHERE room_id = :roomId';
+                $stmt = $this->pdoConnection->prepare($query);
+                $stmt->execute(array(':roomId' => $roomId));
+                
+                $data = [];
+                while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+                {
+                    $data[] = $row;
+                }
+                return array('flg' => 1, 'extras' => $data);
+            }
+            catch(Exception $e)
+            {
+                return array('flg' => -1, 'err' => $e->getMessage());
+            }
+        }
     }
 ?>

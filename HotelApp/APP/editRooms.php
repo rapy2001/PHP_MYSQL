@@ -6,10 +6,10 @@
             <h1>Rooms</h1>
             <h4 class = 'msg' id = 'msg'></h4>
             <div id = 'edit_room_extra_form'>
-                <div>
+                <div id = 'cut'>
                     <h4 id = 'cut'><i class = 'fa fa-times'></i></h4>
                 </div>
-                <div>
+                <div class = 'form_box'>
                     <form id = 'extra_form'>
                         <input
                             type = 'hidden'
@@ -20,7 +20,7 @@
                             placeholder = 'Extra Feature Name'
                             id = 'extra_feature' 
                         />
-                        <button type = 'submit'>Add Feature</button>
+                        <button class = 'btn' type = 'submit'>Add Feature</button>
                     </form>
                 </div>
             </div>
@@ -34,6 +34,7 @@
                             <th>Size</th>
                             <th>Pets Allowed</th>
                             <th>Free Snacks</th>
+                            <th>Add Extra</th>
                         </tr>
                         <tbody id = 'table_body'>
                         </tbody>
