@@ -26,6 +26,6 @@ alter table rooms add guests int not null default 0;
 create table users (
     user_id int primary key auto_increment,
     username varchar(50) not null default 'USERNAME',
-    password varchar(20) not null default 'PASSWORD',
+    password varchar(200) not null default 'PASSWORD',
     image_url text not null default 'https://cdn.dribbble.com/users/1355613/screenshots/14735248/media/e8f4b73b359cffcb33233eebbe14bf9e.jpg?compress=1&resize=1000x750'
 );
