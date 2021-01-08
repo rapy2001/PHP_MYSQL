@@ -7,7 +7,7 @@
         <h4 class = 'msg' id = 'msg'></h4>
         <div class = 'box_1'>
             <form class = 'form' id = 'login_form'>
-                <h3>Register</h3>
+                <h3>Log In</h3>
                 <input 
                     type = 'text'
                     id = 'username'

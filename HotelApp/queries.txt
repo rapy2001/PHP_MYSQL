@@ -29,3 +29,13 @@ create table users (
     password varchar(200) not null default 'PASSWORD',
     image_url text not null default 'https://cdn.dribbble.com/users/1355613/screenshots/14735248/media/e8f4b73b359cffcb33233eebbe14bf9e.jpg?compress=1&resize=1000x750'
 );
+
+create table reviews (
+    review_id int primary key auto_increment,
+    review text not null default 'REVIEW',
+    rating float(3,2) not null default 0,
+    user_id int,
+    room_id int,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL,
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE SET NULL
+);

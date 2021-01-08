@@ -17,7 +17,29 @@
         <div>
             <h4 class = 'msg' id = 'msg'></h4>
             <input type = 'hidden' id = 'roomId' value = '<?php echo $_GET['id']; ?>'/>
+            <input type = 'hidden' id = 'userId' value = "<?php echo empty($_SESSION['user_id']) ? -1 : $_SESSION['user_id']; ?>" />
             <div id = 'container'>
+            </div>
+            <div id = 'review_box'>
+                <div>
+                    <h4 id = 'cut'><i class = 'fa fa-times'></i></h4>
+                </div>
+                <form class = 'form' id = 'reviewForm'>
+                    <input 
+                        type = 'text' 
+                        id = 'review' 
+                        placeholder = 'Your Review'
+                        autocomplete = 'off' 
+                    />
+                    <label>Your Rating:</label>
+                    <input 
+                        type = 'number' 
+                        id = 'rating' 
+                        min = '0'
+                        step = '0.01'
+                    />
+                    <button class = 'btn' type = 'submit'>Add Review</button>
+                </form>
             </div>
         </div>
         <footer class = 'footer'>
