@@ -21,35 +21,37 @@ $(document).ready(() => {
             {
                  $('#container').append(`
                     <div id = 'roomContainer'>
+                        <img src = '${data.room.primary_image}' alt = '${data.room.name}'/>
                         <div>
-                            <img src = '${data.room.primary_image}' alt = '${data.room.name}'/>
+                            <h2>${data.room.name}</h2>
                         </div>
-                        <h2>${data.room.name}</h2>
                     </div>
-                    <div>
+                    <div class = 'imagesBox'>
                         <img src = '${data.room.image_1}' alt = '${data.room.name}'/>
                         <img src = '${data.room.image_2}' alt = '${data.room.name}'/>
                         <img src = '${data.room.image_3}' alt = '${data.room.name}'/>
                     </div>
-                    <div>
+                    <div class = 'des_ext'>
                         <div>
+                            <h2>Description</h2>
                             <p>
                                 ${data.room.description}
                             </p>
                         </div>
                         <div>
-                            <h4>$ ${data.room.price}</h4>
-                            <h4>${data.room.size} SQ FOOT</h4>
-                            <h4>${data.room.pets_allowed == 1 ? 'Yes' : 'No'}</h4>
-                            <h4>${data.room.free_snacks == 1 ? 'Yes' : 'No'}</h4>
-                            <h4>${data.room.type === 1 ? 'Family' : data.room.type === 2 ? 'Single' : 'Two'}</h4>
-                            <h4>Guests: ${data.room.guests}</h4>
-                        </div>
-                        <div id = 'extras'></div>
-                        <div id = 'reviews'>
-                            <div id = 'reviewsBox'></div>
+                            <h2>About</h2>
+                            <h4>Price: <b>$ ${data.room.price}</b></h4>
+                            <h4>Size: <b>${data.room.size} SQ FOOT</b></h4>
+                            <h4>Pets Allowed: <b>${data.room.pets_allowed == 1 ? 'Yes' : 'No'}</b></h4>
+                            <h4>Free Snacks: <b>${data.room.free_snacks == 1 ? 'Yes' : 'No'}</b></h4>
+                            <h4>Room Type: <b>${data.room.type === 1 ? 'Family' : data.room.type === 2 ? 'Single' : 'Two'}</b></h4>
+                            <h4>Guests: <b>${data.room.guests}</b></h4>
                         </div>
                     </div>
+                    <div id = 'extras'></div>
+                    <div id = 'reviews'>
+                        <div id = 'reviewsBox'></div>
+                    </div>   
                 `);
 
                if(data.extras.length > 0)
@@ -92,17 +94,27 @@ $(document).ready(() => {
         })
         .then((res) => res.json())
         .then((data) => {
-            // $('#reviewsBox').html('');
+            if(page == 1)
+                $('#reviewsBox').html('');
             if(data.flg == 1)
             {
-                console.log('hello');
+                // console.log('hello');
                 if(data.reviews.length > 0)
                 {
+                    if(page == 1)
+                    {
+                        $('#ratingDiv').remove();
+                        $('#reviewsBox').append(`
+                            <div id = 'ratingDiv'>
+                                <h2>${data.rating}</h2>
+                            </div>
+                        `);
+                    }
                     flg = 1;
                     for(let i = 0; i<data.reviews.length; i++)
                     {
                         $('#reviewsBox').append(`
-                            <div>
+                            <div id = 'singleReview_${data.reviews[i].review_id}'>
                                 <div>
                                     <img src = '${data.reviews[i].username}'/>
                                 </div>
@@ -114,12 +126,22 @@ $(document).ready(() => {
                                 </div>
                             </div>
                         `)
+                        if(data.reviews[i].user_id == userId)
+                        {
+                            $(`#singleReview_${data.reviews[i].review_id}`).append(`
+                                <div>
+                                    <button id = 'dlt' data-id = '${data.reviews[i].review_id}'>Delete</button>
+                                    <button id = 'upd' data-id = '${data.reviews[i].review_id}'>Update</button>
+                                </div>
+                            `)
+                        }
                     }
                     page += 1;
                     $('#ld_mr').remove();
                     $('#reviewsBox').append(`
                         <button id = 'ld_mr'>Load More</button>
                     `)
+
                 }
                 else
                 {
@@ -219,4 +241,45 @@ $(document).ready(() => {
             })
         }
     })
+    $(document).on('click','#dlt',(e) => {
+        if(confirm('Are you sure ? '))
+        {
+            let reviewId = e.target.dataset.id;
+            // let userId = parseInt($('#userId').val());
+            fetch('http://localhost/projects/HotelApp/API/deleteReview.php',{
+                method:'POST',
+                body:JSON.stringify({reviewId,userId})
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                if(data.flg == 1)
+                {
+                    showMessage('Review Deleted Successfully');
+                    hideMessage();
+                    page = 1;
+                    fetchReviews();
+                }
+                else if(data.flg == 2)
+                {
+                    showMessage('You are not authorized to delete this Review');
+                    hideMessage();
+                }
+                else
+                {
+                    showMessage('Internal Server Error. Please try again later');
+                    hideMessage();
+                }
+            })
+            .catch((err) => {
+                showMessage('No Response from the Server. Please try again later');
+                hideMessage();
+            })
+        }
+    })
+    
+    $(document).on('click','#upd',(e) => {
+        let reviewId = e.target.dataset.id;
+    })
 });
+

@@ -21,18 +21,17 @@ $(document).ready(() => {
                 {
                     // console.log(rooms);
                     $("#rooms").append(`
-                        <div class = 'singleRoom'>
-                            <h4>${rooms[i].price}</h4>
-                            <div class = 'room_img_div'>
-                                <img src = '${rooms[i].image_1}' alt = '${rooms[i].name}'/>
+                        <a class = 'roomLink' href = './viewRoom.php?id=${rooms[i].room_id}'>
+                            <div class = 'singleRoom'>
+                                <h4>${rooms[i].price}</h4>
+                                <div class = 'room_img_div'>
+                                    <img src = '${rooms[i].image_1}' alt = '${rooms[i].name}'/>
+                                </div>
+                                <div class = 'room_title_div'>
+                                <h3>${rooms[i].name}</h3>
+                                </div>
                             </div>
-                            <div class = 'room_title_div'>
-                               <h2>${rooms[i].name}</h2>
-                            </div>
-                            <div>
-                                <a href = './viewRoom.php?id=${rooms[i].room_id}'>View Details</a>
-                            </div>
-                        </div>
+                        </a>
                     `);
                 }
         }

@@ -18,7 +18,16 @@
         $results = $obj->getReviews($data['roomId'],$data['page']);
         if($results['flg'] == 1)
         {
-            echo json_encode(array('flg' => 1, 'reviews' => $results['reviews']));
+            $result = $obj->averageReview($data['roomId']);
+            if($result['flg'] == 1)
+            {
+                echo json_encode(array('flg' => 1, 'reviews' => $results['reviews'], 'rating' => $result['rating']));
+            }
+            else
+            {
+                http_response_code(500);
+                echo json_encode(array('flg' => 0));
+            }
         }
         else
         {
