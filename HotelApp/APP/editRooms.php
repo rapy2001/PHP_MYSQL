@@ -7,7 +7,7 @@
             <h1>Rooms</h1>
             <h4 class = 'msg' id = 'msg'></h4>
             <div id = 'edit_room_extra_form'>
-                <div id = 'cut'>
+                <div    >
                     <h4 id = 'cut'><i class = 'fa fa-times'></i></h4>
                 </div>
                 <div class = 'form_box'>
@@ -15,11 +15,13 @@
                         <input
                             type = 'hidden'
                             id = 'roomId' 
+                            
                         />
                         <input
                             type = 'text'
                             placeholder = 'Extra Feature Name'
                             id = 'extra_feature' 
+                            autocomplete = 'off'
                         />
                         <button class = 'btn' type = 'submit'>Add Feature</button>
                     </form>

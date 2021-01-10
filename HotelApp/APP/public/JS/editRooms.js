@@ -83,6 +83,7 @@ $(document).ready(() => {
                 {
                     showMessage('Feature Added');
                     hideMessage();
+                    $('#edit_room_extra_form').trigger('reset');
                     $("#edit_room_extra_form").hide();
                 }
                 else

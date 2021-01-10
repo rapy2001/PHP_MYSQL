@@ -46,5 +46,26 @@
                 return array("flg" => -1, 'err' => $e->getMessage());
             }
         }
+
+        public function getUserById($userId)
+        {
+            try
+            {
+                $query = 'SELECT * FROM users WHERE user_id = :userId';
+                $stmt = $this->pdoConnection->prepare($query);
+                $stmt->execute(array(':userId' => $userId));
+                $ary = [];
+                while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+                {
+                    $ary[] = $row;
+                }
+                $ary = $ary[0];
+                return array('flg' => 1, 'user' => $ary);
+            }
+            catch(Exception $e)
+            {
+                return array('flg' => 0, 'err' => $e->getMessage());
+            }
+        }
     }
 ?>

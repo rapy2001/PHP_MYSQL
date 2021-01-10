@@ -15,13 +15,32 @@
     else
     {
         $obj = new Review();
+        $userObj = new User();
         $results = $obj->getReviews($data['roomId'],$data['page']);
         if($results['flg'] == 1)
         {
             $result = $obj->averageReview($data['roomId']);
             if($result['flg'] == 1)
             {
-                echo json_encode(array('flg' => 1, 'reviews' => $results['reviews'], 'rating' => $result['rating']));
+                $flg = 1;
+                for($i = 0; $i < count($results['reviews']); $i++)
+                {
+                    $newResult = $userObj->getUserById($results['reviews'][$i]['user_id']);
+                    if($newResult['flg'] == 1)
+                    {
+                        $results['reviews'][$i]['user']['username'] = $newResult['user']['username'];
+                        $results['reviews'][$i]['user']['image'] = $newResult['user']['image_url'];
+                    }
+                    else
+                    {
+                        $flg = 0;
+                        http_response_code(500);
+                        echo json_encode(array('flg' => 0));
+                        break;
+                    }
+                }
+                if($flg = 1)
+                    echo json_encode(array('flg' => 1, 'reviews' => $results['reviews'], 'rating' => $result['rating']));
             }
             else
             {

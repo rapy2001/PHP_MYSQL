@@ -104,5 +104,20 @@
                 return array('flg' => -1, 'err' => $e->getMessage());
             }
         }
+
+        public function updateReview($review,$rating,$reviewId)
+        {
+            try
+            {
+                $query = 'UPDATE reviews set review = :review, rating = :rating where review_id = :reviewId;';
+                $stmt = $this->pdoConnection->prepare($query);
+                $stmt->execute(array(':review' => $review, ':rating' => $rating,':reviewId' => $reviewId));
+                return array('flg' => 1);
+            }
+            catch(Exception $e)
+            {
+                return array('flg' => -1, 'err' => $e->getMessage());
+            }
+        }
     }
 ?>

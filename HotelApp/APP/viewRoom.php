@@ -25,6 +25,7 @@
                     <h4 id = 'cut'><i class = 'fa fa-times'></i></h4>
                 </div>
                 <form class = 'form' id = 'reviewForm'>
+                    <h3>Add a Review</h3>
                     <input 
                         type = 'text' 
                         id = 'review' 
@@ -37,8 +38,35 @@
                         id = 'rating' 
                         min = '0'
                         step = '0.01'
+                        max = '5.0'
                     />
                     <button class = 'btn' type = 'submit'>Add Review</button>
+                </form>
+            </div>
+            <div id = 'upd_review_box'>
+                <div>
+                    <h4 id = 'rvwCut'><i class = 'fa fa-times'></i></h4>
+                </div>
+                <form class = 'form' id = 'updReviewForm'>
+                    <h3>Update Review</h3>
+                    <input 
+                        type = 'hidden' 
+                        id = 'reviewId' 
+                    />
+                    <input 
+                        type = 'text' 
+                        placeholder = 'Your Review' 
+                        id = 'updReview'
+                        autocomplete = 'off'
+                    />
+                    <input 
+                        type = 'number'
+                        min = '0'
+                        step = '0.01' 
+                        id = 'updRating'
+                        max = '5.0'
+                    />
+                    <button type = 'submit' class = 'btn' >Update Review</button>
                 </form>
             </div>
         </div>

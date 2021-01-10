@@ -1,6 +1,7 @@
 $(document).ready(() => {
     $('#msg').text('').hide();
     $('#review_box').hide();
+    $('#upd_review_box').hide();
     const showMessage = (text) => {
         $('#msg').text(text).show();
     }
@@ -48,7 +49,9 @@ $(document).ready(() => {
                             <h4>Guests: <b>${data.room.guests}</b></h4>
                         </div>
                     </div>
-                    <div id = 'extras'></div>
+                    <div id = 'extras'>
+                        <h1>Extras</h1>
+                    </div>
                     <div id = 'reviews'>
                         <div id = 'reviewsBox'></div>
                     </div>   
@@ -58,14 +61,14 @@ $(document).ready(() => {
                {
                    for(let i = 0; i<data.extras.length; i++)
                    {
-                       $('#extras').append(`<h4>${data.extras[i]}</h4>`);
+                       $('#extras').append(`<h4>${data.extras[i].feature}</h4>`);
                    }
                }
                else
                {
-                   $('#extras').append('<h4>No Extras Provided</h4>');
+                   $('#extras').append('<h3>No Extras Provided</h3>');
                }
-               console.log(userId != -1);
+            //    console.log(userId != -1);
                if(userId != -1)
                {
                    $('#reviews').append(`
@@ -87,18 +90,18 @@ $(document).ready(() => {
     
     let page = 1;
     let flg = 0;
-    const fetchReviews = () => {
-        fetch(`http://localhost/projects/HotelApp/API/getReviews.php?id=${roomId}`,{
+    const fetchReviews = async () => {
+        await fetch(`http://localhost/projects/HotelApp/API/getReviews.php?id=${roomId}`,{
             method:'POST',
             body:JSON.stringify({roomId,page})
         })
         .then((res) => res.json())
         .then((data) => {
             if(page == 1)
-                $('#reviewsBox').html('');
+                $('#reviewsBox').html('<h1>Reviews</h1>');
             if(data.flg == 1)
             {
-                // console.log('hello');
+                // console.log('hello inside');
                 if(data.reviews.length > 0)
                 {
                     if(page == 1)
@@ -106,7 +109,7 @@ $(document).ready(() => {
                         $('#ratingDiv').remove();
                         $('#reviewsBox').append(`
                             <div id = 'ratingDiv'>
-                                <h2>${data.rating}</h2>
+                                <h2>Average Rating: <span>${data.rating}</span></h2>
                             </div>
                         `);
                     }
@@ -114,24 +117,25 @@ $(document).ready(() => {
                     for(let i = 0; i<data.reviews.length; i++)
                     {
                         $('#reviewsBox').append(`
-                            <div id = 'singleReview_${data.reviews[i].review_id}'>
+                            <div class = 'singleReview' id = 'singleReview_${data.reviews[i].review_id}'>
                                 <div>
-                                    <img src = '${data.reviews[i].username}'/>
+                                    <img src = '${data.reviews[i].user.image}' alt = '${data.reviews[i].user.username}'/>
                                 </div>
                                 <div>
-                                    <h3>${data.reviews[i].rating}</h3>
+                                    <h3><i class = 'fa fa-star'></i>${data.reviews[i].rating}</h3>
                                     <p>
                                         ${data.reviews[i].review}
                                     </p>
+                                    <h4>by: ${data.reviews[i].user.username}</h4>
                                 </div>
                             </div>
                         `)
                         if(data.reviews[i].user_id == userId)
                         {
                             $(`#singleReview_${data.reviews[i].review_id}`).append(`
-                                <div>
-                                    <button id = 'dlt' data-id = '${data.reviews[i].review_id}'>Delete</button>
-                                    <button id = 'upd' data-id = '${data.reviews[i].review_id}'>Update</button>
+                                <div class = 'mnp'>
+                                    <button class = 'btn' id = 'dlt' data-id = '${data.reviews[i].review_id}'>Delete</button>
+                                    <button class = 'btn' id = 'upd' data-id = '${data.reviews[i].review_id}'>Update</button>
                                 </div>
                             `)
                         }
@@ -139,7 +143,7 @@ $(document).ready(() => {
                     page += 1;
                     $('#ld_mr').remove();
                     $('#reviewsBox').append(`
-                        <button id = 'ld_mr'>Load More</button>
+                        <button class = 'btn' id = 'ld_mr'>Load More</button>
                     `)
 
                 }
@@ -185,7 +189,7 @@ $(document).ready(() => {
 
     const loadData = async () => {
         await fetchRoom();
-        fetchReviews();
+        await fetchReviews();
     }
 
     loadData();
@@ -208,9 +212,9 @@ $(document).ready(() => {
             showMessage('Please enter a Review');
             hideMessage();
         }
-        else if(rating < 0)
+        else if(rating < 0 || rating >5)
         {
-            showMessage('The rating can\'t be less than 0');
+            showMessage('The rating should be between 0 and 5');
             hideMessage();
         }
         else
@@ -278,8 +282,88 @@ $(document).ready(() => {
         }
     })
     
+    const fetchReview = async (reviewId) => {
+        await fetch(`http://localhost/projects/HotelApp/API/getReview.php?id=${reviewId}`)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            if(data.flg === 1)
+            {
+                // console.log(data.review.rating);
+                $('#updReview').val(data.review.review);
+                $('#updRating').val(data.review.rating);
+            }
+            else
+            {
+                showMessage('Error while loading Review data');
+                hideMessage();
+            }
+        })
+        .catch((err) => {
+            showMessage('No Response from the Server');
+            hideMessage();
+        })
+    }
     $(document).on('click','#upd',(e) => {
         let reviewId = e.target.dataset.id;
+        $('#upd_review_box').show();
+        fetchReview(reviewId);
+        $('#reviewId').val(reviewId);
     })
+
+    $('#rvwCut').on('click',() => {
+        $('#upd_review_box').hide();
+    })
+
+    $('#updReviewForm').on('submit',async (e) => {
+        // console.log('hello');
+        e.preventDefault();
+        let review = $('#updReview').val();
+        let rating = $('#updRating').val();
+        let reviewId = $('#reviewId').val();
+        if(review == '')
+        {
+            showMessage('Please enter a new Review');
+            hideMessage();
+        }
+        else if(rating < 0 || rating > 5)
+        {
+            showMessage('The Rating should be between 0 and 5');
+            hideMessage();
+        }
+        else
+        {
+            await fetch('http://localhost/projects/HotelApp/API/updateReview.php',{
+                method:'POST',
+                body:JSON.stringify({review,rating,reviewId,userId})
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then(async (data) => {
+              
+                if(data.flg == 1)
+                {
+                    page = 1;
+                    await fetchReviews();
+                    // console.log('hello');
+                    $('#reviewForm').trigger('reset');
+                    showMessage('Review Updated successfully');
+                    hideMessage();
+                    $('#upd_review_box').hide();
+                }
+                else
+                {
+                    showMessage('Internal Server Error. Please try again');
+                    hideMessage();
+                }
+            })
+            .catch((err) => {
+                showMessage('No response from the Server');
+                hideMessage();
+            })
+        }
+    })  
 });
 
